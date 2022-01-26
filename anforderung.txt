@@ -42,7 +42,9 @@ Spiele Seite:
 
 
 
-
+erste schritte:
+            schaun wie das so geht, und dann umstellen xD
+            erstmal eine o. zwei steuerbare schlangen erstellen mit futterstück.
 
 
 klassen :
