@@ -1,12 +1,51 @@
+
+Erste ideen:
+
 Ein snake spiel umwandeln zum lokal one-comp-multiplayer mit bis zu fünf spielern,
 also bis zu fünf schlanken die gleichzeitig ein futter-stück jagen.
-
 Jeder spieler kann seinen namen eingeben so das die punkte gezählt,
 ausgegeben und auch gespeichert werden können.
-es eine besten Liste gibt.
+es eine besten-Liste gibt.
+
+Start Seite:
+            Hintergrund erscheint, das Lable wird zusätzlich eingeblendet und
+            die input-felder für die namen der spieler erscheint wie auch die
+            button: start, statistik, einstellungen.
+            unterhalb des namen-input-feldes werden die Tastensteuerungsbelegungen angezeigt
+
+Statistik Seite:
+            hat denn selben hintergrund.
+            5 tabellen für jeden spielbereich:
+            z.b.: 1 spieler statistik oder
+            2 spieler statistik
+            ...
+            5 spieler statistik
+            und davon jeweils nur die top 10.
+
+Einstellungen Seite:
+            hat denn selben hintergrund.
+            ?????????? rausfinden wie wir das machen ??????????
+
+Spiele Seite:
+            hat denn selben hintergrund.
+            Spielfeld mit der zuvor gewählten Spieleranzahl(schlangen)
+            und das erste futter stück zum einsammeln erscheint.
+            rechts vom spielfeld sind mehrere input felder je nach nutzen gruppiert in div´s:
+                Die den aktuellen top punktestand aus der datenbank anzeigen.
+                z.b.: den höchsten punktestand der 4 spieler statistik bei einem
+                spiel mit 4 spielern.
+                Da drunter die namen der aktuellen spieler mit dem aktuellen punktestand.
+                Dies ist geordnet nach höchstpunktestand abfallend.
+                dort unter sind die button zur startseite und zur statistik.
+
+
+
+
+
+
 
 
 klassen :
-methoden : draw() , gameloop()
+methoden : draw(), gameloop(), add()
 funktionen :
 datenbank anschluss :
