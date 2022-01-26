@@ -11,27 +11,27 @@
 </head>
 
 <body>
-    <canvas id="canvas" width="600" height="600"  ></canvas>
+    <canvas id="canvas" width="1800" height="800"  ></canvas>
 
 <script>
 
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
-    let rows = 10;
-    let cols = 10;
+    let rows = 100;
+    let cols = 250;
     let snakeOne =[
         {
-            x : 2,
-            y : 3
+            x : 50,
+            y : 50
         }];
     let snakeTwo =[
         {
-            x : 5,
-            y : 8
+            x : 55,
+            y : 55
         }];
     let food = {
-        x : 4,
-        y : 5
+        x : 20,
+        y : 10
     };
     let cellWidth = canvas.width / cols;
     let cellHeight = canvas.height / rows;
