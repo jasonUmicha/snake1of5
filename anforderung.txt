@@ -1,9 +1,9 @@
-Ein snake spiel mit bis zu fünf spielern,
-also bis zu fünf schlanken die gleichzeitig eine sache jagen.
+Ein snake spiel umwandeln zum lokal one-comp-multiplayer mit bis zu fünf spielern,
+also bis zu fünf schlanken die gleichzeitig ein futter-stück jagen.
 
-Jeder spieler kann seinen namen eingeben so das die punkte auch gespeichert werden können,
-
-und es eine besten liste giebt.
+Jeder spieler kann seinen namen eingeben so das die punkte gezählt,
+ausgegeben und auch gespeichert werden können.
+es eine besten Liste gibt.
 
 
 klassen :

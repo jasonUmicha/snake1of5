@@ -11,19 +11,30 @@
 </head>
 
 <body>
-    <canvas id="canvas" width="800" height="600"  ></canvas>
+    <canvas id="canvas" width="600" height="600"  ></canvas>
 
 <script>
 
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
     let rows = 10;
-    let cols = 13;
-    let snake =[
+    let cols = 10;
+    let snakeOne =[
         {
-        x : 2,
-        y : 3
-    }];
+            x : 2,
+            y : 3
+        },{
+            x : 3,
+            y : 3
+        }];
+    let snakeTwo =[
+        {
+            x : 5,
+            y : 8
+        },{
+            x : 6,
+            y : 8
+        }];
     let food = {
         x : 4,
         y : 5
@@ -36,12 +47,19 @@
 
     //malen => funktion : schlange/-en u. futter
     function draw(){
+        // Hintergrund
         ctx.fillStyle = 'green';
         ctx.fillRect(0,0,canvas.width ,canvas.height );
 
-        ctx.fillStyle = 'white';
-        snake.forEach(part => add(part.x, part.y));
+        // Snake one
+        ctx.fillStyle = 'navy';
+        snakeOne.forEach(part => add(part.x, part.y));
 
+        // Snake two
+        ctx.fillStyle = 'Maroon';
+        snakeTwo.forEach(part => add(part.x, part.y));
+
+        // Futter(food) oder auch happen
         ctx.fillStyle = 'yellow';
         add(food.x,food.y); // Food(Happen)
     }
