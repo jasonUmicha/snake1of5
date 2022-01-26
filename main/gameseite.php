@@ -129,6 +129,7 @@
             direction_snakeTwo = 'DOWN';
         }
     }
+    hahaha
 
 </script>
 
