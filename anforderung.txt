@@ -6,10 +6,7 @@ Jeder spieler kann seinen namen eingeben so das die punkte auch gespeichert werd
 und es eine besten liste giebt.
 
 
-game loop :
-feld :
-schlange /-n :
 klassen :
-methoden :
+methoden : draw() , gameloop()
 funktionen :
 datenbank anschluss :
