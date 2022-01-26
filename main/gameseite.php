@@ -103,29 +103,29 @@
 
     function keyDown(e){
         
-        if(e.keyCode === 37){
+        if(e.keyCode === 37){//pfeil links
             direction_snakeOne = 'LEFT';
         }
-        if(e.keyCode === 38){
+        if(e.keyCode === 38){//pfeil hoch
             direction_snakeOne = 'UP';
         }
-        if(e.keyCode === 39){
+        if(e.keyCode === 39){//pfeil rechts
             direction_snakeOne = 'RIGHT';
         }
-        if(e.keyCode === 40){
+        if(e.keyCode === 40){//pfeil runter
             direction_snakeOne = 'DOWN';
         }
 
-        if(e.keyCode === 65){
+        if(e.keyCode === 65){ //A
             direction_snakeTwo = 'LEFT';
         }
-        if(e.keyCode === 87){
+        if(e.keyCode === 87){//W
             direction_snakeTwo = 'UP';
         }
-        if(e.keyCode === 68){
+        if(e.keyCode === 68){//D
             direction_snakeTwo = 'RIGHT';
         }
-        if(e.keyCode === 83){
+        if(e.keyCode === 83){//S
             direction_snakeTwo = 'DOWN';
         }
     }
