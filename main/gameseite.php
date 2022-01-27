@@ -7,14 +7,18 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <link rel="stylesheet" href="/css/style.css">
+
     <title>Snake 1 of 5</title>
 </head>
 
 <body>
+
 <main>
     <canvas id="canvas" width="600" height="600"  ></canvas>
 </main>
+
 <script>
 
     let canvas = document.getElementById('canvas');
@@ -35,6 +39,7 @@
         x : 2,
         y : 1
     };
+
     let cellWidth = canvas.width / cols;
     let cellHeight = canvas.height / rows;
     let direction_snakeOne = 'LEFT';
@@ -48,7 +53,7 @@
 
     // malen => funktion : schlange/-en u. futter
     function draw(){
-        // Hintergrund
+        // Hintergrund (wieder holen damit es nicht aussieht als wenn man male)
         ctx.fillStyle = 'green';
         ctx.fillRect(0,0,canvas.width ,canvas.height );
 
