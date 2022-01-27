@@ -86,18 +86,18 @@
     }
 
     function shiftSnakeOne(){
-        for(let i=snakeOne.length -1;i>0;i--){
-            const part =snakeOne[i];
-            const lastPart =snakeOne[i-1];
+        for(let i = snakeOne.length -1;i > 0;i--){
+            const part = snakeOne[i];
+            const lastPart = snakeOne[i-1];
             part.x =lastPart.x;
             part.y =lastPart.y;
         }
 
     }
     function shiftSnakeTwo(){
-        for(let i=snakeTwo.length -1;i>0;i--){
-            const part =snakeTwo[i];
-            const lastPart =snakeTwo[i-1];
+        for(let i= snakeTwo.length -1;i>0;i--){
+            const part = snakeTwo[i];
+            const lastPart = snakeTwo[i-1];
             part.x =lastPart.x;
             part.y =lastPart.y;
         }
@@ -124,7 +124,7 @@
         }
          if(snakeOne[0].x === food.x &&
                 snakeOne[0].y === food.y){
-             foodCollected_snakeOne=true;
+             foodCollected_snakeOne=false;
                 placeFood();
         }
 
