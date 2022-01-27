@@ -28,13 +28,18 @@
     let cols = 15;
     let snakeOne =[
         {
-            x : 5,
-            y : 5
+            x : 4,
+            y : 4
         }];
     let snakeTwo =[
         {
             x : 5,
             y : 5
+        }];
+    let snakeThree =[
+        {
+            x : 7,
+            y : 7
         }];
     let food;
 
@@ -42,11 +47,13 @@
     let cellHeight = canvas.height / rows;
     let direction_snakeOne = '';
     let direction_snakeTwo = '';
+    let direction_snakeThree = '';
 
     // benötigt für die abfrage ob das Futter gefressen wurde,
     // um die schlange wachsen zulassen
     let foodCollected_snakeOne = false;
     let foodCollected_snakeTwo = false;
+    let foodCollected_snakeThree = false;
 
     placeFood();
 
@@ -71,6 +78,10 @@
         // Snake two
         ctx.fillStyle = 'Maroon';
         snakeTwo.forEach(part => add(part.x, part.y));
+
+        // Snake three
+        ctx.fillStyle = 'blue';
+        snakeThree.forEach(part => add(part.x, part.y));
 
         // Futter(food) oder auch happen
         ctx.fillStyle = 'yellow';
@@ -111,6 +122,18 @@
             part.x = lastPart.x;
             part.y = lastPart.y;
         }
+
+
+    }
+    function shiftSnakeThree(){
+        for (let i = snakeThree.length -1; i > 0; i--){
+            const part = snakeThree[i];
+            const lastPart = snakeThree[i -1];
+            part.x = lastPart.x;
+            part.y = lastPart.y;
+        }
+
+
     }
     // game schleife (bewegung aber auch ablaufs programmierung)
     function gameLoop(){
@@ -138,11 +161,23 @@
             foodCollected_snakeTwo = false ;
             // jetzt kackt er es gleich aus....
         }
+        if (foodCollected_snakeThree){
+            snakeThree = [{
+                x: snakeThree[0].x,
+                y: snakeThree[0].y
+            }, ...snakeThree]; // um das Futterstück hinten anzuhängen
+
+            // fressbestätigung wieder auf (false) setzen,
+            // anhaltenden wachstum zu beenden.
+            foodCollected_snakeThree = false ;
+            // jetzt kackt er es gleich aus....
+        }
         // wachstum : nach der futter bestätigung
         // damit die schlange langsam wächst anstatt
         // sofort zu wachsen.(flüssigere performances)
         shiftSnakeOne();
         shiftSnakeTow();
+        shiftSnakeThree();
         // schlange EINS bewegungsabfrage
 
         if(direction_snakeOne === 'LEFT'){
@@ -172,6 +207,20 @@
         else if(direction_snakeTwo === 'DOWN'){
             snakeTwo[0].y++;
         }
+        // schlange DREI bewegungsabfrage
+
+        if(direction_snakeThree === 'LEFT'){
+            snakeThree[0].x--;
+        }
+        else if(direction_snakeThree === 'UP'){
+            snakeThree[0].y--;
+        }
+        else if(direction_snakeThree === 'RIGHT'){
+            snakeThree[0].x++;
+        }
+        else if(direction_snakeThree === 'DOWN'){
+            snakeThree[0].y++;
+        }
 
         // was passieren soll wenn schlange EINS auf futter trifft
         if (snakeOne[0].x === food.x &&
@@ -191,8 +240,18 @@
             // Futter einsammeln (suggerieren)
             placeFood();
         }
+        // was passieren soll wenn schlange DREI auf futter trifft
+        if (snakeThree[0].x === food.x &&
+            snakeThree[0].y === food.y){
+            // bestätigen das gefressen wurde (true),
+            // benötigt für weiteren schritt (wachstum).
+            foodCollected_snakeThree = true;
+            // Futter einsammeln (suggerieren)
+            placeFood();
+        }
 
     }
+
     // Steuerung
     function keyDown(e){
         // schlange EINS steuerung
@@ -209,7 +268,7 @@
             direction_snakeOne = 'DOWN';
         }
 
-        // schlange EINS steuerung
+        // schlange ZWEI steuerung
         if(e.keyCode === 65){ //A
             direction_snakeTwo = 'LEFT';
         }
@@ -221,6 +280,19 @@
         }
         else if(e.keyCode === 83){ //S
             direction_snakeTwo = 'DOWN';
+        }
+        // schlange DREI steuerung
+        if(e.keyCode === 71){ //G
+            direction_snakeThree = 'LEFT';
+        }
+        else if(e.keyCode === 90){ //Y(Z)
+            direction_snakeThree = 'UP';
+        }
+        else if(e.keyCode === 74){ //J
+            direction_snakeThree = 'RIGHT';
+        }
+        else if(e.keyCode === 72){ //H
+            direction_snakeThree = 'DOWN';
         }
     }
 
