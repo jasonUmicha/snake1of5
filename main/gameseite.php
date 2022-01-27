@@ -78,26 +78,26 @@
         if(direction_snakeOne === 'LEFT'){
             snakeOne[0].x--;
         }
-        if(direction_snakeOne === 'UP'){
+        else if(direction_snakeOne === 'UP'){
             snakeOne[0].y--;
         }
-        if(direction_snakeOne === 'RIGHT'){
+        else if(direction_snakeOne === 'RIGHT'){
             snakeOne[0].x++;
         }
-        if(direction_snakeOne === 'DOWN'){
+        else if(direction_snakeOne === 'DOWN'){
             snakeOne[0].y++;
         }
 
-        if(direction_snakeTwo === 'LEFT'){
+         if(direction_snakeTwo === 'LEFT'){
             snakeTwo[0].x--;
         }
-        if(direction_snakeTwo === 'UP'){
+        else if(direction_snakeTwo === 'UP'){
             snakeTwo[0].y--;
         }
-        if(direction_snakeTwo === 'RIGHT'){
+        else if(direction_snakeTwo === 'RIGHT'){
             snakeTwo[0].x++;
         }
-        if(direction_snakeTwo === 'DOWN'){
+        else if(direction_snakeTwo === 'DOWN'){
             snakeTwo[0].y++;
         }
 
@@ -108,26 +108,26 @@
         if(e.keyCode === 37){//pfeil links
             direction_snakeOne = 'LEFT';
         }
-        if(e.keyCode === 38){//pfeil hoch
+        else if(e.keyCode === 38){//pfeil hoch
             direction_snakeOne = 'UP';
         }
-        if(e.keyCode === 39){//pfeil rechts
+        else if(e.keyCode === 39){//pfeil rechts
             direction_snakeOne = 'RIGHT';
         }
-        if(e.keyCode === 40){//pfeil runter
+        else if(e.keyCode === 40){//pfeil runter
             direction_snakeOne = 'DOWN';
         }
 
         if(e.keyCode === 65){ //A
             direction_snakeTwo = 'LEFT';
         }
-        if(e.keyCode === 87){//W
+        else if(e.keyCode === 87){//W
             direction_snakeTwo = 'UP';
         }
-        if(e.keyCode === 68){//D
+        else if(e.keyCode === 68){//D
             direction_snakeTwo = 'RIGHT';
         }
-        if(e.keyCode === 83){//S
+        else if(e.keyCode === 83){//S
             direction_snakeTwo = 'DOWN';
         }
     }
