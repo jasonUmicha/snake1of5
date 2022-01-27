@@ -1,4 +1,5 @@
 <?php
+
 ?>
 <!doctype html>
 <html lang="de">
@@ -37,8 +38,8 @@
     };
     let cellWidth = canvas.width / cols;
     let cellHeight = canvas.height / rows;
-    let direction_snakeOne = 'LEFT';
-    let direction_snakeTwo = 'UP';
+    let direction_snakeOne = '';
+    let direction_snakeTwo = '';
 
     // aufruf pro sec. *100
     setInterval(gameLoop, 400);
