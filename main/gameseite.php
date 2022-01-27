@@ -52,7 +52,7 @@
     placeFood();
 
     // aufruf pro sec. *100
-    setInterval(gameLoop, 400);
+    setInterval(gameLoop, 200);
     // wenn eine taste gedrückt wird soll func.keyDown ausgeführt werden
     document.addEventListener('keydown',keyDown);
     draw();
@@ -87,7 +87,7 @@
         let otherParts_snakeTwo = snakeTwo.slice(1);
         //  schlange EINS: wenn sich die Schlange selbst berührt o. die andere schlange = respawn(treu)
         let duplicatePart = otherParts_snakeOne.find(part => // kopf trifft auf eigenen körper
-            part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
+                part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
             otherParts_snakeTwo.find(part => // kopf trifft fremden körper
                 part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
             // kopfe trifft fremde kopf
@@ -112,11 +112,18 @@
                 }];
             direction_snakeOne = '';
         }
+
+        if (snakeTwo[0].x <= 0 )
+        { snakeTwo[0].x += rows ;}
+        if(snakeTwo[0].y <= 0 )
+        {snakeTwo[0].y +=  cols ;}
+
+        if(snakeTwo[0].y >= cols)
+        {snakeTwo[0].y += - cols ;}
+        if (snakeTwo[0].x >= rows  )
+        {snakeTwo[0].x += - rows ;}
         // 2. schlange fährt gegen die wand = respawn
-        if (snakeTwo[0].x < 0 ||
-            snakeTwo[0].x > cols -1 ||
-            snakeTwo[0].y < 0 ||
-            snakeTwo[0].y > rows -1 ||
+        if (
             duplicatePart
         ){  // schlange zurücksetzen / alle stücken entfernt
             snakeTwo =[
