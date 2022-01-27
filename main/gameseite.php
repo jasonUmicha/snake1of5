@@ -80,11 +80,29 @@
     }
 
     function testGameOver(){
-        // schlange fährt gegen die wand = respawn
+        // var. benötigt zum abfragen der selbst berührung o. andere schlange
+        let firstPart_snakeOne = snakeOne[0];
+        let otherParts_snakeOne = snakeOne.slice(1);
+        let firstPart_snakeTwo = snakeTwo[0];
+        let otherParts_snakeTwo = snakeTwo.slice(1);
+        //  schlange EINS: wenn sich die Schlange selbst berührt o. die andere schlange = respawn(treu)
+        let duplicatePart_snakeOne = otherParts_snakeOne.find(part =>
+            part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
+            otherParts_snakeTwo.find(part =>
+                part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
+            firstPart_snakeOne.x === firstPart_snakeTwo.x && firstPart_snakeOne.y === firstPart_snakeTwo.y ;
+        //  schlange ZWEI: wenn sich die Schlange selbst berührt o. die andere schlange = respawn(treu)
+        let duplicatePart_snakeTwo = otherParts_snakeTwo.find(part =>
+                part.x === otherParts_snakeTwo.x && part.y === otherParts_snakeTwo.y) ||
+            otherParts_snakeOne.find(part =>
+                part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
+            firstPart_snakeTwo.x === firstPart_snakeOne.x && firstPart_snakeTwo.y === firstPart_snakeOne.y ;
+        // 1. schlange fährt gegen die wand = respawn
         if (snakeOne[0].x < 0 ||
             snakeOne[0].x > cols -1 ||
             snakeOne[0].y < 0 ||
-            snakeOne[0].y > rows -1
+            snakeOne[0].y > rows -1 ||
+            duplicatePart_snakeOne
         ){  // schlange zurücksetzen / alle stücken entfernt
             snakeOne =[
                 {
@@ -93,11 +111,12 @@
                 }];
             direction_snakeOne = '';
         }
-        // schlange fährt gegen die wand = respawn
+        // 2. schlange fährt gegen die wand = respawn
         if (snakeTwo[0].x < 0 ||
             snakeTwo[0].x > cols -1 ||
             snakeTwo[0].y < 0 ||
-            snakeTwo[0].y > rows -1
+            snakeTwo[0].y > rows -1 ||
+            duplicatePart_snakeTwo
         ){  // schlange zurücksetzen / alle stücken entfernt
             snakeTwo =[
                 {
