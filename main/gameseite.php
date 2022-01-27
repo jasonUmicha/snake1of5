@@ -90,6 +90,24 @@
         ctx.fillRect(x * cellWidth,y * cellHeight, cellWidth, cellHeight);
     }
 
+    // Wachstum : nach dem fressen, Futter schicht für
+    // schicht durch reichen und hinten anhängen
+    function shiftSnakeOne(){
+        for (let i = snakeOne.length -1; i > 0; i--){
+            const part = snakeOne[i];
+            const lastPart = snakeOne[i -1];
+            part.x = lastPart.x;
+            part.y = lastPart.y;
+        }
+    }
+    function shiftSnakeTow(){
+        for (let i = snakeTwo.length -1; i > 0; i--){
+            const part = snakeTwo[i];
+            const lastPart = snakeTwo[i -1];
+            part.x = lastPart.x;
+            part.y = lastPart.y;
+        }
+    }
     // game schleife (bewegung aber auch ablaufs programmierung)
     function gameLoop(){
         // abfragen ob futter gefressen wurde.
@@ -104,9 +122,23 @@
             // anhaltenden wachstum zu beenden.
             foodCollected_snakeOne = false ;
             // jetzt kackt er es gleich aus....
-
         }
+        if (foodCollected_snakeTwo){
+            snakeTwo = [{
+                x: snakeTwo[0].x,
+                y: snakeTwo[0].y
+            }, ...snakeTwo]; // um das Futterstück hinten anzuhängen
 
+            // fressbestätigung wieder auf (false) setzen,
+            // anhaltenden wachstum zu beenden.
+            foodCollected_snakeTwo = false ;
+            // jetzt kackt er es gleich aus....
+        }
+        // wachstum : nach der futter bestätigung
+        // damit die schlange langsam wächst anstatt
+        // sofort zu wachsen.(flüssigere performances)
+        shiftSnakeOne();
+        shiftSnakeTow();
         // schlange EINS bewegungsabfrage
         if(direction_snakeOne === 'LEFT'){
             snakeOne[0].x--;
@@ -153,7 +185,7 @@
         }
 
     }
-
+    // Steuerung
     function keyDown(e){
         // schlange EINS steuerung
         if(e.keyCode === 37){//pfeil links
