@@ -28,18 +28,19 @@
     let cols = 15;
     let snakeOne =[
         {
-            x : 5,
-            y : 5
+            x : 12,
+            y : 12
         }];
     let snakeTwo =[
         {
-            x : 6,
-            y : 6
+            x : 2,
+            y : 2
         }];
     let food;
 
     let cellWidth = canvas.width / cols;
     let cellHeight = canvas.height / rows;
+    // steuer richtung festlegen
     let direction_snakeOne = '';
     let direction_snakeTwo = '';
 
@@ -50,13 +51,11 @@
 
     placeFood();
 
-
     // aufruf pro sec. *100
     setInterval(gameLoop, 400);
     // wenn eine taste gedrückt wird soll func.keyDown ausgeführt werden
     document.addEventListener('keydown',keyDown);
     draw();
-
 
     // malen => funktion : schlange/-en u. futter
     function draw(){
@@ -80,48 +79,57 @@
         requestAnimationFrame(draw);
     }
 
-
-    function testGameOverSnakeOne(){
-        let firstPart = snakeOne[0];
-        let otherParts = snakeOne.slice(1);
-        let duplicatePart = otherParts.find(part=>part.x ===firstPart.x && part.y===firstPart.y);
-        if(snakeOne[0].x<0||
-            snakeOne[0].x>cols -1||
-            snakeOne[0].y<0||
-            snakeOne[0].y>rows -1||
-            duplicatePart
-        ){
-            placeFood();
+    function testGameOver(){
+        // var. benötigt zum abfragen der selbst berührung o. andere schlange
+        let firstPart_snakeOne = snakeOne[0];
+        let otherParts_snakeOne = snakeOne.slice(1);
+        let firstPart_snakeTwo = snakeTwo[0];
+        let otherParts_snakeTwo = snakeTwo.slice(1);
+        //  schlange EINS: wenn sich die Schlange selbst berührt o. die andere schlange = respawn(treu)
+        let duplicatePart_snakeOne = otherParts_snakeOne.find(part =>
+                part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
+            otherParts_snakeTwo.find(part =>
+                part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
+            firstPart_snakeOne.x === firstPart_snakeTwo.x && firstPart_snakeOne.y === firstPart_snakeTwo.y ;
+        //  schlange ZWEI: wenn sich die Schlange selbst berührt o. die andere schlange = respawn(treu)
+        let duplicatePart_snakeTwo = otherParts_snakeTwo.find(part =>
+                part.x === otherParts_snakeTwo.x && part.y === otherParts_snakeTwo.y) ||
+            otherParts_snakeOne.find(part =>
+                part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
+            firstPart_snakeTwo.x === firstPart_snakeOne.x && firstPart_snakeTwo.y === firstPart_snakeOne.y ;
+        // 1. schlange fährt gegen die wand = respawn
+        if (snakeOne[0].x < 0 ||
+            snakeOne[0].x > cols -1 ||
+            snakeOne[0].y < 0 ||
+            snakeOne[0].y > rows -1 ||
+            duplicatePart_snakeOne
+        ){  // schlange zurücksetzen / alle stücken entfernt
             snakeOne =[
                 {
-                    x : 5,
-                    y : 5
+                    x : 12,
+                    y : 12
                 }];
-             direction_snakeOne = '';
-
+            direction_snakeOne = '';
         }
-}
-    function testGameOverSnakeTwo(){
-        let firstPart = snakeTwo[0];
-        let otherParts = snakeTwo.slice(1);
-        let duplicatePart = otherParts.find(part=>part.x ===firstPart.x && part.y===firstPart.y);
-        if(snakeTwo[0].x<0||
-            snakeTwo[0].x>cols -1||
-            snakeTwo[0].y<0||
-            snakeTwo[0].y>rows -1||
-            duplicatePart
-        ){
-            placeFood();
+        // 2. schlange fährt gegen die wand = respawn
+        if (snakeTwo[0].x < 0 ||
+            snakeTwo[0].x > cols -1 ||
+            snakeTwo[0].y < 0 ||
+            snakeTwo[0].y > rows -1 ||
+            duplicatePart_snakeTwo
+        ){  // schlange zurücksetzen / alle stücken entfernt
             snakeTwo =[
                 {
-                    x : 6,
-                    y : 6
+                    x : 2,
+                    y : 2
                 }];
             direction_snakeTwo = '';
-
         }
     }
+    // Futterstück irgendwo (random) erscheinen lassen.
+    // (x,y) zufällig zu ordnen
     function placeFood(){
+        // zufalls zahl, mal -/zeilen o. -/spalten und abrunden.
         let randomX = Math.floor(Math.random()* cols);
         let randomY =Math.floor(Math.random()* rows);
         food ={
@@ -155,8 +163,9 @@
     }
     // game schleife (bewegung aber auch ablaufs programmierung)
     function gameLoop(){
-        testGameOverSnakeOne();
-        testGameOverSnakeTwo();
+        // respawn bei wand berührung
+        testGameOver();
+
         // abfragen ob futter gefressen wurde.
         // is das ergebnis (treu), wachstum.
         if (foodCollected_snakeOne){
@@ -164,22 +173,18 @@
                 x: snakeOne[0].x,
                 y: snakeOne[0].y
             }, ...snakeOne]; // um das Futterstück hinten anzuhängen
-
             // fressbestätigung wieder auf (false) setzen,
             // anhaltenden wachstum zu beenden.
             foodCollected_snakeOne = false ;
-            // jetzt kackt er es gleich aus....
         }
         if (foodCollected_snakeTwo){
             snakeTwo = [{
                 x: snakeTwo[0].x,
                 y: snakeTwo[0].y
             }, ...snakeTwo]; // um das Futterstück hinten anzuhängen
-
             // fressbestätigung wieder auf (false) setzen,
             // anhaltenden wachstum zu beenden.
             foodCollected_snakeTwo = false ;
-            // jetzt kackt er es gleich aus....
         }
         // wachstum : nach der futter bestätigung
         // damit die schlange langsam wächst anstatt
@@ -187,7 +192,6 @@
         shiftSnakeOne();
         shiftSnakeTow();
         // schlange EINS bewegungsabfrage
-
         if(direction_snakeOne === 'LEFT'){
             snakeOne[0].x--;
         }
