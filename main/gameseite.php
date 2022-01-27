@@ -7,31 +7,33 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Snake 1 of 5</title>
 </head>
 
 <body>
-    <canvas id="canvas" width="1800" height="800"  ></canvas>
-
+<main>
+    <canvas id="canvas" width="600" height="600"  ></canvas>
+</main>
 <script>
 
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
-    let rows = 100;
-    let cols = 250;
+    let rows = 15;
+    let cols = 15;
     let snakeOne =[
         {
-            x : 50,
-            y : 50
+            x : 5,
+            y : 5
         }];
     let snakeTwo =[
         {
-            x : 55,
-            y : 55
+            x : 5,
+            y : 5
         }];
     let food = {
-        x : 20,
-        y : 10
+        x : 2,
+        y : 1
     };
     let cellWidth = canvas.width / cols;
     let cellHeight = canvas.height / rows;
@@ -39,7 +41,7 @@
     let direction_snakeTwo = 'UP';
 
     // aufruf pro sec. *100
-    setInterval(gameLoop, 100);
+    setInterval(gameLoop, 400);
     // wenn eine taste gedrückt wird soll func.keyDown ausgeführt werden
     document.addEventListener('keydown',keyDown);
     draw();
