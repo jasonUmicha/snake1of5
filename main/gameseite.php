@@ -28,18 +28,19 @@
     let cols = 15;
     let snakeOne =[
         {
-            x : 5,
-            y : 5
+            x : 12,
+            y : 12
         }];
     let snakeTwo =[
         {
-            x : 5,
-            y : 5
+            x : 2,
+            y : 2
         }];
     let food;
 
     let cellWidth = canvas.width / cols;
     let cellHeight = canvas.height / rows;
+    // steuer richtung festlegen
     let direction_snakeOne = '';
     let direction_snakeTwo = '';
 
@@ -50,13 +51,11 @@
 
     placeFood();
 
-
     // aufruf pro sec. *100
     setInterval(gameLoop, 400);
     // wenn eine taste gedrückt wird soll func.keyDown ausgeführt werden
     document.addEventListener('keydown',keyDown);
     draw();
-
 
     // malen => funktion : schlange/-en u. futter
     function draw(){
@@ -79,8 +78,39 @@
         // ständiger wieder aufruf der func.draw(bewegter Ablauf)
         requestAnimationFrame(draw);
     }
- 
+
+    function testGameOver(){
+        // schlange fährt gegen die wand = respawn
+        if (snakeOne[0].x < 0 ||
+            snakeOne[0].x > cols -1 ||
+            snakeOne[0].y < 0 ||
+            snakeOne[0].y > rows -1
+        ){  // schlange zurücksetzen / alle stücken entfernt
+            snakeOne =[
+                {
+                    x : 12,
+                    y : 12
+                }];
+            direction_snakeOne = '';
+        }
+        // schlange fährt gegen die wand = respawn
+        if (snakeTwo[0].x < 0 ||
+            snakeTwo[0].x > cols -1 ||
+            snakeTwo[0].y < 0 ||
+            snakeTwo[0].y > rows -1
+        ){  // schlange zurücksetzen / alle stücken entfernt
+            snakeTwo =[
+                {
+                    x : 2,
+                    y : 2
+                }];
+            direction_snakeTwo = '';
+        }
+    }
+    // Futterstück irgendwo (random) erscheinen lassen.
+    // (x,y) zufällig zu ordnen
     function placeFood(){
+        // zufalls zahl, mal -/zeilen o. -/spalten und abrunden.
         let randomX = Math.floor(Math.random()* cols);
         let randomY =Math.floor(Math.random()* rows);
         food ={
@@ -114,6 +144,9 @@
     }
     // game schleife (bewegung aber auch ablaufs programmierung)
     function gameLoop(){
+        // respawn bei wand berührung
+        testGameOver();
+
         // abfragen ob futter gefressen wurde.
         // is das ergebnis (treu), wachstum.
         if (foodCollected_snakeOne){
@@ -121,22 +154,18 @@
                 x: snakeOne[0].x,
                 y: snakeOne[0].y
             }, ...snakeOne]; // um das Futterstück hinten anzuhängen
-
             // fressbestätigung wieder auf (false) setzen,
             // anhaltenden wachstum zu beenden.
             foodCollected_snakeOne = false ;
-            // jetzt kackt er es gleich aus....
         }
         if (foodCollected_snakeTwo){
             snakeTwo = [{
                 x: snakeTwo[0].x,
                 y: snakeTwo[0].y
             }, ...snakeTwo]; // um das Futterstück hinten anzuhängen
-
             // fressbestätigung wieder auf (false) setzen,
             // anhaltenden wachstum zu beenden.
             foodCollected_snakeTwo = false ;
-            // jetzt kackt er es gleich aus....
         }
         // wachstum : nach der futter bestätigung
         // damit die schlange langsam wächst anstatt
@@ -144,7 +173,6 @@
         shiftSnakeOne();
         shiftSnakeTow();
         // schlange EINS bewegungsabfrage
-
         if(direction_snakeOne === 'LEFT'){
             snakeOne[0].x--;
         }
