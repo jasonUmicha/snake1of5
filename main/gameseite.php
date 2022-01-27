@@ -9,7 +9,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <title>Snake 1 of 5</title>
 </head>
@@ -36,16 +36,17 @@
             x : 5,
             y : 5
         }];
-    let food = {
-        x : 2,
-        y : 1
-    };
+    let food =[
+        {
+
+        }];
+
 
     let cellWidth = canvas.width / cols;
     let cellHeight = canvas.height / rows;
     let direction_snakeOne = '';
     let direction_snakeTwo = '';
-
+    placeFood();
     // aufruf pro sec. *100
     setInterval(gameLoop, 400);
     // wenn eine taste gedrückt wird soll func.keyDown ausgeführt werden
@@ -73,7 +74,15 @@
         // ständiger wieder aufruf der func.draw(bewegter Ablauf)
         requestAnimationFrame(draw);
     }
+    function placeFood(){
+        let randomX = Math.floor(Math.random()* cols);
+        let randomY =Math.floor(Math.random()* rows);
 
+        food ={
+            x: randomX, //=== snakeOne.x ? randomX + cols : randomX,
+            y: randomY //=== snakeOne.y ? randomY + rows : randomY
+        }
+    }
     //futter u schlange/-en koordinaten einfügen (im Spielfeld platzieren)
     function add(x,y){
         ctx.fillRect(x * cellWidth,y * cellHeight, cellWidth, cellHeight);
@@ -93,6 +102,10 @@
         else if(direction_snakeOne === 'DOWN'){
             snakeOne[0].y++;
         }
+         if(snakeOne[0].x === food.x &&
+                snakeOne[0].y === food.y){
+                placeFood();
+        }
 
          if(direction_snakeTwo === 'LEFT'){
             snakeTwo[0].x--;
@@ -105,6 +118,10 @@
         }
         else if(direction_snakeTwo === 'DOWN'){
             snakeTwo[0].y++;
+        }
+         if(snakeTwo[0].x === food.x &&
+            snakeTwo[0].y === food.y){
+            placeFood();
         }
 
     }
@@ -138,7 +155,7 @@
         }
     }
 
-// 11.uhr test
+
 </script>
 
 </body>
