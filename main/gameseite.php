@@ -90,7 +90,54 @@
         // ständiger wieder aufruf der func.draw(bewegter Ablauf)
         requestAnimationFrame(draw);
     }
- 
+    function testGameOverSnakeOne(){
+        if(snakeOne[0].x<0||
+            snakeOne[0].x>cols -1||
+            snakeOne[0].y<0||
+            snakeOne[0].y>rows -1
+        ){
+            placeFood();
+            snakeOne =[
+                {
+                    x : 5,
+                    y : 5
+                }];
+            direction_snakeOne = '';
+
+        }
+    }
+    function testGameOverSnakeTwo(){
+        if(snakeTwo[0].x<0||
+            snakeTwo[0].x>cols -1||
+            snakeTwo[0].y<0||
+            snakeTwo[0].y>rows -1
+        ){
+            placeFood();
+            snakeTwo =[
+                {
+                    x : 6,
+                    y : 6
+                }];
+
+            direction_snakeTwo = '';
+        }
+    }
+    function testGameOverSnakeThree(){
+        if(snakeTwo[0].x<0||
+            snakeTwo[0].x>cols -1||
+            snakeTwo[0].y<0||
+            snakeTwo[0].y>rows -1
+        ){
+            placeFood();
+            snakeTwo =[
+                {
+                    x : 6,
+                    y : 6
+                }];
+
+            direction_snakeTwo = '';
+        }
+    }
     function placeFood(){
         let randomX = Math.floor(Math.random()* cols);
         let randomY =Math.floor(Math.random()* rows);
