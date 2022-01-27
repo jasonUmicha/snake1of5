@@ -36,16 +36,13 @@
             x : 5,
             y : 5
         }];
-    let food =[
-        {
-
-        }];
-
-
+    let food;
     let cellWidth = canvas.width / cols;
     let cellHeight = canvas.height / rows;
     let direction_snakeOne = '';
     let direction_snakeTwo = '';
+    let foodCollected_snakeOne=false;
+    let foodCollected_snakeTwo=false;
     placeFood();
     // aufruf pro sec. *100
     setInterval(gameLoop, 400);
@@ -57,7 +54,7 @@
     function draw(){
         // Hintergrund (wieder holen damit es nicht aussieht als wenn man male)
         ctx.fillStyle = 'green';
-        ctx.fillRect(0,0,canvas.width ,canvas.height );
+        ctx.fillRect(0,0,canvas.width ,canvas.height);
 
         // Snake one
         ctx.fillStyle = 'navy';
@@ -88,8 +85,31 @@
         ctx.fillRect(x * cellWidth,y * cellHeight, cellWidth, cellHeight);
     }
 
+    function shiftSnakeOne(){
+        for(let i=snakeOne.length -1;i>0;i--){
+            const part =snakeOne[i];
+            const lastPart =snakeOne[i-1];
+            part.x =lastPart.x;
+            part.y =lastPart.y;
+        }
+
+    }
+    function shiftSnakeTwo(){
+        for(let i=snakeTwo.length -1;i>0;i--){
+            const part =snakeTwo[i];
+            const lastPart =snakeTwo[i-1];
+            part.x =lastPart.x;
+            part.y =lastPart.y;
+        }
+
+    }
     function gameLoop(){
-        
+       shiftSnakeOne();
+        if (foodCollected_snakeOne){
+            //////////lustig
+            snakeOne=/* snakeTwo=*/[{x: snakeOne[0].x,y: snakeOne[0].y},...snakeOne];
+            foodCollected_snakeOne = false;
+        }
         if(direction_snakeOne === 'LEFT'){
             snakeOne[0].x--;
         }
@@ -104,7 +124,15 @@
         }
          if(snakeOne[0].x === food.x &&
                 snakeOne[0].y === food.y){
+             foodCollected_snakeOne=true;
                 placeFood();
+        }
+
+ //////////SnakeTwo//////////////////////////////////////////////////////////////////
+        shiftSnakeTwo();
+        if (foodCollected_snakeTwo){
+            snakeTwo=[{x: snakeTwo[0].x,y: snakeTwo[0].y},...snakeTwo];
+            foodCollected_snakeOne = false;
         }
 
          if(direction_snakeTwo === 'LEFT'){
@@ -121,6 +149,7 @@
         }
          if(snakeTwo[0].x === food.x &&
             snakeTwo[0].y === food.y){
+             foodCollected_snakeTwo=true;
             placeFood();
         }
 
@@ -140,6 +169,7 @@
         else if(e.keyCode === 40){//pfeil runter
             direction_snakeOne = 'DOWN';
         }
+        ///////////SnakeTwo/////////////////////////////////////////////////
 
         if(e.keyCode === 65){ //A
             direction_snakeTwo = 'LEFT';
