@@ -104,12 +104,13 @@
 
     }
     function gameLoop(){
-       shiftSnakeOne();
+
         if (foodCollected_snakeOne){
             //////////lustig
             snakeOne=/* snakeTwo=*/[{x: snakeOne[0].x,y: snakeOne[0].y},...snakeOne];
             foodCollected_snakeOne = false;
         }
+        shiftSnakeOne();
         if(direction_snakeOne === 'LEFT'){
             snakeOne[0].x--;
         }
@@ -129,12 +130,12 @@
         }
 
  //////////SnakeTwo//////////////////////////////////////////////////////////////////
-        shiftSnakeTwo();
+
         if (foodCollected_snakeTwo){
             snakeTwo=[{x: snakeTwo[0].x,y: snakeTwo[0].y},...snakeTwo];
             foodCollected_snakeOne = false;
         }
-
+        shiftSnakeTwo();
          if(direction_snakeTwo === 'LEFT'){
             snakeTwo[0].x--;
         }
