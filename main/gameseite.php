@@ -50,6 +50,7 @@
 
     placeFood();
 
+
     // aufruf pro sec. *100
     setInterval(gameLoop, 400);
     // wenn eine taste gedrückt wird soll func.keyDown ausgeführt werden
@@ -61,7 +62,7 @@
     function draw(){
         // Hintergrund (wieder holen damit es nicht aussieht als wenn man male)
         ctx.fillStyle = 'green';
-        ctx.fillRect(0,0,canvas.width ,canvas.height );
+        ctx.fillRect(0,0,canvas.width ,canvas.height);
 
         // Snake one
         ctx.fillStyle = 'navy';
@@ -78,7 +79,7 @@
         // ständiger wieder aufruf der func.draw(bewegter Ablauf)
         requestAnimationFrame(draw);
     }
-
+ 
     function placeFood(){
         let randomX = Math.floor(Math.random()* cols);
         let randomY =Math.floor(Math.random()* rows);
@@ -143,6 +144,7 @@
         shiftSnakeOne();
         shiftSnakeTow();
         // schlange EINS bewegungsabfrage
+
         if(direction_snakeOne === 'LEFT'){
             snakeOne[0].x--;
         }
@@ -155,8 +157,10 @@
         else if(direction_snakeOne === 'DOWN'){
             snakeOne[0].y++;
         }
+
         // schlange ZWEI bewegungsabfrage
         if(direction_snakeTwo === 'LEFT'){
+
             snakeTwo[0].x--;
         }
         else if(direction_snakeTwo === 'UP'){
@@ -168,6 +172,7 @@
         else if(direction_snakeTwo === 'DOWN'){
             snakeTwo[0].y++;
         }
+
         // was passieren soll wenn schlange EINS auf futter trifft
         if (snakeOne[0].x === food.x &&
             snakeOne[0].y === food.y){
@@ -203,6 +208,7 @@
         else if(e.keyCode === 40){//pfeil runter
             direction_snakeOne = 'DOWN';
         }
+
         // schlange EINS steuerung
         if(e.keyCode === 65){ //A
             direction_snakeTwo = 'LEFT';
