@@ -1,4 +1,5 @@
 <?php
+
 ?>
 <!doctype html>
 <html lang="de">
@@ -41,12 +42,14 @@
     let cellHeight = canvas.height / rows;
     let direction_snakeOne = '';
     let direction_snakeTwo = '';
+
     // benötigt für die abfrage ob das Futter gefressen wurde,
     // um die schlange wachsen zulassen
     let foodCollected_snakeOne = false;
     let foodCollected_snakeTwo = false;
 
     placeFood();
+
     // aufruf pro sec. *100
     setInterval(gameLoop, 400);
     // wenn eine taste gedrückt wird soll func.keyDown ausgeführt werden
