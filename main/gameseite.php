@@ -82,10 +82,14 @@
 
 
     function testGameOverSnakeOne(){
+        let firstPart = snakeOne[0];
+        let otherParts = snakeOne.slice(1);
+        let duplicatePart = otherParts.find(part=>part.x ===firstPart.x && part.y===firstPart.y);
         if(snakeOne[0].x<0||
             snakeOne[0].x>cols -1||
             snakeOne[0].y<0||
-            snakeOne[0].y>rows -1
+            snakeOne[0].y>rows -1||
+            duplicatePart
         ){
             placeFood();
             snakeOne =[
@@ -98,10 +102,14 @@
         }
 }
     function testGameOverSnakeTwo(){
+        let firstPart = snakeTwo[0];
+        let otherParts = snakeTwo.slice(1);
+        let duplicatePart = otherParts.find(part=>part.x ===firstPart.x && part.y===firstPart.y);
         if(snakeTwo[0].x<0||
             snakeTwo[0].x>cols -1||
             snakeTwo[0].y<0||
-            snakeTwo[0].y>rows -1
+            snakeTwo[0].y>rows -1||
+            duplicatePart
         ){
             placeFood();
             snakeTwo =[
@@ -109,10 +117,10 @@
                     x : 6,
                     y : 6
                 }];
-
             direction_snakeTwo = '';
+
         }
-}
+    }
     function placeFood(){
         let randomX = Math.floor(Math.random()* cols);
         let randomY =Math.floor(Math.random()* rows);
