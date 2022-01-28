@@ -1,3 +1,33 @@
+
+Skip to content
+Pull requests
+Issues
+Marketplace
+Explore
+@JasonXy82
+jasonUmicha /
+snake1of5
+Private
+
+Code
+Issues
+Pull requests
+Actions
+Projects
+Security
+Insights
+
+Settings
+
+snake1of5/main/gameseite.php /
+@4MrBadPet
+4MrBadPet + bug fix: steuerung
+Latest commit 8f6653e 5 minutes ago
+History
+2 contributors
+@4MrBadPet
+@JasonXy82
+304 lines (274 sloc) 10.4 KB
 <?php
 
 ?>
@@ -100,11 +130,11 @@
             // kopf trifft fremde kopf
             firstPart_snakeTwo.x === firstPart_snakeOne.x && firstPart_snakeTwo.y === firstPart_snakeOne.y ;
         // 1. schlange fährt gegen die wand = respawn
-         if (//snakeOne[0].x < 0 ||
-        //     snakeOne[0].x > cols -1 ||
-        //     snakeOne[0].y < 0 ||
-        //     snakeOne[0].y > rows -1 ||
-             duplicatePart_snakeOne
+        if (//snakeOne[0].x < 0 ||
+            //     snakeOne[0].x > cols -1 ||
+            //     snakeOne[0].y < 0 ||
+            //     snakeOne[0].y > rows -1 ||
+            duplicatePart_snakeOne
         ){  // schlange zurücksetzen / alle stücken entfernt
             snakeOne =[
                 {
@@ -132,9 +162,17 @@
         // zufalls zahl, mal -/zeilen o. -/spalten und abrunden.
         let randomX = Math.floor(Math.random()* cols);
         let randomY =Math.floor(Math.random()* rows);
-        food ={
-            x: randomX, //=== snake.x ? randomX + cols : randomX,
-            y: randomY //=== snake.y ? randomY + rows : randomY
+        let allParts_SnakeOne = snakeOne.slice(1);
+        let allParts_SnakeTwo = snakeOne.slice(1);
+        // koordinaten abgleichen TRUE wenn random einem schlangen part entspricht
+        let snake_part = allParts_SnakeOne.find(part =>
+                part.x === randomX && part.y === randomY) ||
+            allParts_SnakeTwo.find(part =>
+                part.x === randomX && part.y === randomY) ;
+
+        food ={// Futterstück soll nicht in der schlange spawnen
+            x: snake_part ? 0 : randomX,
+            y: snake_part ? 0 : randomY
         }
     }
 
@@ -294,3 +332,4 @@
 </body>
 
 </html>
+
