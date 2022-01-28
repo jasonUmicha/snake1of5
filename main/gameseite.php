@@ -90,13 +90,14 @@
                 part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
             otherParts_snakeTwo.find(part => // kopf trifft fremden körper
                 part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
-            // kopfe trifft fremde kopf
+            // kopf trifft fremde kopf
             firstPart_snakeOne.x === firstPart_snakeTwo.x && firstPart_snakeOne.y === firstPart_snakeTwo.y ;
         //  schlange ZWEI: wenn sich die Schlange selbst berührt o. die andere schlange = respawn(treu)
         let duplicatePart_snakeTwo = otherParts_snakeTwo.find(part =>
                 part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
-            otherParts_snakeOne.find(part =>
+            otherParts_snakeOne.find(part => // kopf trifft fremden körper
                 part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
+            // kopf trifft fremde kopf
             firstPart_snakeTwo.x === firstPart_snakeOne.x && firstPart_snakeTwo.y === firstPart_snakeOne.y ;
         // 1. schlange fährt gegen die wand = respawn
          if (//snakeOne[0].x < 0 ||
@@ -258,31 +259,31 @@
     }
     // Steuerung
     function keyDown(e){
-        // schlange EINS steuerung
-        if(e.keyCode === 37){//pfeil links
+        // schlange EINS steuerung + verhindern von rückwärts fahren.
+        if(e.keyCode === 37 && direction_snakeOne !== 'RIGHT'){//pfeil links
             direction_snakeOne = 'LEFT';
         }
-        else if(e.keyCode === 38){//pfeil hoch
+        else if(e.keyCode === 38 && direction_snakeOne !== 'DOWN'){//pfeil hoch
             direction_snakeOne = 'UP';
         }
-        else if(e.keyCode === 39){//pfeil rechts
+        else if(e.keyCode === 39 && direction_snakeOne !== 'LEFT'){//pfeil rechts
             direction_snakeOne = 'RIGHT';
         }
-        else if(e.keyCode === 40){//pfeil runter
+        else if(e.keyCode === 40 && direction_snakeOne !== 'UP'){//pfeil runter
             direction_snakeOne = 'DOWN';
         }
 
-        // schlange EINS steuerung
-        if(e.keyCode === 65){ //A
+        // schlange EINS steuerung + verhindern von rückwärts fahren.
+        if(e.keyCode === 65 && direction_snakeTwo !== 'RIGHT'){ //A
             direction_snakeTwo = 'LEFT';
         }
-        else if(e.keyCode === 87){ //W
+        else if(e.keyCode === 87 && direction_snakeTwo !== 'DOWN'){ //W
             direction_snakeTwo = 'UP';
         }
-        else if(e.keyCode === 68){ //D
+        else if(e.keyCode === 68 && direction_snakeTwo !== 'LEFT'){ //D
             direction_snakeTwo = 'RIGHT';
         }
-        else if(e.keyCode === 83){ //S
+        else if(e.keyCode === 83 && direction_snakeTwo !== 'UP'){ //S
             direction_snakeTwo = 'DOWN';
         }
     }
