@@ -52,7 +52,7 @@
     placeFood();
 
     // aufruf pro sec. *100
-    setInterval(gameLoop, 400);
+    setInterval(gameLoop, 200);
     // wenn eine taste gedrückt wird soll func.keyDown ausgeführt werden
     document.addEventListener('keydown',keyDown);
     draw();
@@ -86,23 +86,25 @@
         let firstPart_snakeTwo = snakeTwo[0];
         let otherParts_snakeTwo = snakeTwo.slice(1);
         //  schlange EINS: wenn sich die Schlange selbst berührt o. die andere schlange = respawn(treu)
-        let duplicatePart_snakeOne = otherParts_snakeOne.find(part =>
-            part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
-            otherParts_snakeTwo.find(part =>
+        let duplicatePart_snakeOne = otherParts_snakeOne.find(part => // kopf trifft auf eigenen körper
                 part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
+            otherParts_snakeTwo.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
+            // kopf trifft fremde kopf
             firstPart_snakeOne.x === firstPart_snakeTwo.x && firstPart_snakeOne.y === firstPart_snakeTwo.y ;
         //  schlange ZWEI: wenn sich die Schlange selbst berührt o. die andere schlange = respawn(treu)
         let duplicatePart_snakeTwo = otherParts_snakeTwo.find(part =>
-                part.x === otherParts_snakeTwo.x && part.y === otherParts_snakeTwo.y) ||
-            otherParts_snakeOne.find(part =>
                 part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
+            otherParts_snakeOne.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
+            // kopf trifft fremde kopf
             firstPart_snakeTwo.x === firstPart_snakeOne.x && firstPart_snakeTwo.y === firstPart_snakeOne.y ;
         // 1. schlange fährt gegen die wand = respawn
-        if (snakeOne[0].x < 0 ||
-            snakeOne[0].x > cols -1 ||
-            snakeOne[0].y < 0 ||
-            snakeOne[0].y > rows -1 ||
-            duplicatePart_snakeOne
+         if (//snakeOne[0].x < 0 ||
+        //     snakeOne[0].x > cols -1 ||
+        //     snakeOne[0].y < 0 ||
+        //     snakeOne[0].y > rows -1 ||
+             duplicatePart_snakeOne
         ){  // schlange zurücksetzen / alle stücken entfernt
             snakeOne =[
                 {
@@ -111,11 +113,9 @@
                 }];
             direction_snakeOne = '';
         }
-        // 2. schlange fährt gegen die wand = respawn
-        if (snakeTwo[0].x < 0 ||
-            snakeTwo[0].x > cols -1 ||
-            snakeTwo[0].y < 0 ||
-            snakeTwo[0].y > rows -1 ||
+
+        // 2. schlange fährt gegen die wand = respawn / wurde geändert
+        if (
             duplicatePart_snakeTwo
         ){  // schlange zurücksetzen / alle stücken entfernt
             snakeTwo =[
@@ -163,9 +163,26 @@
     }
     // game schleife (bewegung aber auch ablaufs programmierung)
     function gameLoop(){
-        // respawn bei wand berührung
+        // respawn bei spieler berührung //--wand berührung
         testGameOver();
-
+        // schlange eins fahrt durch die wand ;)
+        if (snakeOne[0].x <= 0 )
+        { snakeOne[0].x += rows ;}
+        if(snakeOne[0].y <= 0 )
+        {snakeOne[0].y +=  cols ;}
+        if(snakeOne[0].y >= cols)
+        {snakeOne[0].y += - cols ;}
+        if (snakeOne[0].x >= rows  )
+        {snakeOne[0].x += - rows ;}
+        // schlange zwei fahrt durch die wand ;)
+        if (snakeTwo[0].x <= 0 )
+        { snakeTwo[0].x += rows ;}
+        if(snakeTwo[0].y <= 0 )
+        {snakeTwo[0].y +=  cols ;}
+        if(snakeTwo[0].y >= cols)
+        {snakeTwo[0].y += - cols ;}
+        if (snakeTwo[0].x >= rows  )
+        {snakeTwo[0].x += - rows ;}
         // abfragen ob futter gefressen wurde.
         // is das ergebnis (treu), wachstum.
         if (foodCollected_snakeOne){
@@ -242,31 +259,31 @@
     }
     // Steuerung
     function keyDown(e){
-        // schlange EINS steuerung
-        if(e.keyCode === 37){//pfeil links
+        // schlange EINS steuerung + verhindern von rückwärts fahren.
+        if(e.keyCode === 37 && direction_snakeOne !== 'RIGHT'){//pfeil links
             direction_snakeOne = 'LEFT';
         }
-        else if(e.keyCode === 38){//pfeil hoch
+        else if(e.keyCode === 38 && direction_snakeOne !== 'DOWN'){//pfeil hoch
             direction_snakeOne = 'UP';
         }
-        else if(e.keyCode === 39){//pfeil rechts
+        else if(e.keyCode === 39 && direction_snakeOne !== 'LEFT'){//pfeil rechts
             direction_snakeOne = 'RIGHT';
         }
-        else if(e.keyCode === 40){//pfeil runter
+        else if(e.keyCode === 40 && direction_snakeOne !== 'UP'){//pfeil runter
             direction_snakeOne = 'DOWN';
         }
 
-        // schlange EINS steuerung
-        if(e.keyCode === 65){ //A
+        // schlange EINS steuerung + verhindern von rückwärts fahren.
+        if(e.keyCode === 65 && direction_snakeTwo !== 'RIGHT'){ //A
             direction_snakeTwo = 'LEFT';
         }
-        else if(e.keyCode === 87){ //W
+        else if(e.keyCode === 87 && direction_snakeTwo !== 'DOWN'){ //W
             direction_snakeTwo = 'UP';
         }
-        else if(e.keyCode === 68){ //D
+        else if(e.keyCode === 68 && direction_snakeTwo !== 'LEFT'){ //D
             direction_snakeTwo = 'RIGHT';
         }
-        else if(e.keyCode === 83){ //S
+        else if(e.keyCode === 83 && direction_snakeTwo !== 'UP'){ //S
             direction_snakeTwo = 'DOWN';
         }
     }
