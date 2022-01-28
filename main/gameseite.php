@@ -132,9 +132,17 @@
         // zufalls zahl, mal -/zeilen o. -/spalten und abrunden.
         let randomX = Math.floor(Math.random()* cols);
         let randomY =Math.floor(Math.random()* rows);
-        food ={
-            x: randomX, //=== snake.x ? randomX + cols : randomX,
-            y: randomY //=== snake.y ? randomY + rows : randomY
+        let allParts_SnakeOne = snakeOne.slice(1);
+        let allParts_SnakeTwo = snakeOne.slice(1);
+        // koordinaten abgleichen TRUE wenn random einem schlangen part entspricht
+        let snake_part = allParts_SnakeOne.find(part =>
+                part.x === randomX && part.y === randomY) ||
+            allParts_SnakeTwo.find(part =>
+                part.x === randomX && part.y === randomY) ;
+
+        food ={// Futterstück soll nicht in der schlange spawnen
+            x: snake_part ? 0 : randomX,
+            y: snake_part ? 0 : randomY
         }
     }
 
