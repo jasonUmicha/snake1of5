@@ -123,7 +123,10 @@
         if (snakeTwo[0].x >= rows  )
         {snakeTwo[0].x += - rows ;}
         // 2. schlange fährt gegen die wand = respawn
-        if (
+        if (snakeTwo[0].x < 0 ||
+            snakeTwo[0].x > cols -1 ||
+            snakeTwo[0].y < 0 ||
+            snakeTwo[0].y > rows -1 ||
             duplicatePart
         ){  // schlange zurücksetzen / alle stücken entfernt
             snakeTwo =[
