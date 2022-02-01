@@ -66,19 +66,19 @@
             ctx.fillStyle=pattern;
             ctx.fillRect(0,0,canvas.width ,canvas.height);
         }
-        patternImage.src='https://media.istockphoto.com/vectors/military-camouflage-seamless-pattern-hexagonal-grid-background-snake-vector-id848909448';
+        patternImage.src='https://www.colourbox.de/preview/6962083-grunen-wiese-hintergrund.jpg';
         //
         // ctx.fillStyle = 'green';
         // ctx.fillRect(0,0,canvas.width ,canvas.height);
 
         // Snake one
         //ctx.fillStyle = 'navy';
-        let gradientSo =ctx.createLinearGradient(snakeOne[0].x,snakeOne[0].y,canvas.width,canvas.height);
-        gradientSo.addColorStop(0,"#000066");
-        gradientSo.addColorStop(0.5,'#336699');
-        gradientSo.addColorStop(1,'#000066');
-
-        ctx.fillStyle = gradientSo;
+        var patternImage1=new Image();
+        patternImage1.onload=function(){
+            var pattern1 = ctx.createPattern(patternImage1,'repeat');
+            ctx.fillStyle=pattern1;
+        }
+        patternImage1.src='test3.jpg';
         snakeOne.forEach(part => add(part.x, part.y));
 
         // Snake two
