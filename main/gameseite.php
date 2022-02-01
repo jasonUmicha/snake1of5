@@ -67,27 +67,40 @@
             ctx.fillRect(0,0,canvas.width ,canvas.height);
         }
         patternImage.src='https://www.colourbox.de/preview/6962083-grunen-wiese-hintergrund.jpg';
-        //
+
         // ctx.fillStyle = 'green';
         // ctx.fillRect(0,0,canvas.width ,canvas.height);
 
         // Snake one
-        //ctx.fillStyle = 'navy';
-        var patternImage1=new Image();
+        // ctx.fillStyle = 'navy';
+        let patternImage1=new Image();
         patternImage1.onload=function(){
-            var pattern1 = ctx.createPattern(patternImage1,'repeat');
+            let pattern1 = ctx.createPattern(patternImage1,'repeat');
             ctx.fillStyle=pattern1;
+            snakeOne.forEach(part => add(part.x, part.y));
         }
         patternImage1.src='test3.jpg';
-        snakeOne.forEach(part => add(part.x, part.y));
+        // let gradientSo =ctx.createLinearGradient(snakeOne[0].x,snakeOne[0].y,canvas.width,canvas.height);
+        // gradientSo.addColorStop(0,'blue');
+        // gradientSo.addColorStop(0.5,'navy');
+        // gradientSo.addColorStop(1,'blue');
+        // ctx.fillStyle = gradientSo;
+
 
         // Snake two
-        let gradientSt =ctx.createLinearGradient(snakeOne[0].x,snakeOne[0].y,canvas.width,canvas.height);
-        gradientSt.addColorStop(0,'crimson');
-        gradientSt.addColorStop(0.5,'darkred');
-        gradientSt.addColorStop(1,'crimson');
-        ctx.fillStyle = gradientSt;
-        snakeTwo.forEach(part => add(part.x, part.y));
+        // let gradientSt =ctx.createLinearGradient(snakeOne[0].x,snakeOne[0].y,canvas.width,canvas.height);
+        // gradientSt.addColorStop(0,'crimson');
+        // gradientSt.addColorStop(0.5,'darkred');
+        // gradientSt.addColorStop(1,'crimson');
+        // ctx.fillStyle = gradientSt;
+        let patternImage2=new Image();
+        patternImage2.onload=function(){
+            let pattern2 = ctx.createPattern(patternImage2,'repeat');
+            ctx.fillStyle=pattern2;
+            snakeTwo.forEach(part => add(part.x, part.y));
+        }
+        patternImage2.src='test4.jpg';
+
 
         // Futter(food) oder auch happen
         ctx.fillStyle = 'yellow';
