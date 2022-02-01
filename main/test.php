@@ -37,7 +37,7 @@
                 ctx.fillStyle=pattern;
                 ctx.fillRect(200,150,100,50);
             }
-            patternImage.src='http://i.stack.imgur.com/ixrWe.png';
+            patternImage.src='https://media.istockphoto.com/vectors/military-camouflage-seamless-pattern-hexagonal-grid-background-snake-vector-id848909448';
 
             // for demo only, draw labels by each stroke
             ctx.fillStyle='black';

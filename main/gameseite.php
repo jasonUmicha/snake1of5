@@ -60,22 +60,33 @@
     // malen => funktion : schlange/-en u. futter
     function draw(){
         // Hintergrund (wieder holen damit es nicht aussieht als wenn man male)
-        ctx.fillStyle = 'green';
-        ctx.fillRect(0,0,canvas.width ,canvas.height);
+        let patternImage=new Image();
+        patternImage.onload=function(){
+            let pattern = ctx.createPattern(patternImage,'repeat');
+            ctx.fillStyle=pattern;
+            ctx.fillRect(0,0,canvas.width ,canvas.height);
+        }
+        patternImage.src='https://media.istockphoto.com/vectors/military-camouflage-seamless-pattern-hexagonal-grid-background-snake-vector-id848909448';
+        //
+        // ctx.fillStyle = 'green';
+        // ctx.fillRect(0,0,canvas.width ,canvas.height);
 
         // Snake one
         //ctx.fillStyle = 'navy';
-        let gradient =ctx.createLinearGradient(snakeOne[0].x,snakeOne[0].y,canvas.width,canvas.height);
-        gradient.addColorStop(0,'red');
-        gradient.addColorStop(1,'blue');
-        // gradient.addColorStop(2,'green');
-        // gradient.addColorStop(3,'yellow');
-        // gradient.addColorStop(4,'aqua');
-        ctx.fillStyle = gradient;
+        let gradientSo =ctx.createLinearGradient(snakeOne[0].x,snakeOne[0].y,canvas.width,canvas.height);
+        gradientSo.addColorStop(0,"#000066");
+        gradientSo.addColorStop(0.5,'#336699');
+        gradientSo.addColorStop(1,'#000066');
+
+        ctx.fillStyle = gradientSo;
         snakeOne.forEach(part => add(part.x, part.y));
 
         // Snake two
-        ctx.fillStyle = 'Maroon';
+        let gradientSt =ctx.createLinearGradient(snakeOne[0].x,snakeOne[0].y,canvas.width,canvas.height);
+        gradientSt.addColorStop(0,'crimson');
+        gradientSt.addColorStop(0.5,'darkred');
+        gradientSt.addColorStop(1,'crimson');
+        ctx.fillStyle = gradientSt;
         snakeTwo.forEach(part => add(part.x, part.y));
 
         // Futter(food) oder auch happen
@@ -154,7 +165,8 @@
 
     // futter u schlange/-en koordinaten einfügen (im Spielfeld platzieren)
     function add(x,y){
-
+        ctx.shadowBlur=   22.5;
+        ctx.shadowColor= 'black';
         ctx.fillRect(x * cellWidth,y * cellHeight, cellWidth, cellHeight);
     }
     // Wachstum : nach dem fressen, Futter schicht für
