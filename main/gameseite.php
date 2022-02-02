@@ -24,12 +24,12 @@
 
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
-    let rows = 15;
-    let cols = 15;
+    let rows = 5;
+    let cols = 5;
     let snakeOne =[
         {
-            x : 12,
-            y : 12
+            x : 2,
+            y : 2
         }];
     let snakeTwo =[
         {
@@ -52,7 +52,7 @@
     placeFood();
 
     // aufruf pro sec. *100
-    setInterval(gameLoop, 200);
+    setInterval(gameLoop, 400);
     // wenn eine taste gedrückt wird soll func.keyDown ausgeführt werden
     document.addEventListener('keydown',keyDown);
     draw();
@@ -136,6 +136,7 @@
                 part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
             // kopf trifft fremde kopf
             firstPart_snakeTwo.x === firstPart_snakeOne.x && firstPart_snakeTwo.y === firstPart_snakeOne.y ;
+        console.log('#1',duplicatePart_snakeOne,duplicatePart_snakeTwo);
         // 1. schlange fährt gegen die wand = respawn
          if (//snakeOne[0].x < 0 ||
         //     snakeOne[0].x > cols -1 ||
@@ -167,24 +168,39 @@
     // (x,y) zufällig zu ordnen
     function placeFood(){
         // zufalls zahl, mal -/zeilen o. -/spalten und abrunden.
-        let randomX = Math.floor(Math.random()* cols);
-        let randomY =Math.floor(Math.random()* rows);
+        let randomX ;
+        let randomY ;
         let allParts_SnakeOne = snakeOne.slice(0);
-        let allParts_SnakeTwo = snakeOne.slice(0);
-        // koordinaten abgleichen, TRUE wenn random einem schlangen part entspricht
-        let snake_part_one = allParts_SnakeOne.find(part =>
+        let allParts_SnakeTwo = snakeTwo.slice(0);
+        let snake_part_one= allParts_SnakeOne.find(part =>
+            part.x === randomX && part.y === randomY) ;;
+        let snake_part_two= allParts_SnakeTwo.find(part =>
+            part.x === randomX && part.y === randomY) ;
+        do {
+            allParts_SnakeTwo = snakeTwo.slice(0);
+            allParts_SnakeOne = snakeOne.slice(0);
+            randomX = Math.floor(Math.random()* cols);
+            randomY =Math.floor(Math.random()* rows);
+            // koordinaten abgleichen, TRUE wenn random einem schlangen part entspricht
+            snake_part_one = allParts_SnakeOne.find(part =>
                 part.x === randomX && part.y === randomY) ;
-        let snake_part_two = allParts_SnakeTwo.find(part =>
+            snake_part_two = allParts_SnakeTwo.find(part =>
                 part.x === randomX && part.y === randomY) ;
-        food ={// Futterstück soll nicht in der schlange spawnen
-            x: snake_part_one || snake_part_two ? Math.floor(Math.random()* cols) : randomX,
-            y: snake_part_one || snake_part_two ? Math.floor(Math.random()* rows) : randomY
-        }
+            console.log('#2',snake_part_one,snake_part_two);
+        } while (snake_part_one && snake_part_two !==true);
+
+
+
+        food = {// Futterstück soll nicht in der schlange spawnen
+            x: randomX,//snake_part_one || snake_part_two ? Math.floor(Math.random()* cols)
+            y: randomY//snake_part_one || snake_part_two ? Math.floor(Math.random()* rows)
+        };
+
     }
 
     // futter u schlange/-en koordinaten einfügen (im Spielfeld platzieren)
     function add(x,y){
-        ctx.shadowBlur=   22.5;
+        ctx.shadowBlur= 22.5;
         ctx.shadowColor= 'black';
         ctx.fillRect(x * cellWidth,y * cellHeight, cellWidth, cellHeight);
     }
@@ -254,31 +270,31 @@
         shiftSnakeOne();
         shiftSnakeTow();
         // schlange EINS bewegungsabfrage
-        if(direction_snakeOne === 'LEFT'){
+        if(direction_snakeOne === 'LEFT' && direction_snakeOne !== 'RIGHT'){
             snakeOne[0].x--;
         }
-        else if(direction_snakeOne === 'UP'){
+        else if(direction_snakeOne === 'UP' && direction_snakeOne !== 'DOWN'){
             snakeOne[0].y--;
         }
-        else if(direction_snakeOne === 'RIGHT'){
+        else if(direction_snakeOne === 'RIGHT' && direction_snakeOne !== 'LEFT'){
             snakeOne[0].x++;
         }
-        else if(direction_snakeOne === 'DOWN'){
+        else if(direction_snakeOne === 'DOWN' && direction_snakeOne !== 'UP'){
             snakeOne[0].y++;
         }
 
         // schlange ZWEI bewegungsabfrage
-        if(direction_snakeTwo === 'LEFT'){
+        if(direction_snakeTwo === 'LEFT' && direction_snakeTwo !== 'RIGHT'){
 
             snakeTwo[0].x--;
         }
-        else if(direction_snakeTwo === 'UP'){
+        else if(direction_snakeTwo === 'UP' && direction_snakeTwo !== 'DOWN'){
             snakeTwo[0].y--;
         }
-        else if(direction_snakeTwo === 'RIGHT'){
+        else if(direction_snakeTwo === 'RIGHT' && direction_snakeTwo !== 'LEFT'){
             snakeTwo[0].x++;
         }
-        else if(direction_snakeTwo === 'DOWN'){
+        else if(direction_snakeTwo === 'DOWN' && direction_snakeTwo !== 'UP'){
             snakeTwo[0].y++;
         }
 
