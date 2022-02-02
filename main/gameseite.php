@@ -66,7 +66,7 @@
             ctx.fillStyle=pattern;
             ctx.fillRect(0,0,canvas.width ,canvas.height);
         }
-        patternImage.src='https://www.colourbox.de/preview/6962083-grunen-wiese-hintergrund.jpg';
+        patternImage.src='wiese.jpg';
 
         // ctx.fillStyle = 'green';
         // ctx.fillRect(0,0,canvas.width ,canvas.height);
@@ -104,12 +104,18 @@
 
         // Futter(food) oder auch happen
         ctx.fillStyle = 'yellow';
-        add(food.x,food.y); // Food(Happen)
+        addFood(food.x,food.y); // Food(Happen)
 
         // ständiger wieder aufruf der func.draw(bewegter Ablauf)
         requestAnimationFrame(draw);
     }
+    function addFood(x,y){
+        let image = new Image(cellWidth,cellHeight);
+        image.src = 'egg.png';
+        ctx.drawImage(image,x * cellWidth,y * cellHeight, cellWidth ,cellHeight );
 
+
+    }
     function testGameOver(){
         // var. benötigt zum abfragen der selbst berührung o. andere schlange
         let firstPart_snakeOne = snakeOne[0];
