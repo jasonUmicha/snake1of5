@@ -60,25 +60,62 @@
     // malen => funktion : schlange/-en u. futter
     function draw(){
         // Hintergrund (wieder holen damit es nicht aussieht als wenn man male)
-        ctx.fillStyle = 'green';
-        ctx.fillRect(0,0,canvas.width ,canvas.height);
+        let patternImage=new Image();
+        patternImage.onload=function(){
+            let pattern = ctx.createPattern(patternImage,'repeat');
+            ctx.fillStyle=pattern;
+            ctx.fillRect(0,0,canvas.width ,canvas.height);
+        }
+        patternImage.src='wiese.jpg';
+
+        // ctx.fillStyle = 'green';
+        // ctx.fillRect(0,0,canvas.width ,canvas.height);
 
         // Snake one
-        ctx.fillStyle = 'navy';
-        snakeOne.forEach(part => add(part.x, part.y));
+        // ctx.fillStyle = 'navy';
+        let patternImage1=new Image();
+        patternImage1.onload=function(){
+            let pattern1 = ctx.createPattern(patternImage1,'repeat');
+            ctx.fillStyle=pattern1;
+            snakeOne.forEach(part => add(part.x, part.y));
+        }
+        patternImage1.src='test3.jpg';
+        // let gradientSo =ctx.createLinearGradient(snakeOne[0].x,snakeOne[0].y,canvas.width,canvas.height);
+        // gradientSo.addColorStop(0,'blue');
+        // gradientSo.addColorStop(0.5,'navy');
+        // gradientSo.addColorStop(1,'blue');
+        // ctx.fillStyle = gradientSo;
+
 
         // Snake two
-        ctx.fillStyle = 'Maroon';
-        snakeTwo.forEach(part => add(part.x, part.y));
+        // let gradientSt =ctx.createLinearGradient(snakeOne[0].x,snakeOne[0].y,canvas.width,canvas.height);
+        // gradientSt.addColorStop(0,'crimson');
+        // gradientSt.addColorStop(0.5,'darkred');
+        // gradientSt.addColorStop(1,'crimson');
+        // ctx.fillStyle = gradientSt;
+        let patternImage2=new Image();
+        patternImage2.onload=function(){
+            let pattern2 = ctx.createPattern(patternImage2,'repeat');
+            ctx.fillStyle=pattern2;
+            snakeTwo.forEach(part => add(part.x, part.y));
+        }
+        patternImage2.src='test4.jpg';
+
 
         // Futter(food) oder auch happen
         ctx.fillStyle = 'yellow';
-        add(food.x,food.y); // Food(Happen)
+        addFood(food.x,food.y); // Food(Happen)
 
         // ständiger wieder aufruf der func.draw(bewegter Ablauf)
         requestAnimationFrame(draw);
     }
+    function addFood(x,y){
+        let image = new Image(cellWidth,cellHeight);
+        image.src = 'egg.png';
+        ctx.drawImage(image,x * cellWidth,y * cellHeight, cellWidth ,cellHeight );
 
+
+    }
     function testGameOver(){
         // var. benötigt zum abfragen der selbst berührung o. andere schlange
         let firstPart_snakeOne = snakeOne[0];
@@ -132,25 +169,25 @@
         // zufalls zahl, mal -/zeilen o. -/spalten und abrunden.
         let randomX = Math.floor(Math.random()* cols);
         let randomY =Math.floor(Math.random()* rows);
-        let allParts_SnakeOne = snakeOne.slice(1);
-        let allParts_SnakeTwo = snakeOne.slice(1);
-        // koordinaten abgleichen TRUE wenn random einem schlangen part entspricht
-        let snake_part = allParts_SnakeOne.find(part =>
-                part.x === randomX && part.y === randomY) ||
-            allParts_SnakeTwo.find(part =>
+        let allParts_SnakeOne = snakeOne.slice(0);
+        let allParts_SnakeTwo = snakeOne.slice(0);
+        // koordinaten abgleichen, TRUE wenn random einem schlangen part entspricht
+        let snake_part_one = allParts_SnakeOne.find(part =>
                 part.x === randomX && part.y === randomY) ;
-
+        let snake_part_two = allParts_SnakeTwo.find(part =>
+                part.x === randomX && part.y === randomY) ;
         food ={// Futterstück soll nicht in der schlange spawnen
-            x: snake_part ? 0 : randomX,
-            y: snake_part ? 0 : randomY
+            x: snake_part_one || snake_part_two ? Math.floor(Math.random()* cols) : randomX,
+            y: snake_part_one || snake_part_two ? Math.floor(Math.random()* rows) : randomY
         }
     }
 
     // futter u schlange/-en koordinaten einfügen (im Spielfeld platzieren)
     function add(x,y){
+        ctx.shadowBlur=   22.5;
+        ctx.shadowColor= 'black';
         ctx.fillRect(x * cellWidth,y * cellHeight, cellWidth, cellHeight);
     }
-
     // Wachstum : nach dem fressen, Futter schicht für
     // schicht durch reichen und hinten anhängen
     function shiftSnakeOne(){
