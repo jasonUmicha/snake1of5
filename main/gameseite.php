@@ -24,8 +24,8 @@
 
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
-    let rows = 5;
-    let cols = 5;
+    let rows = 25;
+    let cols = 25;
     let snakeOne =[
         {
             x : 2,
@@ -52,7 +52,7 @@
     placeFood();
 
     // aufruf pro sec. *100
-    setInterval(gameLoop, 400);
+    setInterval(gameLoop, 300);
     // wenn eine taste gedrückt wird soll func.keyDown ausgeführt werden
     document.addEventListener('keydown',keyDown);
     draw();
@@ -66,44 +66,28 @@
             ctx.fillStyle=pattern;
             ctx.fillRect(0,0,canvas.width ,canvas.height);
         }
-        patternImage.src='wiese.jpg';
+        patternImage.src='sky.jpg';
 
         // ctx.fillStyle = 'green';
         // ctx.fillRect(0,0,canvas.width ,canvas.height);
 
         // Snake one
-        // ctx.fillStyle = 'navy';
-        let patternImage1=new Image();
-        patternImage1.onload=function(){
-            let pattern1 = ctx.createPattern(patternImage1,'repeat');
-            ctx.fillStyle=pattern1;
-            snakeOne.forEach(part => add(part.x, part.y));
-        }
-        patternImage1.src='test3.jpg';
-        // let gradientSo =ctx.createLinearGradient(snakeOne[0].x,snakeOne[0].y,canvas.width,canvas.height);
-        // gradientSo.addColorStop(0,'blue');
-        // gradientSo.addColorStop(0.5,'navy');
-        // gradientSo.addColorStop(1,'blue');
-        // ctx.fillStyle = gradientSo;
+//#00feca,#08f7fe,#ff85ea
 
+        ctx.fillStyle = '#ff85ea';
+        //ctx.fillStyle = 'navy';
+        snakeOne.forEach(part => add(part.x, part.y,ctx.fillStyle));
 
         // Snake two
-        // let gradientSt =ctx.createLinearGradient(snakeOne[0].x,snakeOne[0].y,canvas.width,canvas.height);
-        // gradientSt.addColorStop(0,'crimson');
-        // gradientSt.addColorStop(0.5,'darkred');
-        // gradientSt.addColorStop(1,'crimson');
-        // ctx.fillStyle = gradientSt;
-        let patternImage2=new Image();
-        patternImage2.onload=function(){
-            let pattern2 = ctx.createPattern(patternImage2,'repeat');
-            ctx.fillStyle=pattern2;
-            snakeTwo.forEach(part => add(part.x, part.y));
-        }
-        patternImage2.src='test4.jpg';
+
+        ctx.fillStyle = '#08f7fe';
+        snakeTwo.forEach(part => add(part.x, part.y,ctx.fillStyle));
+
+
 
 
         // Futter(food) oder auch happen
-        ctx.fillStyle = 'yellow';
+        // ctx.fillStyle = 'yellow';
         addFood(food.x,food.y); // Food(Happen)
 
         // ständiger wieder aufruf der func.draw(bewegter Ablauf)
@@ -111,6 +95,8 @@
     }
     function addFood(x,y){
         let image = new Image(cellWidth,cellHeight);
+        ctx.shadowBlur= 22.5;
+        ctx.shadowColor= '#00feca';
         image.src = 'egg.png';
         ctx.drawImage(image,x * cellWidth,y * cellHeight, cellWidth ,cellHeight );
 
@@ -136,7 +122,7 @@
                 part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
             // kopf trifft fremde kopf
             firstPart_snakeTwo.x === firstPart_snakeOne.x && firstPart_snakeTwo.y === firstPart_snakeOne.y ;
-        console.log('#1',duplicatePart_snakeOne,duplicatePart_snakeTwo);
+        // console.log('#1',duplicatePart_snakeOne,duplicatePart_snakeTwo);
         // 1. schlange fährt gegen die wand = respawn
          if (//snakeOne[0].x < 0 ||
         //     snakeOne[0].x > cols -1 ||
@@ -170,24 +156,34 @@
         // zufalls zahl, mal -/zeilen o. -/spalten und abrunden.
         let randomX ;
         let randomY ;
-        let allParts_SnakeOne = snakeOne.slice(0);
-        let allParts_SnakeTwo = snakeTwo.slice(0);
-        let snake_part_one= allParts_SnakeOne.find(part =>
-            part.x === randomX && part.y === randomY) ;;
-        let snake_part_two= allParts_SnakeTwo.find(part =>
-            part.x === randomX && part.y === randomY) ;
+        let allParts_SnakeOne;// = snakeOne.slice(0);
+        let allParts_SnakeTwo;// = snakeTwo.slice(0);
+        let belegteFelder;//= allParts_SnakeOne.find(part =>
+            //part.x === randomX && part.y === randomY) ;
+        //let snake_part_two;//= allParts_SnakeTwo.find(part =>
+            //part.x === randomX && part.y === randomY) ;
+
         do {
-            allParts_SnakeTwo = snakeTwo.slice(0);
-            allParts_SnakeOne = snakeOne.slice(0);
+            allParts_SnakeTwo = snakeTwo.slice();
+            allParts_SnakeOne = snakeOne.slice();
             randomX = Math.floor(Math.random()* cols);
             randomY =Math.floor(Math.random()* rows);
+            let randomArray=[{
+                x: randomX,
+                y: randomY
+            }];
+
             // koordinaten abgleichen, TRUE wenn random einem schlangen part entspricht
-            snake_part_one = allParts_SnakeOne.find(part =>
-                part.x === randomX && part.y === randomY) ;
-            snake_part_two = allParts_SnakeTwo.find(part =>
-                part.x === randomX && part.y === randomY) ;
-            console.log('#2',snake_part_one,snake_part_two);
-        } while (snake_part_one && snake_part_two !==true);
+            belegteFelder = allParts_SnakeOne.find(part =>
+                part.x === randomArray[0].x && part.y === randomArray[0].y) ||
+                allParts_SnakeTwo.find(part =>
+                part.x === randomArray[0].x && part.y === randomArray[0].y) ||
+                false ;
+
+            // snake_part_two = allParts_SnakeTwo.find(part =>
+            //     part.x === randomArray.x && part.y === randomArray.y) ;
+            // console.log('#2',belegteFelder) ;//,snake_part_two);
+        } while (belegteFelder !== false);//&& snake_part_two
 
 
 
@@ -199,9 +195,9 @@
     }
 
     // futter u schlange/-en koordinaten einfügen (im Spielfeld platzieren)
-    function add(x,y){
+    function add(x,y,color){
         ctx.shadowBlur= 22.5;
-        ctx.shadowColor= 'black';
+        ctx.shadowColor= color;
         ctx.fillRect(x * cellWidth,y * cellHeight, cellWidth, cellHeight);
     }
     // Wachstum : nach dem fressen, Futter schicht für
