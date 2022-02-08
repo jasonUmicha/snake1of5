@@ -20,15 +20,17 @@
 
 <main>
     <div id="overDiv">
-    <canvas id="canvas" width="600" height="600"  ></canvas>
+    <canvas id="canvas" width="600" height="600" moz-opaque  ></canvas>
         <div id="divScore">
-            <h1 class="font-effect-fire" > 1 Vs. 1 TopServer Score </h1>
-            <input id="height_score" type="text" value="100000000"> <br>
-            <h3 class="font-effect-neon"> Top Round Score </h3>
-            <input id="top_score" type="text" value="100000000"> <br>
+            <h1 id="h1" class="font-effect-fire" > 1 Vs. 1 TopServer Score </h1>
+            <input id="height_score" type="text" value="100000000" readonly> <br>
+            <h3 id="h3" class="font-effect-neon"> Top Round Score </h3>
+            <input id="top_score" type="text" value="" readonly> <br>
             <br><br>
-            <input id="snake_one_score" type="text" value="100000000"> <br>
-            <input id="snake_two_score" type="text" value="100000000"> <br>
+            <h5 class="font-effect-neon" id="p1Name">123</h5>
+            <input id="snake_one_score" type="text" value="" readonly> <br>
+            <h5 class="font-effect-neon" id="p2Name">123</h5>
+            <input id="snake_two_score" type="text" value="" readonly> <br>
         </div>
     </div>
 </main>
@@ -224,11 +226,14 @@
             part.y = lastPart.y;
         }
         let punkte =(snakeOne.length -1)*10;
-        document.getElementById('snake_one_score').value=punkte.toString();
+        document.getElementById('p1Name').innerHTML=' player 1';
+        document.getElementById('snake_one_score').value=punkte.toString() ;
         if(punkte > document.getElementById('snake_two_score').value &&
-            punkte>document.getElementById('snake_top_score').value
+            punkte>document.getElementById('top_score').value
         ){
             document.getElementById('top_score').value=punkte.toString();
+            document.getElementById('top_score').style.backgroundColor='#FF00D5';
+            document.getElementById('h3').style.color='#FF00D5';
         }
 
     }
@@ -240,11 +245,14 @@
             part.y = lastPart.y;
         }
         let punkte= (snakeTwo.length -1) * 10;
-        document.getElementById('snake_two_score').value = punkte.toString();
+        document.getElementById('p2Name').innerHTML=' player 2';
+        document.getElementById('snake_two_score').value= punkte.toString() ;
         if (punkte  > document.getElementById('snake_one_score').value &&
             punkte  > document.getElementById('top_score').value)
         {
-            document.getElementById('top_score').value=punkte;
+            document.getElementById('top_score').value=punkte.toString();
+            document.getElementById('top_score').style.backgroundColor='#00EACF';
+            document.getElementById('h3').style.color='#00EACF';
         }
     }
     // game schleife (bewegung aber auch ablaufs programmierung)

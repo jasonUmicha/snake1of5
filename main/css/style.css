@@ -57,4 +57,15 @@ main{
     border-radius: 10px;
     text-align: center;
 }
-
+#h1{
+    color: black;
+}
+#h3{
+    color: #AB09FF;
+}
+#p1Name{
+    color: #FF00D5;
+}
+#p2Name{
+    color: #00EACF;
+}
