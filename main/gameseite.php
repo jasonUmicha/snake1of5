@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple|fire">
+          href="https://fonts.googleapis.com/css?family=Nosifer&effect=neon|outline|emboss|shadow-multiple|fire">
 
     <title>Snake 1 of 5</title>
 </head>
@@ -19,10 +19,68 @@
 <body>
 
 <main>
-    <div id="overDiv">
-    <canvas id="canvas" width="600" height="600" moz-opaque  ></canvas>
+<table>
+    <thead>
+    <tr>
+
+        <th ><p>Player one</p></th>
+
+        <th><p>Player two</p></th>
+
+        <th><p>Player three</p></th>
+
+
+        <th><p>Player four</p></th>
+
+
+        <th><p>Player five</p></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <input type="text" aria-label="name">
+        </td>
+        <td>
+            <input type="text" aria-label="name">
+        </td>
+        <td>
+            <input type="text" aria-label="name">
+        </td>
+        <td>
+            <input type="text" placeholder="name">
+        </td>
+        <td>
+            <input type="text" aria-label="name">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="color" >
+        </td>
+        <td>
+            <input type="color" >
+        </td>
+        <td>
+            <input type="color" >
+        </td>
+        <td>
+            <input type="color" >
+        </td>
+        <td>
+            <input type="color" >
+        </td>
+    </tr>
+    </tbody>
+</table>
+</main>
+
+<main >
+    <div id="overDiv" hidden>
+    <canvas id="canvas" width="600" height="600" moz-opaque ></canvas>
         <div id="divScore">
-            <h1 id="h1" class="font-effect-fire" > 1 Vs. 1 TopServer Score </h1>
+            <h1 id="h1" class="font-effect-fire" > 1 Vs 1 TopServer Score </h1>
             <input id="height_score" type="text" value="100000000" readonly> <br>
             <h3 id="h3" class="font-effect-neon"> Top Round Score </h3>
             <input id="top_score" type="text" value="" readonly> <br>
@@ -41,6 +99,17 @@
     let ctx = canvas.getContext('2d');
     let rows = 25;
     let cols = 25;
+    let cellWidth = canvas.width / cols;
+    let cellHeight = canvas.height / rows;
+    // steuer richtung festlegen
+    let direction_snakeOne = '';
+    let direction_snakeTwo = '';
+    // benötigt für die abfrage ob das Futter gefressen wurde,
+    // um die schlange wachsen zulassen
+    let foodCollected_snakeOne = false;
+    let foodCollected_snakeTwo = false;
+    let food;
+
     let snakeOne =[
         {
             x : 2,
@@ -51,18 +120,9 @@
             x : 2,
             y : 2
         }];
-    let food;
 
-    let cellWidth = canvas.width / cols;
-    let cellHeight = canvas.height / rows;
-    // steuer richtung festlegen
-    let direction_snakeOne = '';
-    let direction_snakeTwo = '';
 
-    // benötigt für die abfrage ob das Futter gefressen wurde,
-    // um die schlange wachsen zulassen
-    let foodCollected_snakeOne = false;
-    let foodCollected_snakeTwo = false;
+
 
     placeFood();
 
@@ -81,7 +141,7 @@
             ctx.fillStyle=pattern;
             ctx.fillRect(0,0,canvas.width ,canvas.height);
         }
-        patternImage.src='sky.jpg';
+        patternImage.src='bilder/sky.jpg';
 
         // ctx.fillStyle = 'green';
         // ctx.fillRect(0,0,canvas.width ,canvas.height);
@@ -98,9 +158,6 @@
         ctx.fillStyle = '#00EACF';
         snakeTwo.forEach(part => add(part.x, part.y,ctx.fillStyle));
 
-
-
-
         // Futter(food) oder auch happen
         // ctx.fillStyle = 'yellow';
         addFood(food.x,food.y); // Food(Happen)
@@ -112,9 +169,8 @@
         let image = new Image(cellWidth,cellHeight);
         ctx.shadowBlur= 22.5;
         ctx.shadowColor= '#00FF53';
-        image.src = 'egg.png';
+        image.src = 'bilder/egg.png';
         ctx.drawImage(image,x * cellWidth,y * cellHeight, cellWidth ,cellHeight );
-
 
     }
     function testGameOver(){
@@ -153,7 +209,6 @@
             direction_snakeOne = '';
 
         }
-
         // 2. schlange fährt gegen die wand = respawn / wurde geändert
         if (
             duplicatePart_snakeTwo

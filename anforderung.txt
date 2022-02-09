@@ -47,6 +47,7 @@ erste schritte:
             erstmal eine o. zwei steuerbare schlangen erstellen mit futterstück.
 
 
+
 klassen :
 methoden : draw(), gameloop(), add()
 funktionen :

@@ -7,7 +7,7 @@
 
 body{
     background-color: black;
-    font-family: "Sofia", sans-serif;
+    font-family: "Nosifer", sans-serif;
     color: white;
 }
 
@@ -61,11 +61,23 @@ main{
     color: black;
 }
 #h3{
-    color: #AB09FF;
+    font-family: "Nosifer", sans-serif;
+
+    color: darkred;
 }
 #p1Name{
+    font-family: "Nosifer", sans-serif;
     color: #FF00D5;
 }
 #p2Name{
+    font-family: "Nosifer", sans-serif;
     color: #00EACF;
+}
+table{
+    font-size: 13px;
+
+}
+p{
+    color: lightslategrey;
+    text-shadow: 1px 2px darkred;
 }
