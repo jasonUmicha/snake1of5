@@ -182,10 +182,10 @@
         do {
             allParts_SnakeTwo = snakeTwo.slice();
             allParts_SnakeOne = snakeOne.slice();
-            randomX = Math.floor(Math.random()* cols);
-            randomY =Math.floor(Math.random()* rows);
+            randomX = Math.floor(Math.random()* (cols-2))+1;
+            randomY =Math.floor(Math.random()* (rows-2))+1;
             let randomArray=[{
-                x: randomX,
+                x: randomX ,
                 y: randomY
             }];
 
@@ -198,7 +198,7 @@
 
             // snake_part_two = allParts_SnakeTwo.find(part =>
             //     part.x === randomArray.x && part.y === randomArray.y) ;
-            // console.log('#2',belegteFelder) ;//,snake_part_two);
+             console.log('#2',randomArray[0].x,' ',randomArray[0].y) ;//,snake_part_two);
         } while (belegteFelder !== false);//&& snake_part_two
 
 
