@@ -22,42 +22,50 @@
 <table>
     <thead>
     <tr>
-
         <th ><p>Player one</p></th>
-
         <th><p>Player two</p></th>
-
         <th><p>Player three</p></th>
-
-
         <th><p>Player four</p></th>
-
-
         <th><p>Player five</p></th>
-
     </tr>
     </thead>
     <tbody>
     <tr>
         <td>
-            <input type="text" aria-label="name">
-        </td>
-        <td>
-            <input type="text" aria-label="name">
-        </td>
-        <td>
-            <input type="text" aria-label="name">
+            <input type="text" placeholder="name">
         </td>
         <td>
             <input type="text" placeholder="name">
         </td>
         <td>
-            <input type="text" aria-label="name">
+            <input type="text" placeholder="name">
+        </td>
+        <td>
+            <input type="text" placeholder="name">
+        </td>
+        <td>
+            <input type="text" placeholder="name">
         </td>
     </tr>
     <tr>
-        <td>
-            <input type="color" >
+        <td >
+            <div class="dropdown">
+                <button class="dropbtn">Color</button>
+                <div class="dropdown-content">
+                    <button id="color_DA00EC" type="submit" style="background-color: #DA00EC" >#1</button>
+                    <button id="color_AA09FF" type="submit" style="background-color: #AA09FF" >#2</button>
+                    <button id="color_6861FF" type="submit" style="background-color: #6861FF" >#3</button>
+                    <button id="color_009AFF" type="submit" style="background-color: #009AFF" >#4</button>
+                    <button id="color_00C9EB" type="submit" style="background-color: #00C9EB" >#5</button>
+                    <button id="color_00EACF" type="submit" style="background-color: #00EACF" >#6</button>
+                    <button id="color_00FE9A" type="submit" style="background-color: #00FE9A" >#7</button>
+                    <button id="color_00FF53" type="submit" style="background-color: #00FF53" >#8</button>
+                    <button id="color_BEE800" type="submit" style="background-color: #BEE800" >#9</button>
+                    <button id="color_FF6155" type="submit" style="background-color: #FF6155" >#10</button>
+                    <button id="color_FF009C" type="submit" style="background-color: #FF009C" >#11</button>
+                    <button id="color_F100CD" type="submit" style="background-color: #F100CD" >#12</button>
+                </div>
+            </div>
         </td>
         <td>
             <input type="color" >
@@ -74,10 +82,11 @@
     </tr>
     </tbody>
 </table>
-</main>
+<!--</main>-->
+<!---->
+<!--<main >-->
 
-<main >
-    <div id="overDiv" hidden>
+    <div id="overDiv" hidden >
     <canvas id="canvas" width="600" height="600" moz-opaque ></canvas>
         <div id="divScore">
             <h1 id="h1" class="font-effect-fire" > 1 Vs 1 TopServer Score </h1>
