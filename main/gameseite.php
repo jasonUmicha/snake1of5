@@ -10,6 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple|fire">
 
     <title>Snake 1 of 5</title>
 </head>
@@ -17,7 +19,20 @@
 <body>
 
 <main>
-    <canvas id="canvas" width="600" height="600"  ></canvas>
+    <div id="overDiv">
+    <canvas id="canvas" width="600" height="600" moz-opaque  ></canvas>
+        <div id="divScore">
+            <h1 id="h1" class="font-effect-fire" > 1 Vs. 1 TopServer Score </h1>
+            <input id="height_score" type="text" value="100000000" readonly> <br>
+            <h3 id="h3" class="font-effect-neon"> Top Round Score </h3>
+            <input id="top_score" type="text" value="" readonly> <br>
+            <br><br>
+            <h5 class="font-effect-neon" id="p1Name">123</h5>
+            <input id="snake_one_score" type="text" value="" readonly> <br>
+            <h5 class="font-effect-neon" id="p2Name">123</h5>
+            <input id="snake_two_score" type="text" value="" readonly> <br>
+        </div>
+    </div>
 </main>
 
 <script>
@@ -52,7 +67,7 @@
     placeFood();
 
     // aufruf pro sec. *100
-    setInterval(gameLoop, 300);
+    setInterval(gameLoop, 200);
     // wenn eine taste gedrückt wird soll func.keyDown ausgeführt werden
     document.addEventListener('keydown',keyDown);
     draw();
@@ -74,13 +89,13 @@
         // Snake one
 //#00feca,#08f7fe,#ff85ea
 
-        ctx.fillStyle = '#ff85ea';
+        ctx.fillStyle = '#FF00D5';
         //ctx.fillStyle = 'navy';
         snakeOne.forEach(part => add(part.x, part.y,ctx.fillStyle));
 
         // Snake two
 
-        ctx.fillStyle = '#08f7fe';
+        ctx.fillStyle = '#00EACF';
         snakeTwo.forEach(part => add(part.x, part.y,ctx.fillStyle));
 
 
@@ -96,7 +111,7 @@
     function addFood(x,y){
         let image = new Image(cellWidth,cellHeight);
         ctx.shadowBlur= 22.5;
-        ctx.shadowColor= '#00feca';
+        ctx.shadowColor= '#00FF53';
         image.src = 'egg.png';
         ctx.drawImage(image,x * cellWidth,y * cellHeight, cellWidth ,cellHeight );
 
@@ -136,6 +151,7 @@
                     y : 12
                 }];
             direction_snakeOne = '';
+
         }
 
         // 2. schlange fährt gegen die wand = respawn / wurde geändert
@@ -209,13 +225,34 @@
             part.x = lastPart.x;
             part.y = lastPart.y;
         }
+        let punkte =(snakeOne.length -1)*10;
+        document.getElementById('p1Name').innerHTML=' player 1';
+        document.getElementById('snake_one_score').value=punkte.toString() ;
+        if(punkte > document.getElementById('snake_two_score').value &&
+            punkte>document.getElementById('top_score').value
+        ){
+            document.getElementById('top_score').value=punkte.toString();
+            document.getElementById('top_score').style.backgroundColor='#FF00D5';
+            document.getElementById('h3').style.color='#FF00D5';
+        }
+
     }
-    function shiftSnakeTow(){
+    function shiftSnakeTwo(){
         for (let i = snakeTwo.length -1; i > 0; i--){
             const part = snakeTwo[i];
             const lastPart = snakeTwo[i -1];
             part.x = lastPart.x;
             part.y = lastPart.y;
+        }
+        let punkte= (snakeTwo.length -1) * 10;
+        document.getElementById('p2Name').innerHTML=' player 2';
+        document.getElementById('snake_two_score').value= punkte.toString() ;
+        if (punkte  > document.getElementById('snake_one_score').value &&
+            punkte  > document.getElementById('top_score').value)
+        {
+            document.getElementById('top_score').value=punkte.toString();
+            document.getElementById('top_score').style.backgroundColor='#00EACF';
+            document.getElementById('h3').style.color='#00EACF';
         }
     }
     // game schleife (bewegung aber auch ablaufs programmierung)
@@ -229,7 +266,7 @@
         {snakeOne[0].y +=  cols ;}
         if(snakeOne[0].y >= cols)
         {snakeOne[0].y += - cols ;}
-        if (snakeOne[0].x >= rows  )
+        if (snakeOne[0].x >= rows )
         {snakeOne[0].x += - rows ;}
         // schlange zwei fahrt durch die wand ;)
         if (snakeTwo[0].x <= 0 )
@@ -264,7 +301,7 @@
         // damit die schlange langsam wächst anstatt
         // sofort zu wachsen.(flüssigere performances)
         shiftSnakeOne();
-        shiftSnakeTow();
+        shiftSnakeTwo();
         // schlange EINS bewegungsabfrage
         if(direction_snakeOne === 'LEFT' && direction_snakeOne !== 'RIGHT'){
             snakeOne[0].x--;

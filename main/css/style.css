@@ -1,4 +1,5 @@
 /*<!-- alles ansprechen -->*/
+
 *{
     padding: 0;
     margin: 0;
@@ -6,7 +7,7 @@
 
 body{
     background-color: black;
-    font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+    font-family: "Sofia", sans-serif;
     color: white;
 }
 
@@ -17,4 +18,54 @@ main{
     justify-content: center;
     align-items: center;
 }
-
+#overDiv{
+    position: relative;
+    z-index: 1;
+    //border: 2px solid #00feca;
+}
+#divScore{
+     position: absolute;
+     z-index: 2;
+     //border: 2px solid #00feca;
+     left: 600px;
+     top: 0px;
+    margin: 20px;
+    padding: 10px;
+    //color: #00C9EB;
+ }
+#snake_one_score {
+    background-color: #FF00D5;
+    border-style: unset;
+    border-radius: 10px;
+    text-align: center;
+}
+#snake_two_score{
+     background-color: #00EACF ;
+     border-style: unset;
+     border-radius: 10px;
+     text-align: center;
+ }
+#top_score{
+    background-color: #6861FF ;
+    border-style: unset;
+    border-radius: 10px;
+    text-align: center;
+}
+#height_score{
+    background-color: #AB09FF ;
+    border-style: unset;
+    border-radius: 10px;
+    text-align: center;
+}
+#h1{
+    color: black;
+}
+#h3{
+    color: #AB09FF;
+}
+#p1Name{
+    color: #FF00D5;
+}
+#p2Name{
+    color: #00EACF;
+}
