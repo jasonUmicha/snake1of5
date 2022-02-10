@@ -86,7 +86,7 @@
 <!---->
 <!--<main >-->
 
-    <div id="overDiv" hidden >
+    <div id="overDiv"  >
     <canvas id="canvas" width="600" height="600" moz-opaque ></canvas>
         <div id="divScore">
             <h1 id="h1" class="font-effect-fire" > 1 Vs 1 TopServer Score </h1>

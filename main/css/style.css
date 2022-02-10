@@ -39,26 +39,26 @@ main{
  }
 #snake_one_score {
     background-color: #FF00D5;
-    border-style: unset;
-    border-radius: 10px;
+    /*border-style: unset;*/
+    /*border-radius: 10px;*/
     /*text-align: center;*/
 }
 #snake_two_score{
      background-color: #00EACF ;
-     border-style: unset;
-     border-radius: 10px;
+     /*border-style: unset;*/
+     /*border-radius: 10px;*/
      /*text-align: center;*/
  }
 #top_score{
     background-color: #6861FF ;
-    border-style: unset;
-    border-radius: 10px;
+    /*border-style: unset;*/
+    /*border-radius: 10px;*/
     /*text-align: center;*/
 }
 #height_score{
     background-color: #AB09FF ;
-    border-style: unset;
-    border-radius: 10px;
+    /*border-style: unset;*/
+    /*border-radius: 10px;*/
     /*text-align: center;*/
 }
 #h1{
@@ -87,6 +87,8 @@ input{
     /*text-align: center;*/
     /*font-family: "Nosifer", sans-serif;*/
     font-size: small;
+    border-style: unset;
+    border-radius: 10px;
 }
 p,a,button{
     color: lightslategrey;
@@ -124,7 +126,8 @@ p,a,button{
     /*padding: unset;*/
     /*text-decoration: none;*/
     /*display: inline-block;*/
-    border-style: unset;
+    border-style: wave;
+    border-radius: 10px;
 
 }
 /*td{*/
