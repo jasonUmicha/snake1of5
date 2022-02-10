@@ -3,11 +3,15 @@
 *{
     padding: 0;
     margin: 0;
+    cursor: crosshair;
+    font-family: "Nosifer", sans-serif;
+    text-align: center;
+
 }
 
 body{
     background-color: black;
-    font-family: "Nosifer", sans-serif;
+    /*font-family: "Nosifer", sans-serif;*/
     color: white;
 }
 
@@ -21,63 +25,112 @@ main{
 #overDiv{
     position: relative;
     z-index: 1;
-    //border: 2px solid #00feca;
+    /*//border: 2px solid #00feca;*/
 }
 #divScore{
      position: absolute;
      z-index: 2;
-     //border: 2px solid #00feca;
+     /*//border: 2px solid #00feca;*/
      left: 600px;
      top: 0px;
     margin: 20px;
     padding: 10px;
-    //color: #00C9EB;
+    /*//color: #00C9EB;*/
  }
 #snake_one_score {
     background-color: #FF00D5;
     border-style: unset;
     border-radius: 10px;
-    text-align: center;
+    /*text-align: center;*/
 }
 #snake_two_score{
      background-color: #00EACF ;
      border-style: unset;
      border-radius: 10px;
-     text-align: center;
+     /*text-align: center;*/
  }
 #top_score{
     background-color: #6861FF ;
     border-style: unset;
     border-radius: 10px;
-    text-align: center;
+    /*text-align: center;*/
 }
 #height_score{
     background-color: #AB09FF ;
     border-style: unset;
     border-radius: 10px;
-    text-align: center;
+    /*text-align: center;*/
 }
 #h1{
     color: black;
+
+
 }
 #h3{
-    font-family: "Nosifer", sans-serif;
+    /*font-family: "Nosifer", sans-serif;*/
 
     color: darkred;
 }
 #p1Name{
-    font-family: "Nosifer", sans-serif;
+    /*font-family: "Nosifer", sans-serif;*/
     color: #FF00D5;
 }
 #p2Name{
-    font-family: "Nosifer", sans-serif;
+    /*font-family: "Nosifer", sans-serif;*/
     color: #00EACF;
 }
 table{
     font-size: 13px;
 
 }
-p{
+input{
+    /*text-align: center;*/
+    /*font-family: "Nosifer", sans-serif;*/
+    font-size: small;
+}
+p,a,button{
     color: lightslategrey;
     text-shadow: 1px 2px darkred;
+    text-align: center;
+    /*font-family: "Nosifer", sans-serif;*/
 }
+/*dropBox*/
+.dropbtn{
+    /*font-family: "Nosifer", sans-serif;*/
+    background-color: black;
+    /*color: ;*/
+    /*padding: ;*/
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    /*display: inline-block;*/
+    /*text-align: center;*/
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*right: auto;*/
+    /*background-color: ;*/
+    /*min-width: ;*/
+    /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+    z-index: 1;
+}
+
+.dropdown-content button {
+    /*color: ;*/
+    /*padding: unset;*/
+    /*text-decoration: none;*/
+    /*display: inline-block;*/
+    border-style: unset;
+
+}
+/*td{*/
+/*    text-align: center;*/
+/*}*/
+
+.dropdown-content a:hover {background-color: black ;}
+.dropdown:hover .dropdown-content {display: table-column-group;}
+.dropdown:hover .dropbtn {background-color: black;}
