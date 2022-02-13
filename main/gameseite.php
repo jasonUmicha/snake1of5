@@ -32,10 +32,10 @@
     <tbody>
     <tr>
         <td>
-            <input type="text" placeholder="name">
+            <input id="snake_one" type="text" placeholder="name">
         </td>
         <td>
-            <input type="text" placeholder="name">
+            <input id="snake_two" type="text" placeholder="name">
         </td>
         <td>
             <input type="text" placeholder="name">
@@ -50,25 +50,41 @@
     <tr>
         <td >
             <div class="dropdown">
-                <button class="dropbtn">Color</button>
-                <div class="dropdown-content">
-                    <button id="color_DA00EC" type="submit" style="background-color: #DA00EC" >#1</button>
-                    <button id="color_AA09FF" type="submit" style="background-color: #AA09FF" >#2</button>
-                    <button id="color_6861FF" type="submit" style="background-color: #6861FF" >#3</button>
-                    <button id="color_009AFF" type="submit" style="background-color: #009AFF" >#4</button>
-                    <button id="color_00C9EB" type="submit" style="background-color: #00C9EB" >#5</button>
-                    <button id="color_00EACF" type="submit" style="background-color: #00EACF" >#6</button>
-                    <button id="color_00FE9A" type="submit" style="background-color: #00FE9A" >#7</button>
-                    <button id="color_00FF53" type="submit" style="background-color: #00FF53" >#8</button>
-                    <button id="color_BEE800" type="submit" style="background-color: #BEE800" >#9</button>
-                    <button id="color_FF6155" type="submit" style="background-color: #FF6155" >#10</button>
-                    <button id="color_FF009C" type="submit" style="background-color: #FF009C" >#11</button>
-                    <button id="color_F100CD" type="submit" style="background-color: #F100CD" >#12</button>
+                <button id="snake_one_color" class="dropbtn">Color</button>
+                <div  class="dropdown-content">
+                    <button class="snake_one_color" id="color_DA00EC" type="submit" style="background-color: #DA00EC" >#1</button>
+                    <button class="snake_one_color" id="color_AA09FF" type="submit" style="background-color: #AA09FF" >#2</button>
+                    <button class="snake_one_color" id="color_6861FF" type="submit" style="background-color: #6861FF" >#3</button>
+                    <button class="snake_one_color" id="color_009AFF" type="submit" style="background-color: #009AFF" >#4</button>
+                    <button class="snake_one_color" id="color_00C9EB" type="submit" style="background-color: #00C9EB" >#5</button>
+                    <button class="snake_one_color" id="color_00EACF" type="submit" style="background-color: #00EACF" >#6</button>
+                    <button class="snake_one_color" id="color_00FE9A" type="submit" style="background-color: #00FE9A" >#7</button>
+                    <button class="snake_one_color" id="color_00FF53" type="submit" style="background-color: #00FF53" >#8</button>
+                    <button class="snake_one_color" id="color_BEE800" type="submit" style="background-color: #BEE800" >#9</button>
+                    <button class="snake_one_color" id="color_FF6155" type="submit" style="background-color: #FF6155" >#10</button>
+                    <button class="snake_one_color" id="color_FF009C" type="submit" style="background-color: #FF009C" >#11</button>
+                    <button class="snake_one_color" id="color_F100CD" type="submit" style="background-color: #F100CD" >#12</button>
                 </div>
             </div>
         </td>
         <td>
-            <input type="color" >
+            <div class="dropdown">
+                <button id="snake_two_color" class="dropbtn">Color</button>
+                <div  class="dropdown-content">
+                    <button class="snake_two_color" id="color_DA00EC" type="submit" style="background-color: #DA00EC" >#1</button>
+                    <button class="snake_two_color" id="color_AA09FF" type="submit" style="background-color: #AA09FF" >#2</button>
+                    <button class="snake_two_color" id="color_6861FF" type="submit" style="background-color: #6861FF" >#3</button>
+                    <button class="snake_two_color" id="color_009AFF" type="submit" style="background-color: #009AFF" >#4</button>
+                    <button class="snake_two_color" id="color_00C9EB" type="submit" style="background-color: #00C9EB" >#5</button>
+                    <button class="snake_two_color" id="color_00EACF" type="submit" style="background-color: #00EACF" >#6</button>
+                    <button class="snake_two_color" id="color_00FE9A" type="submit" style="background-color: #00FE9A" >#7</button>
+                    <button class="snake_two_color" id="color_00FF53" type="submit" style="background-color: #00FF53" >#8</button>
+                    <button class="snake_two_color" id="color_BEE800" type="submit" style="background-color: #BEE800" >#9</button>
+                    <button class="snake_two_color" id="color_FF6155" type="submit" style="background-color: #FF6155" >#10</button>
+                    <button class="snake_two_color" id="color_FF009C" type="submit" style="background-color: #FF009C" >#11</button>
+                    <button class="snake_two_color" id="color_F100CD" type="submit" style="background-color: #F100CD" >#12</button>
+                </div>
+            </div>
         </td>
         <td>
             <input type="color" >
@@ -86,7 +102,7 @@
 <!---->
 <!--<main >-->
 
-    <div id="overDiv" hidden >
+    <div id="overDiv"  >
     <canvas id="canvas" width="600" height="600" moz-opaque ></canvas>
         <div id="divScore">
             <h1 id="h1" class="font-effect-fire" > 1 Vs 1 TopServer Score </h1>
@@ -118,7 +134,11 @@
     let foodCollected_snakeOne = false;
     let foodCollected_snakeTwo = false;
     let food;
-
+    let snake_one_color = '#FF00D5';
+    let snake_two_color = '#00EACF';
+    let snake_three_color = '#FF00D5';
+    let snake_four_color = '#FF00D5';
+    let snake_five_color = '#FF00D5';
     let snakeOne =[
         {
             x : 2,
@@ -130,9 +150,12 @@
             y : 2
         }];
 
-
-
-
+    for (let i=0;i<document.getElementsByClassName('snake_one_color').length;i++) {
+        document.getElementsByClassName('snake_one_color')[i].addEventListener('click', farbwahl);
+    }
+    for (let i=0;i<document.getElementsByClassName('snake_two_color').length;i++) {
+        document.getElementsByClassName('snake_two_color')[i].addEventListener('click', farbwahl);
+    }
     placeFood();
 
     // aufruf pro sec. *100
@@ -141,6 +164,21 @@
     document.addEventListener('keydown',keyDown);
     draw();
 
+
+
+
+    function farbwahl(){
+        console.log(this.className);
+        document.getElementById(this.className).style.backgroundColor=this.style.backgroundColor;
+        if (this.className === 'snake_one_color'){
+            snake_one_color=this.style.backgroundColor;
+            document.getElementById('snake_one').style.backgroundColor=this.style.backgroundColor;
+            document.getElementById('snake_one').style.color='black';
+        }else if (this.className === 'snake_two_color'){
+            snake_two_color=this.style.backgroundColor;
+        }
+
+    }
     // malen => funktion : schlange/-en u. futter
     function draw(){
         // Hintergrund (wieder holen damit es nicht aussieht als wenn man male)
@@ -158,13 +196,13 @@
         // Snake one
 //#00feca,#08f7fe,#ff85ea
 
-        ctx.fillStyle = '#FF00D5';
+        ctx.fillStyle = snake_one_color;
         //ctx.fillStyle = 'navy';
         snakeOne.forEach(part => add(part.x, part.y,ctx.fillStyle));
 
         // Snake two
 
-        ctx.fillStyle = '#00EACF';
+        ctx.fillStyle = snake_two_color;
         snakeTwo.forEach(part => add(part.x, part.y,ctx.fillStyle));
 
         // Futter(food) oder auch happen
