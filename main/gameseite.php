@@ -22,7 +22,7 @@
 </head>
 
 <body>
-<button type="button" onclick="change()" >change</button>
+<button type="button" onclick="change(),openFullscreen()" >change</button>
 <main>
 <table id="tabelle">
     <thead>
@@ -162,7 +162,7 @@
             <input id="height_score" type="text" value="100000000" readonly> <br>
             <h3 id="h3" class="font-effect-neon"> Top Round Score </h3>
             <input id="top_score" type="text" value="" readonly> <br>
-            <br><br>
+            <br>
             <h5 class="font-effect-neon" id="p1Name"></h5>
             <input id="snake_one_score" type="text" value="" readonly> <br>
             <h5 class="font-effect-neon" id="p2Name"></h5>
@@ -173,7 +173,7 @@
             <input  id="snake_four_score"  value="00" type="text" readonly>
             <h5 class="font-effect-neon" id="p5Name"></h5>
             <input id="snake_five_score" type="text" value="" readonly> <br>
-            <br><br><br><br><br><br><br><br><br><br>
+            <br>
             <input  id="radioAn"  value="Musik An" onclick="radio.play(),radioAn()" type="text" readonly>
             <input  id="radioAus"  hidden value="Musik Aus" onclick="radio.pause(),radioAus()" type="text" readonly>
         </div>
@@ -181,36 +181,7 @@
 </main>
 
 <script>
-    function namensGebung(){
-        if (this.id === 'snake_one') {
-            document.getElementById('p1Name').innerHTML = this.value
-        }else if (this.id === 'snake_two'){
-            document.getElementById('p2Name').innerHTML = this.value
-        }else if (this.id === 'snake_three'){
-            document.getElementById('p3Name').innerHTML = this.value
-        }else if (this.id === 'snake_four'){
-            document.getElementById('p4Name').innerHTML = this.value
-        }else if (this.id === 'snake_five'){
-            document.getElementById('p5Name').innerHTML = this.value
-        }
-    }
-    function change(){
-        if (document.getElementById('tabelle').hidden === true){
-            document.getElementById('tabelle').hidden=false;
-            document.getElementById('overDiv').hidden=true;
-        }else if (document.getElementById('tabelle').hidden === false){
-            document.getElementById('tabelle').hidden=true;
-            document.getElementById('overDiv').hidden=false;
-        }
-    }
-    function radioAn(){
-        document.getElementById('radioAn').hidden=true;
-        document.getElementById('radioAus').hidden=false;
-    }
-    function radioAus(){
-        document.getElementById('radioAn').hidden=false;
-        document.getElementById('radioAus').hidden=true;
-    }
+
 
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
@@ -292,7 +263,49 @@
     document.addEventListener('keydown',keyDown);
     draw();
 
+    let elem = document.documentElement;
+    function openFullscreen() {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        }
+    }
 
+
+    function closeFullscreen() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+    function namensGebung(){
+        if (this.id === 'snake_one') {
+            document.getElementById('p1Name').innerHTML = this.value
+        }else if (this.id === 'snake_two'){
+            document.getElementById('p2Name').innerHTML = this.value
+        }else if (this.id === 'snake_three'){
+            document.getElementById('p3Name').innerHTML = this.value
+        }else if (this.id === 'snake_four'){
+            document.getElementById('p4Name').innerHTML = this.value
+        }else if (this.id === 'snake_five'){
+            document.getElementById('p5Name').innerHTML = this.value
+        }
+    }
+    function change(){
+        if (document.getElementById('tabelle').hidden === true){
+            document.getElementById('tabelle').hidden=false;
+            document.getElementById('overDiv').hidden=true;
+        }else if (document.getElementById('tabelle').hidden === false){
+            document.getElementById('tabelle').hidden=true;
+            document.getElementById('overDiv').hidden=false;
+        }
+    }
+    function radioAn(){
+        document.getElementById('radioAn').hidden=true;
+        document.getElementById('radioAus').hidden=false;
+    }
+    function radioAus(){
+        document.getElementById('radioAn').hidden=false;
+        document.getElementById('radioAus').hidden=true;
+    }
     function farbwahl(){
         // console.log(this.className);
         document.getElementById(this.className).style.backgroundColor=this.style.backgroundColor;
