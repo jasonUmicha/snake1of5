@@ -45,7 +45,7 @@ main{
 #height_score{
     background-color: #AB09FF ;
 }
-#snake_one{
+.snake_name{
     background-color: black;
     color: darkred;
 }
@@ -98,7 +98,23 @@ p,a,button{
     border-color: darkred;
 
 }
-
 .dropdown-content a:hover {background-color: black ;}
 .dropdown:hover .dropdown-content {display: table-column-group;}
 .dropdown:hover .dropbtn {background-color: black;}
+
+#radioAn{
+    background-color: #08f7fe;
+    color: black;
+    border:none;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+#radioAus{
+    background-color: #FF00D5;
+    color: black;
+    border:none;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+}
