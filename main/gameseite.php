@@ -22,7 +22,10 @@
 </head>
 
 <body>
-<button type="button" onclick="change(),openFullscreen()" >change</button>
+<button type="button" onclick="start()" >Start</button>
+<button type="button" onclick="back()" >Back</button>
+<button onclick="openFullscreen();">Open Fullscreen</button>
+<button onclick="closeFullscreen();">Close Fullscreen</button>
 <main>
 <table id="tabelle">
     <thead>
@@ -202,37 +205,78 @@
     let foodCollected_snakeThree = false;
     let foodCollected_snakeFour = false;
     let foodCollected_snakeFive = false;
+    let inGame_snakeOne = false;
+    let inGame_snakeTwo = false;
+    let inGame_snakeThree = false;
+    let inGame_snakeFour = false;
+    let inGame_snakeFive = false;
     let food;
     let snake_one_color = '#FF00D5';
     let snake_two_color = '#00EACF';
     let snake_three_color = '#FF00D5';
     let snake_four_color = '#FF00D5';
     let snake_five_color = '#FF00D5';
-    let snakeOne =[
+    let elem = document.documentElement;
+    let snakeOne=[
         {
-            x : 2,
-            y : 2
+            x: -14,
+            y: -15
         }];
-    let snakeTwo =[
+    let snakeTwo=[
         {
-            x : 2,
-            y : 2
+            x: -12,
+            y: -12
         }];
-    let snakeThree =[
+    let snakeThree=[
         {
-            x : 2,
-            y : 2
+            x: -11,
+            y: -11
         }];
-    let snakeFour =[
+    let snakeFour=[
         {
-            x : 2,
-            y : 2
+            x: -18,
+            y: -18
         }];
-    let snakeFive =[
+    let snakeFive=[
         {
-            x : 2,
-            y : 2
+            x: -10,
+            y: -10
         }];
+    if(inGame_snakeOne) {
+        snakeOne = [
+            {
+                x: 12,
+                y: 12
+            }];
+    }
+    if(inGame_snakeTwo) {
+        snakeTwo = [
+            {
+                x: 2,
+                y: 2
+            }];
+    }
+    if(inGame_snakeThree) {
+        snakeThree = [
+            {
+                x: 22,
+                y: 22
+            }];
+    }
+    if(inGame_snakeFour) {
+        snakeFour = [
+            {
+                x: 22,
+                y: 2
+            }];
+    }
+    if(inGame_snakeFive) {
+        snakeFive = [
+            {
+                x: 2,
+                y: 22
+            }];
+    }
     document.getElementById('snake_one').addEventListener('input',namensGebung);
     document.getElementById('snake_two').addEventListener('input',namensGebung);
     document.getElementById('snake_three').addEventListener('input',namensGebung);
@@ -256,20 +300,17 @@
     }
 
     placeFood();
-
     // aufruf pro sec. *100
     setInterval(gameLoop, 200);
     // wenn eine taste gedrückt wird soll func.keyDown ausgeführt werden
     document.addEventListener('keydown',keyDown);
     draw();
 
-    let elem = document.documentElement;
     function openFullscreen() {
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
         }
     }
-
 
     function closeFullscreen() {
         if (document.exitFullscreen) {
@@ -279,24 +320,66 @@
     function namensGebung(){
         if (this.id === 'snake_one') {
             document.getElementById('p1Name').innerHTML = this.value
+            inGame_snakeOne=true;
         }else if (this.id === 'snake_two'){
             document.getElementById('p2Name').innerHTML = this.value
+            inGame_snakeTwo=true;
         }else if (this.id === 'snake_three'){
             document.getElementById('p3Name').innerHTML = this.value
+            inGame_snakeThree=true;
         }else if (this.id === 'snake_four'){
             document.getElementById('p4Name').innerHTML = this.value
+            inGame_snakeFour=true;
         }else if (this.id === 'snake_five'){
             document.getElementById('p5Name').innerHTML = this.value
+            inGame_snakeFive=true;
         }
+
     }
-    function change(){
-        if (document.getElementById('tabelle').hidden === true){
-            document.getElementById('tabelle').hidden=false;
-            document.getElementById('overDiv').hidden=true;
-        }else if (document.getElementById('tabelle').hidden === false){
-            document.getElementById('tabelle').hidden=true;
-            document.getElementById('overDiv').hidden=false;
-        }
+    function back(){
+        snakeOne=[
+            {
+                x: -14,
+                y: -15
+            }];
+        snakeTwo=[
+            {
+                x: -12,
+                y: -12
+            }];
+        snakeThree=[
+            {
+                x: -11,
+                y: -11
+            }];
+        snakeFour=[
+            {
+                x: -18,
+                y: -18
+            }];
+        snakeFive=[
+            {
+                x: -10,
+                y: -10
+            }];
+        direction_snakeOne = '';
+        direction_snakeTwo = '';
+        direction_snakeThree = '';
+        direction_snakeFour = '';
+        direction_snakeFive = '';
+        inGame_snakeOne = false;
+        inGame_snakeTwo = false;
+        inGame_snakeThree = false;
+        inGame_snakeFour = false;
+        inGame_snakeFive = false;
+        document.getElementById('tabelle').hidden=false;
+        document.getElementById('overDiv').hidden=true;
+        clearInterval();
+
+    }
+    function start(){
+        document.getElementById('tabelle').hidden=true;
+        document.getElementById('overDiv').hidden=false
     }
     function radioAn(){
         document.getElementById('radioAn').hidden=true;
@@ -356,21 +439,31 @@
         // ctx.fillStyle = 'green';
         // ctx.fillRect(0,0,canvas.width ,canvas.height);
 
-        // Snake one
-        ctx.fillStyle = snake_one_color;
-        snakeOne.forEach(part => add(part.x, part.y,ctx.fillStyle));
-        // Snake two
-        ctx.fillStyle = snake_two_color;
-        snakeTwo.forEach(part => add(part.x, part.y,ctx.fillStyle));
-        // Snake three
-        ctx.fillStyle = snake_three_color;
-        snakeThree.forEach(part => add(part.x, part.y,ctx.fillStyle));
-        // Snake four
-        ctx.fillStyle = snake_four_color;
-        snakeFour.forEach(part => add(part.x, part.y,ctx.fillStyle));
-        // Snake five
-        ctx.fillStyle = snake_five_color;
-        snakeFive.forEach(part => add(part.x, part.y,ctx.fillStyle));
+        if (inGame_snakeOne) {
+            // Snake one
+            ctx.fillStyle = snake_one_color;
+            snakeOne.forEach(part => add(part.x, part.y, ctx.fillStyle));
+        }
+        if (inGame_snakeTwo) {
+            // Snake two
+            ctx.fillStyle = snake_two_color;
+            snakeTwo.forEach(part => add(part.x, part.y, ctx.fillStyle));
+        }
+        if (inGame_snakeThree) {
+            // Snake three
+            ctx.fillStyle = snake_three_color;
+            snakeThree.forEach(part => add(part.x, part.y, ctx.fillStyle));
+        }
+        if (inGame_snakeFour) {
+            // Snake four
+            ctx.fillStyle = snake_four_color;
+            snakeFour.forEach(part => add(part.x, part.y, ctx.fillStyle));
+        }
+        if (inGame_snakeFive) {
+            // Snake five
+            ctx.fillStyle = snake_five_color;
+            snakeFive.forEach(part => add(part.x, part.y, ctx.fillStyle));
+        }
         // Futter(food) oder auch happen
         // ctx.fillStyle = 'yellow';
         addFood(food.x,food.y); // Food(Happen)
@@ -622,8 +715,8 @@
             punkte>document.getElementById('top_score').value
         ){
             document.getElementById('top_score').value=punkte.toString();
-            document.getElementById('top_score').style.backgroundColor='#FF00D5';
-            document.getElementById('h3').style.color='#FF00D5';
+            document.getElementById('top_score').style.backgroundColor=snake_one_color;
+            document.getElementById('h3').style.color=snake_one_color;
         }
 
     }
@@ -643,8 +736,8 @@
             punkte  > document.getElementById('top_score').value)
         {
             document.getElementById('top_score').value=punkte.toString();
-            document.getElementById('top_score').style.backgroundColor='#00EACF';
-            document.getElementById('h3').style.color='#00EACF';
+            document.getElementById('top_score').style.backgroundColor=snake_two_color;
+            document.getElementById('h3').style.color=snake_two_color;
         }
 
     }
@@ -664,8 +757,8 @@
             punkte  > document.getElementById('top_score').value)
         {
             document.getElementById('top_score').value=punkte.toString();
-            document.getElementById('top_score').style.backgroundColor='#00EACF';
-            document.getElementById('h3').style.color='#00EACF';
+            document.getElementById('top_score').style.backgroundColor=snake_three_color;
+            document.getElementById('h3').style.color=snake_three_color;
         }
 
     }
@@ -685,8 +778,8 @@
             punkte  > document.getElementById('top_score').value)
         {
             document.getElementById('top_score').value=punkte.toString();
-            document.getElementById('top_score').style.backgroundColor='#00EACF';
-            document.getElementById('h3').style.color='#00EACF';
+            document.getElementById('top_score').style.backgroundColor=snake_four_color;
+            document.getElementById('h3').style.color=snake_four_color;
         }
 
     }
@@ -706,11 +799,12 @@
             punkte  > document.getElementById('top_score').value)
         {
             document.getElementById('top_score').value=punkte.toString();
-            document.getElementById('top_score').style.backgroundColor='#00EACF';
-            document.getElementById('h3').style.color='#00EACF';
+            document.getElementById('top_score').style.backgroundColor=snake_five_color;
+            document.getElementById('h3').style.color=snake_five_color;
         }
 
     }
+
     // function crossWalls(){  ---------------------eine function für alle
     //     if (snakeOne[0].x <= 0 )
     //     { snakeOne[0].x += rows ;}

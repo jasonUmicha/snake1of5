@@ -21,6 +21,12 @@ main{
     justify-content: center;
     align-items: center;
 }
+input{
+    font-size: small;
+    border-style: unset;
+    border-radius: 10px;
+    background-color: black;
+}
 #overDiv{
     position: relative;
     z-index: 1;
@@ -32,12 +38,6 @@ main{
      top: 0px;
     margin: 20px;
     padding: 10px;
- }
-#snake_one_score {
-    background-color: #FF00D5;
-}
-#snake_two_score{
-     background-color: #00EACF ;
 }
 #top_score{
     background-color: #6861FF ;
@@ -46,7 +46,6 @@ main{
     background-color: #AB09FF ;
 }
 .snake_name{
-    background-color: black;
     color: darkred;
 }
 #h1{
@@ -64,11 +63,6 @@ main{
 table{
     font-size: 13px;
 
-}
-input{
-    font-size: small;
-    border-style: unset;
-    border-radius: 10px;
 }
 p,a,button{
     color: lightslategrey;
