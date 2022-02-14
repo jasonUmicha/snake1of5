@@ -12,17 +12,22 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Nosifer&effect=neon|outline|emboss|shadow-multiple|fire">
-
+    <script>
+        let ei_sound = new Audio("audio/sound_test1.mp3");
+        let radio = new Audio("http://rs11.stream24.org:8270/listen.pls");
+        ei_sound.volume=0.8;//lautstärke von 0.1-1
+        radio.volume=0.2;
+    </script>
     <title>Snake 1 of 5</title>
 </head>
 
 <body>
-
+<button type="button" onclick="change()" >change</button>
 <main>
-<table>
+<table id="tabelle">
     <thead>
     <tr>
-        <th ><p>Player one</p></th>
+        <th><p>Player one</p></th>
         <th><p>Player two</p></th>
         <th><p>Player three</p></th>
         <th><p>Player four</p></th>
@@ -32,19 +37,19 @@
     <tbody>
     <tr>
         <td>
-            <input id="snake_one" type="text" placeholder="name">
+            <input id="snake_one" class="snake_name" type="text" placeholder="name" >
         </td>
         <td>
-            <input id="snake_two" type="text" placeholder="name">
+            <input id="snake_two" class="snake_name" type="text" placeholder="name">
         </td>
         <td>
-            <input type="text" placeholder="name">
+            <input id="snake_three" class="snake_name" type="text" placeholder="name">
         </td>
         <td>
-            <input type="text" placeholder="name">
+            <input id="snake_four" class="snake_name" type="text" placeholder="name">
         </td>
         <td>
-            <input type="text" placeholder="name">
+            <input id="snake_five" class="snake_name" type="text" placeholder="name">
         </td>
     </tr>
     <tr>
@@ -87,13 +92,61 @@
             </div>
         </td>
         <td>
-            <input type="color" >
+            <div class="dropdown">
+                <button id="snake_three_color" class="dropbtn">Color</button>
+                <div  class="dropdown-content">
+                    <button class="snake_three_color" id="color_DA00EC" type="submit" style="background-color: #DA00EC" >#1</button>
+                    <button class="snake_three_color" id="color_AA09FF" type="submit" style="background-color: #AA09FF" >#2</button>
+                    <button class="snake_three_color" id="color_6861FF" type="submit" style="background-color: #6861FF" >#3</button>
+                    <button class="snake_three_color" id="color_009AFF" type="submit" style="background-color: #009AFF" >#4</button>
+                    <button class="snake_three_color" id="color_00C9EB" type="submit" style="background-color: #00C9EB" >#5</button>
+                    <button class="snake_three_color" id="color_00EACF" type="submit" style="background-color: #00EACF" >#6</button>
+                    <button class="snake_three_color" id="color_00FE9A" type="submit" style="background-color: #00FE9A" >#7</button>
+                    <button class="snake_three_color" id="color_00FF53" type="submit" style="background-color: #00FF53" >#8</button>
+                    <button class="snake_three_color" id="color_BEE800" type="submit" style="background-color: #BEE800" >#9</button>
+                    <button class="snake_three_color" id="color_FF6155" type="submit" style="background-color: #FF6155" >#10</button>
+                    <button class="snake_three_color" id="color_FF009C" type="submit" style="background-color: #FF009C" >#11</button>
+                    <button class="snake_three_color" id="color_F100CD" type="submit" style="background-color: #F100CD" >#12</button>
+                </div>
+            </div>
         </td>
         <td>
-            <input type="color" >
+            <div class="dropdown">
+                <button id="snake_four_color" class="dropbtn">Color</button>
+                <div  class="dropdown-content">
+                    <button class="snake_four_color" id="color_DA00EC" type="submit" style="background-color: #DA00EC" >#1</button>
+                    <button class="snake_four_color" id="color_AA09FF" type="submit" style="background-color: #AA09FF" >#2</button>
+                    <button class="snake_four_color" id="color_6861FF" type="submit" style="background-color: #6861FF" >#3</button>
+                    <button class="snake_four_color" id="color_009AFF" type="submit" style="background-color: #009AFF" >#4</button>
+                    <button class="snake_four_color" id="color_00C9EB" type="submit" style="background-color: #00C9EB" >#5</button>
+                    <button class="snake_four_color" id="color_00EACF" type="submit" style="background-color: #00EACF" >#6</button>
+                    <button class="snake_four_color" id="color_00FE9A" type="submit" style="background-color: #00FE9A" >#7</button>
+                    <button class="snake_four_color" id="color_00FF53" type="submit" style="background-color: #00FF53" >#8</button>
+                    <button class="snake_four_color" id="color_BEE800" type="submit" style="background-color: #BEE800" >#9</button>
+                    <button class="snake_four_color" id="color_FF6155" type="submit" style="background-color: #FF6155" >#10</button>
+                    <button class="snake_four_color" id="color_FF009C" type="submit" style="background-color: #FF009C" >#11</button>
+                    <button class="snake_four_color" id="color_F100CD" type="submit" style="background-color: #F100CD" >#12</button>
+                </div>
+            </div>
         </td>
         <td>
-            <input type="color" >
+            <div class="dropdown">
+                <button id="snake_five_color" class="dropbtn">Color</button>
+                <div  class="dropdown-content">
+                    <button class="snake_five_color" id="color_DA00EC" type="submit" style="background-color: #DA00EC" >#1</button>
+                    <button class="snake_five_color" id="color_AA09FF" type="submit" style="background-color: #AA09FF" >#2</button>
+                    <button class="snake_five_color" id="color_6861FF" type="submit" style="background-color: #6861FF" >#3</button>
+                    <button class="snake_five_color" id="color_009AFF" type="submit" style="background-color: #009AFF" >#4</button>
+                    <button class="snake_five_color" id="color_00C9EB" type="submit" style="background-color: #00C9EB" >#5</button>
+                    <button class="snake_five_color" id="color_00EACF" type="submit" style="background-color: #00EACF" >#6</button>
+                    <button class="snake_five_color" id="color_00FE9A" type="submit" style="background-color: #00FE9A" >#7</button>
+                    <button class="snake_five_color" id="color_00FF53" type="submit" style="background-color: #00FF53" >#8</button>
+                    <button class="snake_five_color" id="color_BEE800" type="submit" style="background-color: #BEE800" >#9</button>
+                    <button class="snake_five_color" id="color_FF6155" type="submit" style="background-color: #FF6155" >#10</button>
+                    <button class="snake_five_color" id="color_FF009C" type="submit" style="background-color: #FF009C" >#11</button>
+                    <button class="snake_five_color" id="color_F100CD" type="submit" style="background-color: #F100CD" >#12</button>
+                </div>
+            </div>
         </td>
     </tr>
     </tbody>
@@ -102,7 +155,7 @@
 <!---->
 <!--<main >-->
 
-    <div id="overDiv"  >
+    <div id="overDiv" hidden >
     <canvas id="canvas" width="600" height="600" moz-opaque ></canvas>
         <div id="divScore">
             <h1 id="h1" class="font-effect-fire" > 1 Vs 1 TopServer Score </h1>
@@ -110,15 +163,54 @@
             <h3 id="h3" class="font-effect-neon"> Top Round Score </h3>
             <input id="top_score" type="text" value="" readonly> <br>
             <br><br>
-            <h5 class="font-effect-neon" id="p1Name">123</h5>
+            <h5 class="font-effect-neon" id="p1Name"></h5>
             <input id="snake_one_score" type="text" value="" readonly> <br>
-            <h5 class="font-effect-neon" id="p2Name">123</h5>
-            <input id="snake_two_score" type="text" value="" readonly> <br>
+            <h5 class="font-effect-neon" id="p2Name"></h5>
+            <input  id="snake_two_score"  value="00" type="text" readonly>
+            <h5 class="font-effect-neon" id="p3Name"></h5>
+            <input id="snake_three_score" type="text" value="" readonly> <br>
+            <h5 class="font-effect-neon" id="p4Name"></h5>
+            <input  id="snake_four_score"  value="00" type="text" readonly>
+            <h5 class="font-effect-neon" id="p5Name"></h5>
+            <input id="snake_five_score" type="text" value="" readonly> <br>
+            <br><br><br><br><br><br><br><br><br><br>
+            <input  id="radioAn"  value="Musik An" onclick="radio.play(),radioAn()" type="text" readonly>
+            <input  id="radioAus"  hidden value="Musik Aus" onclick="radio.pause(),radioAus()" type="text" readonly>
         </div>
     </div>
 </main>
 
 <script>
+    function namensGebung(){
+        if (this.id === 'snake_one') {
+            document.getElementById('p1Name').innerHTML = this.value
+        }else if (this.id === 'snake_two'){
+            document.getElementById('p2Name').innerHTML = this.value
+        }else if (this.id === 'snake_three'){
+            document.getElementById('p3Name').innerHTML = this.value
+        }else if (this.id === 'snake_four'){
+            document.getElementById('p4Name').innerHTML = this.value
+        }else if (this.id === 'snake_five'){
+            document.getElementById('p5Name').innerHTML = this.value
+        }
+    }
+    function change(){
+        if (document.getElementById('tabelle').hidden === true){
+            document.getElementById('tabelle').hidden=false;
+            document.getElementById('overDiv').hidden=true;
+        }else if (document.getElementById('tabelle').hidden === false){
+            document.getElementById('tabelle').hidden=true;
+            document.getElementById('overDiv').hidden=false;
+        }
+    }
+    function radioAn(){
+        document.getElementById('radioAn').hidden=true;
+        document.getElementById('radioAus').hidden=false;
+    }
+    function radioAus(){
+        document.getElementById('radioAn').hidden=false;
+        document.getElementById('radioAus').hidden=true;
+    }
 
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
@@ -129,10 +221,16 @@
     // steuer richtung festlegen
     let direction_snakeOne = '';
     let direction_snakeTwo = '';
+    let direction_snakeThree = '';
+    let direction_snakeFour = '';
+    let direction_snakeFive = '';
     // benötigt für die abfrage ob das Futter gefressen wurde,
     // um die schlange wachsen zulassen
     let foodCollected_snakeOne = false;
     let foodCollected_snakeTwo = false;
+    let foodCollected_snakeThree = false;
+    let foodCollected_snakeFour = false;
+    let foodCollected_snakeFive = false;
     let food;
     let snake_one_color = '#FF00D5';
     let snake_two_color = '#00EACF';
@@ -149,6 +247,26 @@
             x : 2,
             y : 2
         }];
+    let snakeThree =[
+        {
+            x : 2,
+            y : 2
+        }];
+    let snakeFour =[
+        {
+            x : 2,
+            y : 2
+        }];
+    let snakeFive =[
+        {
+            x : 2,
+            y : 2
+        }];
+    document.getElementById('snake_one').addEventListener('input',namensGebung);
+    document.getElementById('snake_two').addEventListener('input',namensGebung);
+    document.getElementById('snake_three').addEventListener('input',namensGebung);
+    document.getElementById('snake_four').addEventListener('input',namensGebung);
+    document.getElementById('snake_five').addEventListener('input',namensGebung);
 
     for (let i=0;i<document.getElementsByClassName('snake_one_color').length;i++) {
         document.getElementsByClassName('snake_one_color')[i].addEventListener('click', farbwahl);
@@ -156,6 +274,16 @@
     for (let i=0;i<document.getElementsByClassName('snake_two_color').length;i++) {
         document.getElementsByClassName('snake_two_color')[i].addEventListener('click', farbwahl);
     }
+    for (let i=0;i<document.getElementsByClassName('snake_three_color').length;i++) {
+        document.getElementsByClassName('snake_three_color')[i].addEventListener('click', farbwahl);
+    }
+    for (let i=0;i<document.getElementsByClassName('snake_four_color').length;i++) {
+        document.getElementsByClassName('snake_four_color')[i].addEventListener('click', farbwahl);
+    }
+    for (let i=0;i<document.getElementsByClassName('snake_five_color').length;i++) {
+        document.getElementsByClassName('snake_five_color')[i].addEventListener('click', farbwahl);
+    }
+
     placeFood();
 
     // aufruf pro sec. *100
@@ -165,17 +293,39 @@
     draw();
 
 
-
-
     function farbwahl(){
-        console.log(this.className);
+        // console.log(this.className);
         document.getElementById(this.className).style.backgroundColor=this.style.backgroundColor;
         if (this.className === 'snake_one_color'){
             snake_one_color=this.style.backgroundColor;
             document.getElementById('snake_one').style.backgroundColor=this.style.backgroundColor;
             document.getElementById('snake_one').style.color='black';
+            document.getElementById('snake_one_score').style.backgroundColor=this.style.backgroundColor;
+            document.getElementById('p1Name').style.color=this.style.backgroundColor;
         }else if (this.className === 'snake_two_color'){
             snake_two_color=this.style.backgroundColor;
+            document.getElementById('snake_two').style.backgroundColor=this.style.backgroundColor;
+            document.getElementById('snake_two').style.color='black';
+            document.getElementById('snake_two_score').style.backgroundColor=this.style.backgroundColor;
+            document.getElementById('p2Name').style.color=this.style.backgroundColor;
+        }else if (this.className === 'snake_three_color'){
+            snake_three_color=this.style.backgroundColor;
+            document.getElementById('snake_three').style.backgroundColor=this.style.backgroundColor;
+            document.getElementById('snake_three').style.color='black';
+            document.getElementById('snake_three_score').style.backgroundColor=this.style.backgroundColor;
+            document.getElementById('p2Name').style.color=this.style.backgroundColor;
+        }else if (this.className === 'snake_four_color'){
+            snake_four_color=this.style.backgroundColor;
+            document.getElementById('snake_four').style.backgroundColor=this.style.backgroundColor;
+            document.getElementById('snake_four').style.color='black';
+            document.getElementById('snake_four_score').style.backgroundColor=this.style.backgroundColor;
+            document.getElementById('p4Name').style.color=this.style.backgroundColor;
+        }else if (this.className === 'snake_five_color'){
+            snake_five_color=this.style.backgroundColor;
+            document.getElementById('snake_five').style.backgroundColor=this.style.backgroundColor;
+            document.getElementById('snake_five').style.color='black';
+            document.getElementById('snake_five_score').style.backgroundColor=this.style.backgroundColor;
+            document.getElementById('p5Name').style.color=this.style.backgroundColor;
         }
 
     }
@@ -194,21 +344,23 @@
         // ctx.fillRect(0,0,canvas.width ,canvas.height);
 
         // Snake one
-//#00feca,#08f7fe,#ff85ea
-
         ctx.fillStyle = snake_one_color;
-        //ctx.fillStyle = 'navy';
         snakeOne.forEach(part => add(part.x, part.y,ctx.fillStyle));
-
         // Snake two
-
         ctx.fillStyle = snake_two_color;
         snakeTwo.forEach(part => add(part.x, part.y,ctx.fillStyle));
-
+        // Snake three
+        ctx.fillStyle = snake_three_color;
+        snakeThree.forEach(part => add(part.x, part.y,ctx.fillStyle));
+        // Snake four
+        ctx.fillStyle = snake_four_color;
+        snakeFour.forEach(part => add(part.x, part.y,ctx.fillStyle));
+        // Snake five
+        ctx.fillStyle = snake_five_color;
+        snakeFive.forEach(part => add(part.x, part.y,ctx.fillStyle));
         // Futter(food) oder auch happen
         // ctx.fillStyle = 'yellow';
         addFood(food.x,food.y); // Food(Happen)
-
         // ständiger wieder aufruf der func.draw(bewegter Ablauf)
         requestAnimationFrame(draw);
     }
@@ -218,34 +370,108 @@
         ctx.shadowColor= '#00FF53';
         image.src = 'bilder/egg.png';
         ctx.drawImage(image,x * cellWidth,y * cellHeight, cellWidth ,cellHeight );
-
     }
     function testGameOver(){
         // var. benötigt zum abfragen der selbst berührung o. andere schlange
         let firstPart_snakeOne = snakeOne[0];
         let otherParts_snakeOne = snakeOne.slice(1);
+
         let firstPart_snakeTwo = snakeTwo[0];
         let otherParts_snakeTwo = snakeTwo.slice(1);
+
+        let firstPart_snakeThree = snakeThree[0];
+        let otherParts_snakeThree = snakeThree.slice(1);
+
+        let firstPart_snakeFour = snakeFour[0];
+        let otherParts_snakeFour = snakeFour.slice(1);
+
+        let firstPart_snakeFive = snakeFive[0];
+        let otherParts_snakeFive = snakeFive.slice(1);
+
         //  schlange EINS: wenn sich die Schlange selbst berührt o. die andere schlange = respawn(treu)
         let duplicatePart_snakeOne = otherParts_snakeOne.find(part => // kopf trifft auf eigenen körper
                 part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
             otherParts_snakeTwo.find(part => // kopf trifft fremden körper
                 part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
+            otherParts_snakeThree.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
+            otherParts_snakeFour.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
+            otherParts_snakeFive.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
             // kopf trifft fremde kopf
-            firstPart_snakeOne.x === firstPart_snakeTwo.x && firstPart_snakeOne.y === firstPart_snakeTwo.y ;
-        //  schlange ZWEI: wenn sich die Schlange selbst berührt o. die andere schlange = respawn(treu)
-        let duplicatePart_snakeTwo = otherParts_snakeTwo.find(part =>
+            firstPart_snakeOne.x === firstPart_snakeTwo.x && firstPart_snakeOne.y === firstPart_snakeTwo.y ||
+            firstPart_snakeOne.x === firstPart_snakeThree.x && firstPart_snakeOne.y === firstPart_snakeThree.y ||
+            firstPart_snakeOne.x === firstPart_snakeFour.x && firstPart_snakeOne.y === firstPart_snakeFour.y ||
+            firstPart_snakeOne.x === firstPart_snakeFive.x && firstPart_snakeOne.y === firstPart_snakeFive.y ;
+
+        //  schlange Zwei
+        let duplicatePart_snakeTwo = otherParts_snakeTwo.find(part => // kopf trifft auf eigenen körper
+                part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
+            otherParts_snakeThree.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
+            otherParts_snakeFour.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
+            otherParts_snakeFive.find(part => // kopf trifft fremden körper
                 part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
             otherParts_snakeOne.find(part => // kopf trifft fremden körper
                 part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
             // kopf trifft fremde kopf
-            firstPart_snakeTwo.x === firstPart_snakeOne.x && firstPart_snakeTwo.y === firstPart_snakeOne.y ;
-        // console.log('#1',duplicatePart_snakeOne,duplicatePart_snakeTwo);
-        // 1. schlange fährt gegen die wand = respawn
-         if (//snakeOne[0].x < 0 ||
-        //     snakeOne[0].x > cols -1 ||
-        //     snakeOne[0].y < 0 ||
-        //     snakeOne[0].y > rows -1 ||
+            firstPart_snakeTwo.x === firstPart_snakeOne.x && firstPart_snakeTwo.y === firstPart_snakeOne.y ||
+            firstPart_snakeTwo.x === firstPart_snakeThree.x && firstPart_snakeTwo.y === firstPart_snakeThree.y ||
+            firstPart_snakeTwo.x === firstPart_snakeFour.x && firstPart_snakeTwo.y === firstPart_snakeFour.y ||
+            firstPart_snakeTwo.x === firstPart_snakeFive.x && firstPart_snakeTwo.y === firstPart_snakeFive.y ;
+
+        //  schlange Drei
+        let duplicatePart_snakeThree = otherParts_snakeThree.find(part => // kopf trifft auf eigenen körper
+                part.x === firstPart_snakeThree.x && part.y === firstPart_snakeThree.y) ||
+            otherParts_snakeTwo.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeThree.x && part.y === firstPart_snakeThree.y) ||
+            otherParts_snakeOne.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeThree.x && part.y === firstPart_snakeThree.y) ||
+            otherParts_snakeFour.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeThree.x && part.y === firstPart_snakeThree.y) ||
+            otherParts_snakeFive.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeThree.x && part.y === firstPart_snakeThree.y) ||
+            // kopf trifft fremde kopf
+            firstPart_snakeThree.x === firstPart_snakeTwo.x && firstPart_snakeThree.y === firstPart_snakeTwo.y ||
+            firstPart_snakeThree.x === firstPart_snakeOne.x && firstPart_snakeThree.y === firstPart_snakeOne.y ||
+            firstPart_snakeThree.x === firstPart_snakeFour.x && firstPart_snakeThree.y === firstPart_snakeFour.y ||
+            firstPart_snakeThree.x === firstPart_snakeFive.x && firstPart_snakeThree.y === firstPart_snakeFive.y ;
+        //  schlange Vier
+        let duplicatePart_snakeFour = otherParts_snakeFour.find(part => // kopf trifft auf eigenen körper
+                part.x === firstPart_snakeFour.x && part.y === firstPart_snakeFour.y) ||
+            otherParts_snakeTwo.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeFour.x && part.y === firstPart_snakeFour.y) ||
+            otherParts_snakeThree.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeFour.x && part.y === firstPart_snakeFour.y) ||
+            otherParts_snakeOne.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeFour.x && part.y === firstPart_snakeFour.y) ||
+            otherParts_snakeFive.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeFour.x && part.y === firstPart_snakeFour.y) ||
+            // kopf trifft fremde kopf
+            firstPart_snakeFour.x === firstPart_snakeTwo.x && firstPart_snakeFour.y === firstPart_snakeTwo.y ||
+            firstPart_snakeFour.x === firstPart_snakeThree.x && firstPart_snakeFour.y === firstPart_snakeThree.y ||
+            firstPart_snakeFour.x === firstPart_snakeOne.x && firstPart_snakeFour.y === firstPart_snakeOne.y ||
+            firstPart_snakeFour.x === firstPart_snakeFive.x && firstPart_snakeFour.y === firstPart_snakeFive.y ;
+        //  schlange Fünf
+        let duplicatePart_snakeFive = otherParts_snakeFive.find(part => // kopf trifft auf eigenen körper
+                part.x === firstPart_snakeFive.x && part.y === firstPart_snakeFive.y) ||
+            otherParts_snakeTwo.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeFive.x && part.y === firstPart_snakeFive.y) ||
+            otherParts_snakeThree.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeFive.x && part.y === firstPart_snakeFive.y) ||
+            otherParts_snakeFour.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeFive.x && part.y === firstPart_snakeFive.y) ||
+            otherParts_snakeFive.find(part => // kopf trifft fremden körper
+                part.x === firstPart_snakeFive.x && part.y === firstPart_snakeFive.y) ||
+            // kopf trifft fremde kopf
+            firstPart_snakeFive.x === firstPart_snakeTwo.x && firstPart_snakeFive.y === firstPart_snakeTwo.y ||
+            firstPart_snakeFive.x === firstPart_snakeThree.x && firstPart_snakeFive.y === firstPart_snakeThree.y ||
+            firstPart_snakeFive.x === firstPart_snakeFour.x && firstPart_snakeFive.y === firstPart_snakeFour.y ||
+            firstPart_snakeFive.x === firstPart_snakeOne.x && firstPart_snakeFive.y === firstPart_snakeOne.y ;
+        // 1. schlange
+         if (
              duplicatePart_snakeOne
         ){  // schlange zurücksetzen / alle stücken entfernt
             snakeOne =[
@@ -256,7 +482,7 @@
             direction_snakeOne = '';
 
         }
-        // 2. schlange fährt gegen die wand = respawn / wurde geändert
+        // 2. schlange
         if (
             duplicatePart_snakeTwo
         ){  // schlange zurücksetzen / alle stücken entfernt
@@ -267,15 +493,53 @@
                 }];
             direction_snakeTwo = '';
         }
+        // 3. schlange
+        if (
+            duplicatePart_snakeThree
+        ){  // schlange zurücksetzen / alle stücken entfernt
+            snakeThree =[
+                {
+                    x : 22,
+                    y : 22
+                }];
+            direction_snakeThree = '';
+        }
+        // 4. schlange
+        if (
+            duplicatePart_snakeFour
+        ){  // schlange zurücksetzen / alle stücken entfernt
+            snakeFour =[
+                {
+                    x : 22,
+                    y : 2
+                }];
+            direction_snakeFour = '';
+        }
+        // 5. schlange
+        if (
+            duplicatePart_snakeFive
+        ){  // schlange zurücksetzen / alle stücken entfernt
+            snakeFive =[
+                {
+                    x : 2,
+                    y : 22
+                }];
+            direction_snakeFive = '';
+        }
     }
+
     // Futterstück irgendwo (random) erscheinen lassen.
     // (x,y) zufällig zu ordnen
     function placeFood(){
+
         // zufalls zahl, mal -/zeilen o. -/spalten und abrunden.
         let randomX ;
         let randomY ;
         let allParts_SnakeOne;// = snakeOne.slice(0);
         let allParts_SnakeTwo;// = snakeTwo.slice(0);
+        let allParts_SnakeThree;
+        let allParts_SnakeFour;
+        let allParts_SnakeFive;
         let belegteFelder;//= allParts_SnakeOne.find(part =>
             //part.x === randomX && part.y === randomY) ;
         //let snake_part_two;//= allParts_SnakeTwo.find(part =>
@@ -284,6 +548,9 @@
         do {
             allParts_SnakeTwo = snakeTwo.slice();
             allParts_SnakeOne = snakeOne.slice();
+            allParts_SnakeThree = snakeThree.slice();
+            allParts_SnakeFour = snakeFour.slice();
+            allParts_SnakeFive = snakeFive.slice();
             randomX = Math.floor(Math.random()* (cols-2))+1;
             randomY =Math.floor(Math.random()* (rows-2))+1;
             let randomArray=[{
@@ -295,12 +562,18 @@
             belegteFelder = allParts_SnakeOne.find(part =>
                 part.x === randomArray[0].x && part.y === randomArray[0].y) ||
                 allParts_SnakeTwo.find(part =>
-                part.x === randomArray[0].x && part.y === randomArray[0].y) ||
+                    part.x === randomArray[0].x && part.y === randomArray[0].y) ||
+                allParts_SnakeThree.find(part =>
+                    part.x === randomArray[0].x && part.y === randomArray[0].y) ||
+                allParts_SnakeFour.find(part =>
+                    part.x === randomArray[0].x && part.y === randomArray[0].y) ||
+                allParts_SnakeFive.find(part =>
+                    part.x === randomArray[0].x && part.y === randomArray[0].y) ||
                 false ;
 
             // snake_part_two = allParts_SnakeTwo.find(part =>
             //     part.x === randomArray.x && part.y === randomArray.y) ;
-             console.log('#2',randomArray[0].x,' ',randomArray[0].y) ;//,snake_part_two);
+            //  console.log('#2',randomArray[0].x,' ',randomArray[0].y) ;//,snake_part_two);
         } while (belegteFelder !== false);//&& snake_part_two
 
 
@@ -328,9 +601,11 @@
             part.y = lastPart.y;
         }
         let punkte =(snakeOne.length -1)*10;
-        document.getElementById('p1Name').innerHTML=' player 1';
         document.getElementById('snake_one_score').value=punkte.toString() ;
         if(punkte > document.getElementById('snake_two_score').value &&
+            punkte > document.getElementById('snake_three_score').value &&
+            punkte > document.getElementById('snake_four_score').value &&
+            punkte > document.getElementById('snake_five_score').value &&
             punkte>document.getElementById('top_score').value
         ){
             document.getElementById('top_score').value=punkte.toString();
@@ -347,16 +622,92 @@
             part.y = lastPart.y;
         }
         let punkte= (snakeTwo.length -1) * 10;
-        document.getElementById('p2Name').innerHTML=' player 2';
         document.getElementById('snake_two_score').value= punkte.toString() ;
         if (punkte  > document.getElementById('snake_one_score').value &&
+            punkte > document.getElementById('snake_three_score').value &&
+            punkte > document.getElementById('snake_four_score').value &&
+            punkte > document.getElementById('snake_five_score').value &&
             punkte  > document.getElementById('top_score').value)
         {
             document.getElementById('top_score').value=punkte.toString();
             document.getElementById('top_score').style.backgroundColor='#00EACF';
             document.getElementById('h3').style.color='#00EACF';
         }
+
     }
+    function shiftSnakeThree(){
+        for (let i = snakeThree.length -1; i > 0; i--){
+            const part = snakeThree[i];
+            const lastPart = snakeThree[i -1];
+            part.x = lastPart.x;
+            part.y = lastPart.y;
+        }
+        let punkte= (snakeThree.length -1) * 10;
+        document.getElementById('snake_three_score').value= punkte.toString() ;
+        if (punkte  > document.getElementById('snake_one_score').value &&
+            punkte > document.getElementById('snake_two_score').value &&
+            punkte > document.getElementById('snake_four_score').value &&
+            punkte > document.getElementById('snake_five_score').value &&
+            punkte  > document.getElementById('top_score').value)
+        {
+            document.getElementById('top_score').value=punkte.toString();
+            document.getElementById('top_score').style.backgroundColor='#00EACF';
+            document.getElementById('h3').style.color='#00EACF';
+        }
+
+    }
+    function shiftSnakeFour(){
+        for (let i = snakeFour.length -1; i > 0; i--){
+            const part = snakeFour[i];
+            const lastPart = snakeFour[i -1];
+            part.x = lastPart.x;
+            part.y = lastPart.y;
+        }
+        let punkte= (snakeFour.length -1) * 10;
+        document.getElementById('snake_four_score').value= punkte.toString() ;
+        if (punkte  > document.getElementById('snake_one_score').value &&
+            punkte > document.getElementById('snake_three_score').value &&
+            punkte > document.getElementById('snake_two_score').value &&
+            punkte > document.getElementById('snake_five_score').value &&
+            punkte  > document.getElementById('top_score').value)
+        {
+            document.getElementById('top_score').value=punkte.toString();
+            document.getElementById('top_score').style.backgroundColor='#00EACF';
+            document.getElementById('h3').style.color='#00EACF';
+        }
+
+    }
+    function shiftSnakeFive(){
+        for (let i = snakeFive.length -1; i > 0; i--){
+            const part = snakeFive[i];
+            const lastPart = snakeFive[i -1];
+            part.x = lastPart.x;
+            part.y = lastPart.y;
+        }
+        let punkte= (snakeFive.length -1) * 10;
+        document.getElementById('snake_five_score').value= punkte.toString() ;
+        if (punkte  > document.getElementById('snake_one_score').value &&
+            punkte > document.getElementById('snake_three_score').value &&
+            punkte > document.getElementById('snake_four_score').value &&
+            punkte > document.getElementById('snake_two_score').value &&
+            punkte  > document.getElementById('top_score').value)
+        {
+            document.getElementById('top_score').value=punkte.toString();
+            document.getElementById('top_score').style.backgroundColor='#00EACF';
+            document.getElementById('h3').style.color='#00EACF';
+        }
+
+    }
+    // function crossWalls(){  ---------------------eine function für alle
+    //     if (snakeOne[0].x <= 0 )
+    //     { snakeOne[0].x += rows ;}
+    //     if(snakeOne[0].y <= 0 )
+    //     {snakeOne[0].y +=  cols ;}
+    //     if(snakeOne[0].y >= cols)
+    //     {snakeOne[0].y += - cols ;}
+    //     if (snakeOne[0].x >= rows )
+    //     {snakeOne[0].x += - rows ;}
+    // }
     // game schleife (bewegung aber auch ablaufs programmierung)
     function gameLoop(){
         // respawn bei spieler berührung //--wand berührung
@@ -379,6 +730,33 @@
         {snakeTwo[0].y += - cols ;}
         if (snakeTwo[0].x >= rows  )
         {snakeTwo[0].x += - rows ;}
+        // schlange drei
+        if (snakeThree[0].x <= 0 )
+        { snakeThree[0].x += rows ;}
+        if(snakeThree[0].y <= 0 )
+        {snakeThree[0].y +=  cols ;}
+        if(snakeThree[0].y >= cols)
+        {snakeThree[0].y += - cols ;}
+        if (snakeThree[0].x >= rows  )
+        {snakeThree[0].x += - rows ;}
+        // schlange vier
+        if (snakeFour[0].x <= 0 )
+        { snakeFour[0].x += rows ;}
+        if(snakeFour[0].y <= 0 )
+        {snakeFour[0].y +=  cols ;}
+        if(snakeFour[0].y >= cols)
+        {snakeFour[0].y += - cols ;}
+        if (snakeFour[0].x >= rows  )
+        {snakeFour[0].x += - rows ;}
+        // schlange fünf
+        if (snakeFive[0].x <= 0 )
+        { snakeFive[0].x += rows ;}
+        if(snakeFive[0].y <= 0 )
+        {snakeFive[0].y +=  cols ;}
+        if(snakeFive[0].y >= cols)
+        {snakeFive[0].y += - cols ;}
+        if (snakeFive[0].x >= rows  )
+        {snakeFive[0].x += - rows ;}
         // abfragen ob futter gefressen wurde.
         // is das ergebnis (treu), wachstum.
         if (foodCollected_snakeOne){
@@ -399,11 +777,42 @@
             // anhaltenden wachstum zu beenden.
             foodCollected_snakeTwo = false ;
         }
+        if (foodCollected_snakeThree){
+            snakeThree = [{
+                x: snakeThree[0].x,
+                y: snakeThree[0].y
+            }, ...snakeThree]; // um das Futterstück hinten anzuhängen
+            // fressbestätigung wieder auf (false) setzen,
+            // anhaltenden wachstum zu beenden.
+            foodCollected_snakeThree = false ;
+        }
+        if (foodCollected_snakeFour){
+            snakeFour = [{
+                x: snakeFour[0].x,
+                y: snakeFour[0].y
+            }, ...snakeFour]; // um das Futterstück hinten anzuhängen
+            // fressbestätigung wieder auf (false) setzen,
+            // anhaltenden wachstum zu beenden.
+            foodCollected_snakeFour = false ;
+        }
+        if (foodCollected_snakeFive){
+            snakeFive = [{
+                x: snakeFive[0].x,
+                y: snakeFive[0].y
+            }, ...snakeFive]; // um das Futterstück hinten anzuhängen
+            // fressbestätigung wieder auf (false) setzen,
+            // anhaltenden wachstum zu beenden.
+            foodCollected_snakeFive = false ;
+        }
         // wachstum : nach der futter bestätigung
         // damit die schlange langsam wächst anstatt
         // sofort zu wachsen.(flüssigere performances)
         shiftSnakeOne();
         shiftSnakeTwo();
+        shiftSnakeThree();
+        shiftSnakeFour();
+        shiftSnakeFive();
+
         // schlange EINS bewegungsabfrage
         if(direction_snakeOne === 'LEFT' && direction_snakeOne !== 'RIGHT'){
             snakeOne[0].x--;
@@ -432,6 +841,49 @@
         else if(direction_snakeTwo === 'DOWN' && direction_snakeTwo !== 'UP'){
             snakeTwo[0].y++;
         }
+        // schlange DREI bewegungsabfrage
+        if(direction_snakeThree === 'LEFT' && direction_snakeThree !== 'RIGHT'){
+
+            snakeThree[0].x--;
+        }
+        else if(direction_snakeThree === 'UP' && direction_snakeThree !== 'DOWN'){
+            snakeThree[0].y--;
+        }
+        else if(direction_snakeThree === 'RIGHT' && direction_snakeThree !== 'LEFT'){
+            snakeThree[0].x++;
+        }
+        else if(direction_snakeThree === 'DOWN' && direction_snakeThree !== 'UP'){
+            snakeThree[0].y++;
+        }
+// schlange VIER bewegungsabfrage
+        if(direction_snakeFour === 'LEFT' && direction_snakeFour !== 'RIGHT'){
+
+            snakeFour[0].x--;
+        }
+        else if(direction_snakeFour === 'UP' && direction_snakeFour !== 'DOWN'){
+            snakeFour[0].y--;
+        }
+        else if(direction_snakeFour === 'RIGHT' && direction_snakeFour !== 'LEFT'){
+            snakeFour[0].x++;
+        }
+        else if(direction_snakeFour === 'DOWN' && direction_snakeFour !== 'UP'){
+            snakeFour[0].y++;
+        }
+// schlange FÜNF bewegungsabfrage
+        if(direction_snakeFive === 'LEFT' && direction_snakeFive !== 'RIGHT'){
+
+            snakeFive[0].x--;
+        }
+        else if(direction_snakeFive === 'UP' && direction_snakeFive !== 'DOWN'){
+            snakeFive[0].y--;
+        }
+        else if(direction_snakeFive === 'RIGHT' && direction_snakeFive !== 'LEFT'){
+            snakeFive[0].x++;
+        }
+        else if(direction_snakeFive === 'DOWN' && direction_snakeFive !== 'UP'){
+            snakeFive[0].y++;
+        }
+
 
         // was passieren soll wenn schlange EINS auf futter trifft
         if (snakeOne[0].x === food.x &&
@@ -439,6 +891,7 @@
             // bestätigen das gefressen wurde (true),
             // benötigt für weiteren schritt (wachstum).
             foodCollected_snakeOne = true;
+            ei_sound.play();
             // Futter einsammeln (suggerieren)
             placeFood();
         }
@@ -448,9 +901,41 @@
             // bestätigen das gefressen wurde (true),
             // benötigt für weiteren schritt (wachstum).
             foodCollected_snakeTwo = true;
+            ei_sound.play();
             // Futter einsammeln (suggerieren)
             placeFood();
         }
+        // was passieren soll wenn schlange DREI auf futter trifft
+        if (snakeThree[0].x === food.x &&
+            snakeThree[0].y === food.y){
+            // bestätigen das gefressen wurde (true),
+            // benötigt für weiteren schritt (wachstum).
+            foodCollected_snakeThree = true;
+            ei_sound.play();
+            // Futter einsammeln (suggerieren)
+            placeFood();
+        }
+        // was passieren soll wenn schlange VIER auf futter trifft
+        if (snakeFour[0].x === food.x &&
+            snakeFour[0].y === food.y){
+            // bestätigen das gefressen wurde (true),
+            // benötigt für weiteren schritt (wachstum).
+            foodCollected_snakeFour = true;
+            ei_sound.play();
+            // Futter einsammeln (suggerieren)
+            placeFood();
+        }
+        // was passieren soll wenn schlange FÜNF auf futter trifft
+        if (snakeFive[0].x === food.x &&
+            snakeFive[0].y === food.y){
+            // bestätigen das gefressen wurde (true),
+            // benötigt für weiteren schritt (wachstum).
+            foodCollected_snakeFive = true;
+            ei_sound.play();
+            // Futter einsammeln (suggerieren)
+            placeFood();
+        }
+
 
     }
     // Steuerung
@@ -468,8 +953,7 @@
         else if(e.keyCode === 40 && direction_snakeOne !== 'UP'){//pfeil runter
             direction_snakeOne = 'DOWN';
         }
-
-        // schlange EINS steuerung + verhindern von rückwärts fahren.
+        // schlange ZWEI steuerung + verhindern von rückwärts fahren.
         if(e.keyCode === 65 && direction_snakeTwo !== 'RIGHT'){ //A
             direction_snakeTwo = 'LEFT';
         }
@@ -481,6 +965,45 @@
         }
         else if(e.keyCode === 83 && direction_snakeTwo !== 'UP'){ //S
             direction_snakeTwo = 'DOWN';
+        }
+        // schlange DREI steuerung + verhindern von rückwärts fahren.
+        if(e.keyCode === 100 && direction_snakeThree !== 'RIGHT'){ //NUM4
+            direction_snakeThree = 'LEFT';
+        }
+        else if(e.keyCode === 104 && direction_snakeThree !== 'DOWN'){ //NUM8
+            direction_snakeThree = 'UP';
+        }
+        else if(e.keyCode === 102 && direction_snakeThree !== 'LEFT'){ //NUM6
+            direction_snakeThree = 'RIGHT';
+        }
+        else if(e.keyCode === 101 && direction_snakeThree !== 'UP'){ //NUM5
+            direction_snakeThree = 'DOWN';
+        }
+        // schlange VIER steuerung + verhindern von rückwärts fahren.
+        if(e.keyCode === 74 && direction_snakeFour !== 'RIGHT'){ //J
+            direction_snakeFour = 'LEFT';
+        }
+        else if(e.keyCode === 73 && direction_snakeFour !== 'DOWN'){ //I
+            direction_snakeFour = 'UP';
+        }
+        else if(e.keyCode === 76 && direction_snakeFour !== 'LEFT'){ //L
+            direction_snakeFour = 'RIGHT';
+        }
+        else if(e.keyCode === 75 && direction_snakeFour !== 'UP'){ //K
+            direction_snakeFour = 'DOWN';
+        }
+        // schlange FÜNF steuerung + verhindern von rückwärts fahren.
+        if(e.keyCode === 86 && direction_snakeFive !== 'RIGHT'){ //V
+            direction_snakeFive = 'LEFT';
+        }
+        else if(e.keyCode === 71 && direction_snakeFive !== 'DOWN'){ //G
+            direction_snakeFive = 'UP';
+        }
+        else if(e.keyCode === 78 && direction_snakeFive !== 'LEFT'){ //N
+            direction_snakeFive = 'RIGHT';
+        }
+        else if(e.keyCode === 66 && direction_snakeFive !== 'UP'){ //B
+            direction_snakeFive = 'DOWN';
         }
     }
 
