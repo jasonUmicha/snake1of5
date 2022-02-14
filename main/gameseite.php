@@ -13,6 +13,18 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Nosifer&effect=neon|outline|emboss|shadow-multiple|fire">
     <script>
+        let elem = document.documentElement;
+        function openFullscreen() {
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            }
+        }
+
+        function closeFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
         let ei_sound = new Audio("audio/sound_test1.mp3");
         let radio = new Audio("http://rs11.stream24.org:8270/listen.pls");
         ei_sound.volume=0.8;//lautstärke von 0.1-1
@@ -22,9 +34,12 @@
 </head>
 
 <body>
-<button type="button" onclick="change()" >change</button>
+
+
 <main>
 <table id="tabelle">
+    <button type="button" onclick="change(),openFullscreen()" >Start</button>
+    <button type="button" onclick="change(),schlangenLöschen()" >zurück</button>
     <thead>
     <tr>
         <th><p>Player one</p></th>
@@ -173,7 +188,6 @@
             <input  id="snake_four_score"  value="00" type="text" readonly>
             <h5 class="font-effect-neon" id="p5Name"></h5>
             <input id="snake_five_score" type="text" value="" readonly> <br>
-            <br><br><br><br><br><br><br><br><br><br>
             <input  id="radioAn"  value="Musik An" onclick="radio.play(),radioAn()" type="text" readonly>
             <input  id="radioAus"  hidden value="Musik Aus" onclick="radio.pause(),radioAus()" type="text" readonly>
         </div>
@@ -181,17 +195,26 @@
 </main>
 
 <script>
+function schlangenLöschen(){
+    inGame_snakeOne=false,inGame_snakeTwo=false,inGame_snakeThree=false,inGame_snakeFour=false,inGame_snakeFive=false;
+}
     function namensGebung(){
+
         if (this.id === 'snake_one') {
-            document.getElementById('p1Name').innerHTML = this.value
+           document.getElementById('p1Name').innerHTML = this.value;
+           inGame_snakeOne=true;
         }else if (this.id === 'snake_two'){
             document.getElementById('p2Name').innerHTML = this.value
+            inGame_snakeTwo=true;
         }else if (this.id === 'snake_three'){
             document.getElementById('p3Name').innerHTML = this.value
+            inGame_snakeThree=true;
         }else if (this.id === 'snake_four'){
             document.getElementById('p4Name').innerHTML = this.value
+            inGame_snakeFour=true;
         }else if (this.id === 'snake_five'){
             document.getElementById('p5Name').innerHTML = this.value
+            inGame_snakeFive=true;
         }
     }
     function change(){
@@ -231,6 +254,11 @@
     let foodCollected_snakeThree = false;
     let foodCollected_snakeFour = false;
     let foodCollected_snakeFive = false;
+    let inGame_snakeOne = false;
+    let inGame_snakeTwo = false;
+    let inGame_snakeThree = false;
+    let inGame_snakeFour = false;
+    let inGame_snakeFive = false;
     let food;
     let snake_one_color = '#FF00D5';
     let snake_two_color = '#00EACF';
@@ -296,7 +324,7 @@
     function farbwahl(){
         // console.log(this.className);
         document.getElementById(this.className).style.backgroundColor=this.style.backgroundColor;
-        if (this.className === 'snake_one_color'){
+        if (this.className === 'snake_one_color' ){
             snake_one_color=this.style.backgroundColor;
             document.getElementById('snake_one').style.backgroundColor=this.style.backgroundColor;
             document.getElementById('snake_one').style.color='black';
@@ -331,6 +359,7 @@
     }
     // malen => funktion : schlange/-en u. futter
     function draw(){
+
         // Hintergrund (wieder holen damit es nicht aussieht als wenn man male)
         let patternImage=new Image();
         patternImage.onload=function(){
@@ -344,20 +373,32 @@
         // ctx.fillRect(0,0,canvas.width ,canvas.height);
 
         // Snake one
-        ctx.fillStyle = snake_one_color;
-        snakeOne.forEach(part => add(part.x, part.y,ctx.fillStyle));
+
+        if(inGame_snakeOne===true){
+            ctx.fillStyle = snake_one_color;
+            snakeOne.forEach(part => add(part.x, part.y, ctx.fillStyle));
+        }
+
         // Snake two
+        if(inGame_snakeTwo===true){
         ctx.fillStyle = snake_two_color;
         snakeTwo.forEach(part => add(part.x, part.y,ctx.fillStyle));
+       }
         // Snake three
-        ctx.fillStyle = snake_three_color;
-        snakeThree.forEach(part => add(part.x, part.y,ctx.fillStyle));
+        if(inGame_snakeThree===true) {
+            ctx.fillStyle = snake_three_color;
+            snakeThree.forEach(part => add(part.x, part.y, ctx.fillStyle));
+        }
         // Snake four
-        ctx.fillStyle = snake_four_color;
-        snakeFour.forEach(part => add(part.x, part.y,ctx.fillStyle));
+        if(inGame_snakeFour===true) {
+            ctx.fillStyle = snake_four_color;
+            snakeFour.forEach(part => add(part.x, part.y, ctx.fillStyle));
+        }
         // Snake five
-        ctx.fillStyle = snake_five_color;
-        snakeFive.forEach(part => add(part.x, part.y,ctx.fillStyle));
+        if(inGame_snakeFive===true) {
+            ctx.fillStyle = snake_five_color;
+            snakeFive.forEach(part => add(part.x, part.y, ctx.fillStyle));
+        }
         // Futter(food) oder auch happen
         // ctx.fillStyle = 'yellow';
         addFood(food.x,food.y); // Food(Happen)
