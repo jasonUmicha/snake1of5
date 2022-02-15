@@ -21,23 +21,34 @@ main{
     justify-content: center;
     align-items: center;
 }
+input{
+    font-size: small;
+    border-style: unset;
+    border-radius: 10px;
+    background-color: black;
+}
 #overDiv{
     position: relative;
     z-index: 1;
 }
 #divScore{
-     position: absolute;
-     z-index: 2;
-     left: 600px;
-     top: 0px;
+    position: absolute;
+    z-index: 2;
+    left: 600px;
+    top: -30%;
     margin: 20px;
     padding: 10px;
- }
-#snake_one_score {
-    background-color: #FF00D5;
 }
-#snake_two_score{
-     background-color: #00EACF ;
+#height-top-score{
+    position: relative;
+}
+#player-score{
+    position: relative;
+    top : 50px;
+}
+#sound-button{
+    position: relative;
+    top:340px;
 }
 #top_score{
     background-color: #6861FF ;
@@ -46,29 +57,20 @@ main{
     background-color: #AB09FF ;
 }
 .snake_name{
-    background-color: black;
     color: darkred;
 }
 #h1{
+
     color: black;
 }
 #h3{
     color: darkred;
 }
-#p1Name{
-    color: #FF00D5;
-}
-#p2Name{
-    color: #00EACF;
+h5{
+
 }
 table{
     font-size: 13px;
-
-}
-input{
-    font-size: small;
-    border-style: unset;
-    border-radius: 10px;
 }
 p,a,button{
     color: lightslategrey;
@@ -93,7 +95,6 @@ p,a,button{
 }
 
 .dropdown-content button {
-    border-style: wave;
     border-radius: 10px;
     border-color: darkred;
 
@@ -117,4 +118,8 @@ p,a,button{
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
+}
+#nav-button-div{
+    position: absolute;
+    top: 0;
 }
