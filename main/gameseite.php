@@ -276,10 +276,6 @@
         </tr>
         </tbody>
     </table>
-    <!--</main>-->
-    <!---->
-    <!--<main >-->
-
     <div id="overDiv" hidden>
         <canvas id="canvas" width="600" height="600" moz-opaque></canvas>
         <div id="divScore">
@@ -290,16 +286,16 @@
                 <input id="top_score" type="text" value="" readonly>
             </div>
             <div id="player-score">
-                <h5 class="font-effect-neon" id="p1Name"></h5>
-                <input id="snake_one_score" type="text" value="" readonly> <br>
-                <h5 class="font-effect-neon" id="p2Name"></h5>
-                <input id="snake_two_score" value="00" type="text" readonly>
-                <h5 class="font-effect-neon" id="p3Name"></h5>
-                <input id="snake_three_score" type="text" value="" readonly> <br>
-                <h5 class="font-effect-neon" id="p4Name"></h5>
-                <input id="snake_four_score" value="00" type="text" readonly>
-                <h5 class="font-effect-neon" id="p5Name"></h5>
-                <input id="snake_five_score" type="text" value="" readonly> <br>
+                <h5 class="start_input" id="p1Name"></h5>
+                <input class="start_input" id="snake_one_score" type="text" value="" readonly> <br>
+                <h5 class="start_input"  id="p2Name"></h5>
+                <input class="start_input" id="snake_two_score" value="" type="text" readonly>
+                <h5 class="start_input"  id="p3Name"></h5>
+                <input class="start_input" id="snake_three_score" type="text" value="" readonly> <br>
+                <h5 class="start_input"  id="p4Name"></h5>
+                <input class="start_input" id="snake_four_score" value="" type="text" readonly>
+                <h5 class="start_input"  id="p5Name"></h5>
+                <input class="start_input" id="snake_five_score" type="text" value="" readonly> <br>
             </div>
             <div id="sound-button">
                 <input id="radioAn" value="Musik An" onclick="radio.play() ,radioAn()" type="text" readonly>
@@ -310,7 +306,8 @@
 </main>
 
 <script>
-
+    // var deklaration
+    // ---------------------------------------------------------------------------------------------------------
 
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
@@ -319,11 +316,11 @@
     let cellWidth = canvas.width / cols;
     let cellHeight = canvas.height / rows;
     // steuer richtung festlegen
-    let direction_snakeOne = '';
-    let direction_snakeTwo = '';
-    let direction_snakeThree = '';
-    let direction_snakeFour = '';
-    let direction_snakeFive = '';
+    let direction_snakeOne = null;
+    let direction_snakeTwo = null;
+    let direction_snakeThree = null;
+    let direction_snakeFour = null;
+    let direction_snakeFive = null;
     // benötigt für die abfrage ob das Futter gefressen wurde,
     // um die schlange wachsen zulassen
     let foodCollected_snakeOne = false;
@@ -337,12 +334,13 @@
     let inGame_snakeFour = false;
     let inGame_snakeFive = false;
     let food;
-    let snake_one_color = '#FF00D5';
-    let snake_two_color = '#00EACF';
-    let snake_three_color = '#FF00D5';
-    let snake_four_color = '#FF00D5';
-    let snake_five_color = '#FF00D5';
-    let elem = document.documentElement;
+    let snake_one_color = null;
+    let snake_two_color = null;
+    let snake_three_color = null;
+    let snake_four_color = null;
+    let snake_five_color = null;
+    let egg_color = '#00FF53';
+    let vollBild = document.documentElement;
     let snakeOne = [
         {
             x: null,
@@ -368,6 +366,41 @@
             x: null,
             y: null
         }];
+    let neon = '0 0 0.1em #fff,' +
+        '0 0 0.2em #fff,' +
+        '0 0 0.3em #fff,' +
+        '0 0 0.4em #f7f,' +
+        '0 0 0.6em #f0f,' +
+        '0 0 0.8em #f0f,' +
+        '0 0 1.0em #f0f,' +
+        '0 0 1.2em #f0f';
+    // Events zuordnen
+    // ---------------------------------------------------------------------------------------------------------
+
+    document.getElementById('snake_one').addEventListener('input', namensGebung);
+    document.getElementById('snake_two').addEventListener('input', namensGebung);
+    document.getElementById('snake_three').addEventListener('input', namensGebung);
+    document.getElementById('snake_four').addEventListener('input', namensGebung);
+    document.getElementById('snake_five').addEventListener('input', namensGebung);
+
+    for (let i = 0; i < document.getElementsByClassName('snake_one_color').length; i++) {
+        document.getElementsByClassName('snake_one_color')[i].addEventListener('click', farbwahl);
+    }
+    for (let i = 0; i < document.getElementsByClassName('snake_two_color').length; i++) {
+        document.getElementsByClassName('snake_two_color')[i].addEventListener('click', farbwahl);
+    }
+    for (let i = 0; i < document.getElementsByClassName('snake_three_color').length; i++) {
+        document.getElementsByClassName('snake_three_color')[i].addEventListener('click', farbwahl);
+    }
+    for (let i = 0; i < document.getElementsByClassName('snake_four_color').length; i++) {
+        document.getElementsByClassName('snake_four_color')[i].addEventListener('click', farbwahl);
+    }
+    for (let i = 0; i < document.getElementsByClassName('snake_five_color').length; i++) {
+        document.getElementsByClassName('snake_five_color')[i].addEventListener('click', farbwahl);
+    }
+
+    // programm Initialisierung
+    // ---------------------------------------------------------------------------------------------------------
     if (inGame_snakeOne) {
         snakeOne = [
             {
@@ -403,28 +436,6 @@
                 y: 22
             }];
     }
-    document.getElementById('snake_one').addEventListener('input', namensGebung);
-    document.getElementById('snake_two').addEventListener('input', namensGebung);
-    document.getElementById('snake_three').addEventListener('input', namensGebung);
-    document.getElementById('snake_four').addEventListener('input', namensGebung);
-    document.getElementById('snake_five').addEventListener('input', namensGebung);
-
-    for (let i = 0; i < document.getElementsByClassName('snake_one_color').length; i++) {
-        document.getElementsByClassName('snake_one_color')[i].addEventListener('click', farbwahl);
-    }
-    for (let i = 0; i < document.getElementsByClassName('snake_two_color').length; i++) {
-        document.getElementsByClassName('snake_two_color')[i].addEventListener('click', farbwahl);
-    }
-    for (let i = 0; i < document.getElementsByClassName('snake_three_color').length; i++) {
-        document.getElementsByClassName('snake_three_color')[i].addEventListener('click', farbwahl);
-    }
-    for (let i = 0; i < document.getElementsByClassName('snake_four_color').length; i++) {
-        document.getElementsByClassName('snake_four_color')[i].addEventListener('click', farbwahl);
-    }
-    for (let i = 0; i < document.getElementsByClassName('snake_five_color').length; i++) {
-        document.getElementsByClassName('snake_five_color')[i].addEventListener('click', farbwahl);
-    }
-
     placeFood();
     // aufruf pro sec. *100
     setInterval(gameLoop, 200);
@@ -432,541 +443,12 @@
     document.addEventListener('keydown', keyDown);
     draw();
 
-    function openFullscreen() {
-        if (elem.requestFullscreen) {
-            elem.requestFullscreen();
-        }
-    }
-
-    function closeFullscreen() {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        }
-    }
-
-    function namensGebung() {
-        if (this.id === 'snake_one') {
-            document.getElementById('p1Name').innerHTML = this.value
-            inGame_snakeOne = true;
-        } else if (this.id === 'snake_two') {
-            document.getElementById('p2Name').innerHTML = this.value
-            inGame_snakeTwo = true;
-        } else if (this.id === 'snake_three') {
-            document.getElementById('p3Name').innerHTML = this.value
-            inGame_snakeThree = true;
-        } else if (this.id === 'snake_four') {
-            document.getElementById('p4Name').innerHTML = this.value
-            inGame_snakeFour = true;
-        } else if (this.id === 'snake_five') {
-            document.getElementById('p5Name').innerHTML = this.value
-            inGame_snakeFive = true;
-        }
-
-    }
-
-    function back() {
-        snakeOne = [
-            {
-                x: null,
-                y: null
-            }];
-        snakeTwo = [
-            {
-                x: null,
-                y: null
-            }];
-        snakeThree = [
-            {
-                x: null,
-                y: null
-            }];
-        snakeFour = [
-            {
-                x: null,
-                y: null
-            }];
-        snakeFive = [
-            {
-                x: null,
-                y: null
-            }];
-        direction_snakeOne = '';
-        direction_snakeTwo = '';
-        direction_snakeThree = '';
-        direction_snakeFour = '';
-        direction_snakeFive = '';
-        inGame_snakeOne = false;
-        inGame_snakeTwo = false;
-        inGame_snakeThree = false;
-        inGame_snakeFour = false;
-        inGame_snakeFive = false;
-        clearInterval();
-        cancelAnimationFrame(draw);
-        // ctx.remove();
-        document.getElementById('tabelle').hidden = false;
-        document.getElementById('overDiv').hidden = true;
-    }
-
-    function start() {
-        document.getElementById('tabelle').hidden = true;
-        document.getElementById('overDiv').hidden = false
-    }
-
-    function radioAn() {
-        document.getElementById('radioAn').hidden = true;
-        document.getElementById('radioAus').hidden = false;
-    }
-
-    function radioAus() {
-        document.getElementById('radioAn').hidden = false;
-        document.getElementById('radioAus').hidden = true;
-    }
-
-    function farbwahl() {
-        // console.log(this.className);
-        document.getElementById(this.className).style.backgroundColor = this.style.backgroundColor;
-        if (this.className === 'snake_one_color') {
-            snake_one_color = this.style.backgroundColor;
-            document.getElementById('snake_one').style.backgroundColor = this.style.backgroundColor;
-            document.getElementById('snake_one').style.color = 'black';
-            document.getElementById('snake_one_score').style.backgroundColor = this.style.backgroundColor;
-            document.getElementById('p1Name').style.color = this.style.backgroundColor;
-        } else if (this.className === 'snake_two_color') {
-            snake_two_color = this.style.backgroundColor;
-            document.getElementById('snake_two').style.backgroundColor = this.style.backgroundColor;
-            document.getElementById('snake_two').style.color = 'black';
-            document.getElementById('snake_two_score').style.backgroundColor = this.style.backgroundColor;
-            document.getElementById('p2Name').style.color = this.style.backgroundColor;
-        } else if (this.className === 'snake_three_color') {
-            snake_three_color = this.style.backgroundColor;
-            document.getElementById('snake_three').style.backgroundColor = this.style.backgroundColor;
-            document.getElementById('snake_three').style.color = 'black';
-            document.getElementById('snake_three_score').style.backgroundColor = this.style.backgroundColor;
-            document.getElementById('p2Name').style.color = this.style.backgroundColor;
-        } else if (this.className === 'snake_four_color') {
-            snake_four_color = this.style.backgroundColor;
-            document.getElementById('snake_four').style.backgroundColor = this.style.backgroundColor;
-            document.getElementById('snake_four').style.color = 'black';
-            document.getElementById('snake_four_score').style.backgroundColor = this.style.backgroundColor;
-            document.getElementById('p4Name').style.color = this.style.backgroundColor;
-        } else if (this.className === 'snake_five_color') {
-            snake_five_color = this.style.backgroundColor;
-            document.getElementById('snake_five').style.backgroundColor = this.style.backgroundColor;
-            document.getElementById('snake_five').style.color = 'black';
-            document.getElementById('snake_five_score').style.backgroundColor = this.style.backgroundColor;
-            document.getElementById('p5Name').style.color = this.style.backgroundColor;
-        }
-
-    }
-
-    // malen => funktion : schlange/-en u. futter
-    function draw() {
-        // Hintergrund (wieder holen damit es nicht aussieht als wenn man male)
-        let patternImage = new Image();
-        patternImage.onload = function () {
-            let pattern = ctx.createPattern(patternImage, 'repeat');
-            ctx.fillStyle = pattern;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
-        patternImage.src = 'bilder/sky.jpg';
-
-        // ctx.fillStyle = 'green';
-        // ctx.fillRect(0,0,canvas.width ,canvas.height);
-
-        if (inGame_snakeOne) {
-            // Snake one
-            ctx.fillStyle = snake_one_color;
-            snakeOne.forEach(part => add(part.x, part.y, ctx.fillStyle));
-        }
-        if (inGame_snakeTwo) {
-            // Snake two
-            ctx.fillStyle = snake_two_color;
-            snakeTwo.forEach(part => add(part.x, part.y, ctx.fillStyle));
-        }
-        if (inGame_snakeThree) {
-            // Snake three
-            ctx.fillStyle = snake_three_color;
-            snakeThree.forEach(part => add(part.x, part.y, ctx.fillStyle));
-        }
-        if (inGame_snakeFour) {
-            // Snake four
-            ctx.fillStyle = snake_four_color;
-            snakeFour.forEach(part => add(part.x, part.y, ctx.fillStyle));
-        }
-        if (inGame_snakeFive) {
-            // Snake five
-            ctx.fillStyle = snake_five_color;
-            snakeFive.forEach(part => add(part.x, part.y, ctx.fillStyle));
-        }
-        // Futter(food) oder auch happen
-        // ctx.fillStyle = 'yellow';
-        addFood(food.x, food.y); // Food(Happen)
-        // ständiger wieder aufruf der func.draw(bewegter Ablauf)
-        requestAnimationFrame(draw);
-    }
-
-    function addFood(x, y) {
-        let image = new Image(cellWidth, cellHeight);
-        ctx.shadowBlur = 22.5;
-        ctx.shadowColor = '#00FF53';
-        image.src = 'bilder/egg.png';
-        ctx.drawImage(image, x * cellWidth, y * cellHeight, cellWidth, cellHeight);
-    }
-
-    function testGameOver() {
-        // var. benötigt zum abfragen der selbst berührung o. andere schlange
-        let firstPart_snakeOne = snakeOne[0];
-        let otherParts_snakeOne = snakeOne.slice(1);
-
-        let firstPart_snakeTwo = snakeTwo[0];
-        let otherParts_snakeTwo = snakeTwo.slice(1);
-
-        let firstPart_snakeThree = snakeThree[0];
-        let otherParts_snakeThree = snakeThree.slice(1);
-
-        let firstPart_snakeFour = snakeFour[0];
-        let otherParts_snakeFour = snakeFour.slice(1);
-
-        let firstPart_snakeFive = snakeFive[0];
-        let otherParts_snakeFive = snakeFive.slice(1);
-        let duplicatePart_snakeOne;
-        let duplicatePart_snakeTwo;
-        let duplicatePart_snakeThree;
-        let duplicatePart_snakeFour;
-        let duplicatePart_snakeFive;
-        if (inGame_snakeOne) {
-            //  schlange EINS: wenn sich die Schlange selbst berührt o. die andere schlange = respawn(treu)
-            duplicatePart_snakeOne = otherParts_snakeOne.find(part => // kopf trifft auf eigenen körper
-                    part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
-                otherParts_snakeTwo.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
-                otherParts_snakeThree.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
-                otherParts_snakeFour.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
-                otherParts_snakeFive.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
-                // kopf trifft fremde kopf
-                firstPart_snakeOne.x === firstPart_snakeTwo.x && firstPart_snakeOne.y === firstPart_snakeTwo.y ||
-                firstPart_snakeOne.x === firstPart_snakeThree.x && firstPart_snakeOne.y === firstPart_snakeThree.y ||
-                firstPart_snakeOne.x === firstPart_snakeFour.x && firstPart_snakeOne.y === firstPart_snakeFour.y ||
-                firstPart_snakeOne.x === firstPart_snakeFive.x && firstPart_snakeOne.y === firstPart_snakeFive.y;
-        }
-        if (inGame_snakeTwo) {
-            //  schlange Zwei
-            duplicatePart_snakeTwo = otherParts_snakeTwo.find(part => // kopf trifft auf eigenen körper
-                    part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
-                otherParts_snakeThree.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
-                otherParts_snakeFour.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
-                otherParts_snakeFive.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
-                otherParts_snakeOne.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
-                // kopf trifft fremde kopf
-                firstPart_snakeTwo.x === firstPart_snakeOne.x && firstPart_snakeTwo.y === firstPart_snakeOne.y ||
-                firstPart_snakeTwo.x === firstPart_snakeThree.x && firstPart_snakeTwo.y === firstPart_snakeThree.y ||
-                firstPart_snakeTwo.x === firstPart_snakeFour.x && firstPart_snakeTwo.y === firstPart_snakeFour.y ||
-                firstPart_snakeTwo.x === firstPart_snakeFive.x && firstPart_snakeTwo.y === firstPart_snakeFive.y;
-        }
-        if (inGame_snakeThree) {
-            //  schlange Drei
-            duplicatePart_snakeThree = otherParts_snakeThree.find(part => // kopf trifft auf eigenen körper
-                    part.x === firstPart_snakeThree.x && part.y === firstPart_snakeThree.y) ||
-                otherParts_snakeTwo.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeThree.x && part.y === firstPart_snakeThree.y) ||
-                otherParts_snakeOne.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeThree.x && part.y === firstPart_snakeThree.y) ||
-                otherParts_snakeFour.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeThree.x && part.y === firstPart_snakeThree.y) ||
-                otherParts_snakeFive.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeThree.x && part.y === firstPart_snakeThree.y) ||
-                // kopf trifft fremde kopf
-                firstPart_snakeThree.x === firstPart_snakeTwo.x && firstPart_snakeThree.y === firstPart_snakeTwo.y ||
-                firstPart_snakeThree.x === firstPart_snakeOne.x && firstPart_snakeThree.y === firstPart_snakeOne.y ||
-                firstPart_snakeThree.x === firstPart_snakeFour.x && firstPart_snakeThree.y === firstPart_snakeFour.y ||
-                firstPart_snakeThree.x === firstPart_snakeFive.x && firstPart_snakeThree.y === firstPart_snakeFive.y;
-        }
-        if (inGame_snakeFour) {
-            //  schlange Vier
-            duplicatePart_snakeFour = otherParts_snakeFour.find(part => // kopf trifft auf eigenen körper
-                    part.x === firstPart_snakeFour.x && part.y === firstPart_snakeFour.y) ||
-                otherParts_snakeTwo.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeFour.x && part.y === firstPart_snakeFour.y) ||
-                otherParts_snakeThree.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeFour.x && part.y === firstPart_snakeFour.y) ||
-                otherParts_snakeOne.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeFour.x && part.y === firstPart_snakeFour.y) ||
-                otherParts_snakeFive.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeFour.x && part.y === firstPart_snakeFour.y) ||
-                // kopf trifft fremde kopf
-                firstPart_snakeFour.x === firstPart_snakeTwo.x && firstPart_snakeFour.y === firstPart_snakeTwo.y ||
-                firstPart_snakeFour.x === firstPart_snakeThree.x && firstPart_snakeFour.y === firstPart_snakeThree.y ||
-                firstPart_snakeFour.x === firstPart_snakeOne.x && firstPart_snakeFour.y === firstPart_snakeOne.y ||
-                firstPart_snakeFour.x === firstPart_snakeFive.x && firstPart_snakeFour.y === firstPart_snakeFive.y;
-        }
-        if (inGame_snakeFive) {
-            //  schlange Fünf
-            duplicatePart_snakeFive = otherParts_snakeFive.find(part => // kopf trifft auf eigenen körper
-                    part.x === firstPart_snakeFive.x && part.y === firstPart_snakeFive.y) ||
-                otherParts_snakeTwo.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeFive.x && part.y === firstPart_snakeFive.y) ||
-                otherParts_snakeThree.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeFive.x && part.y === firstPart_snakeFive.y) ||
-                otherParts_snakeFour.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeFive.x && part.y === firstPart_snakeFive.y) ||
-                otherParts_snakeFive.find(part => // kopf trifft fremden körper
-                    part.x === firstPart_snakeFive.x && part.y === firstPart_snakeFive.y) ||
-                // kopf trifft fremde kopf
-                firstPart_snakeFive.x === firstPart_snakeTwo.x && firstPart_snakeFive.y === firstPart_snakeTwo.y ||
-                firstPart_snakeFive.x === firstPart_snakeThree.x && firstPart_snakeFive.y === firstPart_snakeThree.y ||
-                firstPart_snakeFive.x === firstPart_snakeFour.x && firstPart_snakeFive.y === firstPart_snakeFour.y ||
-                firstPart_snakeFive.x === firstPart_snakeOne.x && firstPart_snakeFive.y === firstPart_snakeOne.y;
-        }
-        // 1. schlange
-        if (
-            duplicatePart_snakeOne
-        ) {  // schlange zurücksetzen / alle stücken entfernt
-            snakeOne = [
-                {
-                    x: 12,
-                    y: 12
-                }];
-            direction_snakeOne = '';
-
-        }
-        // 2. schlange
-        if (
-            duplicatePart_snakeTwo
-        ) {  // schlange zurücksetzen / alle stücken entfernt
-            snakeTwo = [
-                {
-                    x: 2,
-                    y: 2
-                }];
-            direction_snakeTwo = '';
-        }
-        // 3. schlange
-        if (
-            duplicatePart_snakeThree
-        ) {  // schlange zurücksetzen / alle stücken entfernt
-            snakeThree = [
-                {
-                    x: 22,
-                    y: 22
-                }];
-            direction_snakeThree = '';
-        }
-        // 4. schlange
-        if (
-            duplicatePart_snakeFour
-        ) {  // schlange zurücksetzen / alle stücken entfernt
-            snakeFour = [
-                {
-                    x: 22,
-                    y: 2
-                }];
-            direction_snakeFour = '';
-        }
-        // 5. schlange
-        if (
-            duplicatePart_snakeFive
-        ) {  // schlange zurücksetzen / alle stücken entfernt
-            snakeFive = [
-                {
-                    x: 2,
-                    y: 22
-                }];
-            direction_snakeFive = '';
-        }
-    }
-
-    // Futterstück irgendwo (random) erscheinen lassen.
-    // (x,y) zufällig zu ordnen
-    function placeFood() {
-
-        // zufalls zahl, mal -/zeilen o. -/spalten und abrunden.
-        let randomX;
-        let randomY;
-        let allParts_SnakeOne;// = snakeOne.slice(0);
-        let allParts_SnakeTwo;// = snakeTwo.slice(0);
-        let allParts_SnakeThree;
-        let allParts_SnakeFour;
-        let allParts_SnakeFive;
-        let belegteFelder;//= allParts_SnakeOne.find(part =>
-        //part.x === randomX && part.y === randomY) ;
-        //let snake_part_two;//= allParts_SnakeTwo.find(part =>
-        //part.x === randomX && part.y === randomY) ;
-
-        do {
-            allParts_SnakeTwo = snakeTwo.slice();
-            allParts_SnakeOne = snakeOne.slice();
-            allParts_SnakeThree = snakeThree.slice();
-            allParts_SnakeFour = snakeFour.slice();
-            allParts_SnakeFive = snakeFive.slice();
-            randomX = Math.floor(Math.random() * (cols - 2)) + 1;
-            randomY = Math.floor(Math.random() * (rows - 2)) + 1;
-            let randomArray = [{
-                x: randomX,
-                y: randomY
-            }];
-
-            // koordinaten abgleichen, TRUE wenn random einem schlangen part entspricht
-            belegteFelder = allParts_SnakeOne.find(part =>
-                    part.x === randomArray[0].x && part.y === randomArray[0].y) ||
-                allParts_SnakeTwo.find(part =>
-                    part.x === randomArray[0].x && part.y === randomArray[0].y) ||
-                allParts_SnakeThree.find(part =>
-                    part.x === randomArray[0].x && part.y === randomArray[0].y) ||
-                allParts_SnakeFour.find(part =>
-                    part.x === randomArray[0].x && part.y === randomArray[0].y) ||
-                allParts_SnakeFive.find(part =>
-                    part.x === randomArray[0].x && part.y === randomArray[0].y) ||
-                false;
-
-            // snake_part_two = allParts_SnakeTwo.find(part =>
-            //     part.x === randomArray.x && part.y === randomArray.y) ;
-            //  console.log('#2',randomArray[0].x,' ',randomArray[0].y) ;//,snake_part_two);
-        } while (belegteFelder !== false);//&& snake_part_two
-
-
-        food = {// Futterstück soll nicht in der schlange spawnen
-            x: randomX,//snake_part_one || snake_part_two ? Math.floor(Math.random()* cols)
-            y: randomY//snake_part_one || snake_part_two ? Math.floor(Math.random()* rows)
-        };
-
-    }
-
-    // futter u schlange/-en koordinaten einfügen (im Spielfeld platzieren)
-    function add(x, y, color) {
-        ctx.shadowBlur = 22.5;
-        ctx.shadowColor = color;
-        ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
-    }
-
-    // Wachstum : nach dem fressen, Futter schicht für
-    // schicht durch reichen und hinten anhängen
-    function shiftSnakeOne() {
-        for (let i = snakeOne.length - 1; i > 0; i--) {
-            const part = snakeOne[i];
-            const lastPart = snakeOne[i - 1];
-            part.x = lastPart.x;
-            part.y = lastPart.y;
-        }
-        let punkte = (snakeOne.length - 1) * 10;
-        document.getElementById('snake_one_score').value = punkte.toString();
-        if (punkte > document.getElementById('snake_two_score').value &&
-            punkte > document.getElementById('snake_three_score').value &&
-            punkte > document.getElementById('snake_four_score').value &&
-            punkte > document.getElementById('snake_five_score').value &&
-            punkte > document.getElementById('top_score').value
-        ) {
-            document.getElementById('top_score').value = punkte.toString();
-            document.getElementById('top_score').style.backgroundColor = snake_one_color;
-            document.getElementById('h3').style.color = snake_one_color;
-        }
-
-    }
-
-    function shiftSnakeTwo() {
-        for (let i = snakeTwo.length - 1; i > 0; i--) {
-            const part = snakeTwo[i];
-            const lastPart = snakeTwo[i - 1];
-            part.x = lastPart.x;
-            part.y = lastPart.y;
-        }
-        let punkte = (snakeTwo.length - 1) * 10;
-        document.getElementById('snake_two_score').value = punkte.toString();
-        if (punkte > document.getElementById('snake_one_score').value &&
-            punkte > document.getElementById('snake_three_score').value &&
-            punkte > document.getElementById('snake_four_score').value &&
-            punkte > document.getElementById('snake_five_score').value &&
-            punkte > document.getElementById('top_score').value) {
-            document.getElementById('top_score').value = punkte.toString();
-            document.getElementById('top_score').style.backgroundColor = snake_two_color;
-            document.getElementById('h3').style.color = snake_two_color;
-        }
-
-    }
-
-    function shiftSnakeThree() {
-        for (let i = snakeThree.length - 1; i > 0; i--) {
-            const part = snakeThree[i];
-            const lastPart = snakeThree[i - 1];
-            part.x = lastPart.x;
-            part.y = lastPart.y;
-        }
-        let punkte = (snakeThree.length - 1) * 10;
-        document.getElementById('snake_three_score').value = punkte.toString();
-        if (punkte > document.getElementById('snake_one_score').value &&
-            punkte > document.getElementById('snake_two_score').value &&
-            punkte > document.getElementById('snake_four_score').value &&
-            punkte > document.getElementById('snake_five_score').value &&
-            punkte > document.getElementById('top_score').value) {
-            document.getElementById('top_score').value = punkte.toString();
-            document.getElementById('top_score').style.backgroundColor = snake_three_color;
-            document.getElementById('h3').style.color = snake_three_color;
-        }
-
-    }
-
-    function shiftSnakeFour() {
-        for (let i = snakeFour.length - 1; i > 0; i--) {
-            const part = snakeFour[i];
-            const lastPart = snakeFour[i - 1];
-            part.x = lastPart.x;
-            part.y = lastPart.y;
-        }
-        let punkte = (snakeFour.length - 1) * 10;
-        document.getElementById('snake_four_score').value = punkte.toString();
-        if (punkte > document.getElementById('snake_one_score').value &&
-            punkte > document.getElementById('snake_three_score').value &&
-            punkte > document.getElementById('snake_two_score').value &&
-            punkte > document.getElementById('snake_five_score').value &&
-            punkte > document.getElementById('top_score').value) {
-            document.getElementById('top_score').value = punkte.toString();
-            document.getElementById('top_score').style.backgroundColor = snake_four_color;
-            document.getElementById('h3').style.color = snake_four_color;
-        }
-
-    }
-
-    function shiftSnakeFive() {
-        for (let i = snakeFive.length - 1; i > 0; i--) {
-            const part = snakeFive[i];
-            const lastPart = snakeFive[i - 1];
-            part.x = lastPart.x;
-            part.y = lastPart.y;
-        }
-        let punkte = (snakeFive.length - 1) * 10;
-        document.getElementById('snake_five_score').value = punkte.toString();
-        if (punkte > document.getElementById('snake_one_score').value &&
-            punkte > document.getElementById('snake_three_score').value &&
-            punkte > document.getElementById('snake_four_score').value &&
-            punkte > document.getElementById('snake_two_score').value &&
-            punkte > document.getElementById('top_score').value) {
-            document.getElementById('top_score').value = punkte.toString();
-            document.getElementById('top_score').style.backgroundColor = snake_five_color;
-            document.getElementById('h3').style.color = snake_five_color;
-        }
-
-    }
-
-    // function crossWalls(){  ---------------------eine function für alle
-    //     if (snakeOne[0].x <= 0 )
-    //     { snakeOne[0].x += rows ;}
-    //     if(snakeOne[0].y <= 0 )
-    //     {snakeOne[0].y +=  cols ;}
-    //     if(snakeOne[0].y >= cols)
-    //     {snakeOne[0].y += - cols ;}
-    //     if (snakeOne[0].x >= rows )
-    //     {snakeOne[0].x += - rows ;}
-    // }
+    // Funktionen
+    // ---------------------------------------------------------------------------------------------------------
     // game schleife (bewegung aber auch ablaufs programmierung)
     function gameLoop() {
         // respawn bei spieler berührung //--wand berührung
-        testGameOver();
+        GameOver();
         if (inGame_snakeOne) {
             // schlange eins fahrt durch die wand ;)
             if (snakeOne[0].x <= 0) {
@@ -1156,7 +638,7 @@
             }
         }
         if (inGame_snakeFour) {
-// schlange VIER bewegungsabfrage
+            // schlange VIER bewegungsabfrage
             if (direction_snakeFour === 'LEFT' && direction_snakeFour !== 'RIGHT') {
 
                 snakeFour[0].x--;
@@ -1169,7 +651,7 @@
             }
         }
         if (inGame_snakeFive) {
-// schlange FÜNF bewegungsabfrage
+            // schlange FÜNF bewegungsabfrage
             if (direction_snakeFive === 'LEFT' && direction_snakeFive !== 'RIGHT') {
 
                 snakeFive[0].x--;
@@ -1242,11 +724,566 @@
                 placeFood();
             }
         }
+    }
 
+    // malen => funktion : schlange/-en u. futter
+    function draw() {
+        // Hintergrund (wieder holen damit es nicht aussieht als wenn man male)
+        let patternImage = new Image();
+        patternImage.onload = function () {
+            let pattern = ctx.createPattern(patternImage, 'repeat');
+            ctx.fillStyle = pattern;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        patternImage.src = 'bilder/sky.jpg';
+
+        if (inGame_snakeOne) {
+            // Snake one
+            ctx.fillStyle = snake_one_color;
+            snakeOne.forEach(part => add(part.x, part.y, ctx.fillStyle));
+        }
+        if (inGame_snakeTwo) {
+            // Snake two
+            ctx.fillStyle = snake_two_color;
+            snakeTwo.forEach(part => add(part.x, part.y, ctx.fillStyle));
+        }
+        if (inGame_snakeThree) {
+            // Snake three
+            ctx.fillStyle = snake_three_color;
+            snakeThree.forEach(part => add(part.x, part.y, ctx.fillStyle));
+        }
+        if (inGame_snakeFour) {
+            // Snake four
+            ctx.fillStyle = snake_four_color;
+            snakeFour.forEach(part => add(part.x, part.y, ctx.fillStyle));
+        }
+        if (inGame_snakeFive) {
+            // Snake five
+            ctx.fillStyle = snake_five_color;
+            snakeFive.forEach(part => add(part.x, part.y, ctx.fillStyle));
+        }
+        // Futter(food) oder auch happen
+        // ctx.fillStyle = 'yellow';
+        addFood(food.x, food.y); // Food(Happen)
+        // ständiger wieder aufruf der func.draw(bewegter Ablauf)
+        requestAnimationFrame(draw);
+    }
+
+    // vollbild
+    // ---------------------------------------------------------------------------------------------------------
+    function openFullscreen() {
+        if (vollBild.requestFullscreen) {
+            vollBild.requestFullscreen();
+        }
+    }
+
+    function closeFullscreen() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+    // namen / in game = true
+    // ---------------------------------------------------------------------------------------------------------
+    function namensGebung() {
+        if (this.id === 'snake_one') {
+            document.getElementById('p1Name').innerHTML = this.value
+            inGame_snakeOne = true;
+        } else if (this.id === 'snake_two') {
+            document.getElementById('p2Name').innerHTML = this.value
+            inGame_snakeTwo = true;
+        } else if (this.id === 'snake_three') {
+            document.getElementById('p3Name').innerHTML = this.value
+            inGame_snakeThree = true;
+        } else if (this.id === 'snake_four') {
+            document.getElementById('p4Name').innerHTML = this.value
+            inGame_snakeFour = true;
+        } else if (this.id === 'snake_five') {
+            document.getElementById('p5Name').innerHTML = this.value
+            inGame_snakeFive = true;
+        }
+
+    }
+    // farbanpassung der schlangen und ihrer input variablen
+    // ---------------------------------------------------------------------------------------------------------
+    function farbwahl() {
+        // console.log(this.className);
+        document.getElementById(this.className).style.backgroundColor = this.style.backgroundColor;
+        if (this.className === 'snake_one_color') {
+            snake_one_color = this.style.backgroundColor;
+            document.getElementById('snake_one').style.backgroundColor = this.style.backgroundColor;
+            document.getElementById('snake_one').style.color = 'black';
+            document.getElementById('snake_one_score').style.backgroundColor = this.style.backgroundColor;
+            document.getElementById('p1Name').style.color = 'black';
+            document.getElementById('p1Name').style.textShadow = neon;
+        } else if (this.className === 'snake_two_color') {
+            snake_two_color = this.style.backgroundColor;
+            document.getElementById('snake_two').style.backgroundColor = this.style.backgroundColor;
+            document.getElementById('snake_two').style.color = 'black';
+            document.getElementById('snake_two_score').style.backgroundColor = this.style.backgroundColor;
+            document.getElementById('p2Name').style.color = 'black';
+            document.getElementById('p2Name').style.textShadow = neon;
+        } else if (this.className === 'snake_three_color') {
+            snake_three_color = this.style.backgroundColor;
+            document.getElementById('snake_three').style.backgroundColor = this.style.backgroundColor;
+            document.getElementById('snake_three').style.color = 'black';
+            document.getElementById('snake_three_score').style.backgroundColor = this.style.backgroundColor;
+            document.getElementById('p3Name').style.color = 'black';
+            document.getElementById('p3Name').style.textShadow = neon;
+        } else if (this.className === 'snake_four_color') {
+            snake_four_color = this.style.backgroundColor;
+            document.getElementById('snake_four').style.backgroundColor = this.style.backgroundColor;
+            document.getElementById('snake_four').style.color = 'black';
+            document.getElementById('snake_four_score').style.backgroundColor = this.style.backgroundColor;
+            document.getElementById('p4Name').style.color = 'black';
+            document.getElementById('p4Name').style.textShadow = neon;
+        } else if (this.className === 'snake_five_color') {
+            snake_five_color = this.style.backgroundColor;
+            document.getElementById('snake_five').style.backgroundColor = this.style.backgroundColor;
+            document.getElementById('snake_five').style.color = 'black';
+            document.getElementById('snake_five_score').style.backgroundColor = this.style.backgroundColor;
+            document.getElementById('p5Name').style.color = 'black';
+            document.getElementById('p5Name').style.textShadow = neon;
+        }
+
+    }
+    // spieler,namen,input.styles,positionen und jegliche bewegung zurücksetzen
+    // ---------------------------------------------------------------------------------------------------------
+    function reset() {
+        snakeOne = [
+            {
+                x: null,
+                y: null
+            }];
+        snakeTwo = [
+            {
+                x: null,
+                y: null
+            }];
+        snakeThree = [
+            {
+                x: null,
+                y: null
+            }];
+        snakeFour = [
+            {
+                x: null,
+                y: null
+            }];
+        snakeFive = [
+            {
+                x: null,
+                y: null
+            }];
+        snake_one_color = null;
+        snake_two_color = null;
+        snake_three_color = null;
+        snake_four_color = null;
+        snake_five_color = null;
+        direction_snakeOne = null;
+        direction_snakeTwo = null;
+        direction_snakeThree = null;
+        direction_snakeFour = null;
+        direction_snakeFive = null;
+        inGame_snakeOne = false;
+        inGame_snakeTwo = false;
+        inGame_snakeThree = false;
+        inGame_snakeFour = false;
+        inGame_snakeFive = false;
+        clearInterval();
+        cancelAnimationFrame(draw);
+        for (let i = 0; i < document.getElementsByClassName('snake_name').length; i++)
+        {
+            document.getElementsByClassName('snake_name')[i].value = null;
+            document.getElementsByClassName('snake_name')[i].style.backgroundColor = 'black';
+            document.getElementsByClassName('snake_name')[i].style.color = 'darkred';
+        }
+        for (let i = 0; i < document.getElementsByClassName('start_input').length; i++)
+        {
+            document.getElementsByClassName('start_input')[i].value = null;
+            document.getElementsByClassName('start_input')[i].innerHTML = null;
+            document.getElementsByClassName('start_input')[i].style.backgroundColor = 'black';
+        }
+        for (let i = 0; i < document.getElementsByClassName('dropbtn').length; i++)
+        {
+            document.getElementsByClassName('dropbtn')[i].style.backgroundColor = 'black';
+        }
+    }
+    // nav & sound button
+    // ---------------------------------------------------------------------------------------------------------
+    function back() {
+        reset();
+        document.getElementById('tabelle').hidden = false;
+        document.getElementById('overDiv').hidden = true;
+    }
+    function start() {
+        document.getElementById('tabelle').hidden = true;
+        document.getElementById('overDiv').hidden = false
+    }
+
+    function radioAn() {
+        document.getElementById('radioAn').hidden = true;
+        document.getElementById('radioAus').hidden = false;
+    }
+
+    function radioAus() {
+        document.getElementById('radioAn').hidden = false;
+        document.getElementById('radioAus').hidden = true;
+    }
+    // futter u schlange/-en koordinaten einfügen (im Spielfeld platzieren)
+    // ---------------------------------------------------------------------------------------------------------
+    function add(x, y, color) {
+        ctx.shadowBlur = 22.5;
+        ctx.shadowColor = color;
+        ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+    }
+    // ei positionieren / abwandlung der add.function (extras fürs ei eingefügt)
+    // ---------------------------------------------------------------------------------------------------------
+    function addFood(x, y) {
+        let image = new Image(cellWidth, cellHeight);
+        ctx.shadowBlur = 22.5;
+        ctx.shadowColor = egg_color;
+        image.src = 'bilder/egg.png';
+        ctx.drawImage(image, x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+    }
+    // Futterstück irgendwo (random) erscheinen lassen.
+    // (x,y) zufällig zu ordnen
+    // ---------------------------------------------------------------------------------------------------------
+    function placeFood() {
+        // zufalls zahl, mal -/zeilen o. -/spalten und abrunden.
+        let randomX;
+        let randomY;
+        let allParts_SnakeOne;// = snakeOne.slice(0);
+        let allParts_SnakeTwo;// = snakeTwo.slice(0);
+        let allParts_SnakeThree;
+        let allParts_SnakeFour;
+        let allParts_SnakeFive;
+        let belegteFelder;//= allParts_SnakeOne.find(part =>
+        //part.x === randomX && part.y === randomY) ;
+        do {
+            allParts_SnakeTwo = snakeTwo.slice();
+            allParts_SnakeOne = snakeOne.slice();
+            allParts_SnakeThree = snakeThree.slice();
+            allParts_SnakeFour = snakeFour.slice();
+            allParts_SnakeFive = snakeFive.slice();
+            randomX = Math.floor(Math.random() * (cols - 2)) + 1;
+            randomY = Math.floor(Math.random() * (rows - 2)) + 1;
+            let randomArray = [{
+                x: randomX,
+                y: randomY
+            }];
+            // koordinaten abgleichen, TRUE wenn random einem schlangen part entspricht
+            belegteFelder = allParts_SnakeOne.find(part =>
+                    part.x === randomArray[0].x && part.y === randomArray[0].y) ||
+                allParts_SnakeTwo.find(part =>
+                    part.x === randomArray[0].x && part.y === randomArray[0].y) ||
+                allParts_SnakeThree.find(part =>
+                    part.x === randomArray[0].x && part.y === randomArray[0].y) ||
+                allParts_SnakeFour.find(part =>
+                    part.x === randomArray[0].x && part.y === randomArray[0].y) ||
+                allParts_SnakeFive.find(part =>
+                    part.x === randomArray[0].x && part.y === randomArray[0].y) ||
+                false;
+        } while (belegteFelder !== false);
+
+        food = {// Futterstück soll nicht in der schlange spawnen
+            x: randomX,//snake_part_one || snake_part_two ? Math.floor(Math.random()* cols)
+            y: randomY//snake_part_one || snake_part_two ? Math.floor(Math.random()* rows)
+        };
+
+    }
+    // endbedingungen
+    // ---------------------------------------------------------------------------------------------------------
+    // an sich ein endlos game bis das feld voll ist
+    // dann spawnt die schlange-/n neu.
+    // einziger sinn bisher die top punkte(u. height punkte)
+    // in die höhe treiben.
+    function GameOver() {
+        // var. benötigt zum abfragen der selbst berührung o. andere schlange
+        let firstPart_snakeOne = snakeOne[0];
+        let otherParts_snakeOne = snakeOne.slice(1);
+
+        let firstPart_snakeTwo = snakeTwo[0];
+        let otherParts_snakeTwo = snakeTwo.slice(1);
+
+        let firstPart_snakeThree = snakeThree[0];
+        let otherParts_snakeThree = snakeThree.slice(1);
+
+        let firstPart_snakeFour = snakeFour[0];
+        let otherParts_snakeFour = snakeFour.slice(1);
+
+        let firstPart_snakeFive = snakeFive[0];
+        let otherParts_snakeFive = snakeFive.slice(1);
+        let duplicatePart_snakeOne;
+        let duplicatePart_snakeTwo;
+        let duplicatePart_snakeThree;
+        let duplicatePart_snakeFour;
+        let duplicatePart_snakeFive;
+        if (inGame_snakeOne) {
+            //  schlange EINS: wenn sich die Schlange selbst berührt o. die andere schlange = respawn(treu)
+            duplicatePart_snakeOne = otherParts_snakeOne.find(part => // kopf trifft auf eigenen körper
+                    part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
+                otherParts_snakeTwo.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
+                otherParts_snakeThree.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
+                otherParts_snakeFour.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
+                otherParts_snakeFive.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeOne.x && part.y === firstPart_snakeOne.y) ||
+                // kopf trifft fremde kopf
+                firstPart_snakeOne.x === firstPart_snakeTwo.x && firstPart_snakeOne.y === firstPart_snakeTwo.y ||
+                firstPart_snakeOne.x === firstPart_snakeThree.x && firstPart_snakeOne.y === firstPart_snakeThree.y ||
+                firstPart_snakeOne.x === firstPart_snakeFour.x && firstPart_snakeOne.y === firstPart_snakeFour.y ||
+                firstPart_snakeOne.x === firstPart_snakeFive.x && firstPart_snakeOne.y === firstPart_snakeFive.y;
+        }
+        if (inGame_snakeTwo) {
+            //  schlange Zwei
+            duplicatePart_snakeTwo = otherParts_snakeTwo.find(part => // kopf trifft auf eigenen körper
+                    part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
+                otherParts_snakeThree.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
+                otherParts_snakeFour.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
+                otherParts_snakeFive.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
+                otherParts_snakeOne.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeTwo.x && part.y === firstPart_snakeTwo.y) ||
+                // kopf trifft fremde kopf
+                firstPart_snakeTwo.x === firstPart_snakeOne.x && firstPart_snakeTwo.y === firstPart_snakeOne.y ||
+                firstPart_snakeTwo.x === firstPart_snakeThree.x && firstPart_snakeTwo.y === firstPart_snakeThree.y ||
+                firstPart_snakeTwo.x === firstPart_snakeFour.x && firstPart_snakeTwo.y === firstPart_snakeFour.y ||
+                firstPart_snakeTwo.x === firstPart_snakeFive.x && firstPart_snakeTwo.y === firstPart_snakeFive.y;
+        }
+        if (inGame_snakeThree) {
+            //  schlange Drei
+            duplicatePart_snakeThree = otherParts_snakeThree.find(part => // kopf trifft auf eigenen körper
+                    part.x === firstPart_snakeThree.x && part.y === firstPart_snakeThree.y) ||
+                otherParts_snakeTwo.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeThree.x && part.y === firstPart_snakeThree.y) ||
+                otherParts_snakeOne.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeThree.x && part.y === firstPart_snakeThree.y) ||
+                otherParts_snakeFour.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeThree.x && part.y === firstPart_snakeThree.y) ||
+                otherParts_snakeFive.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeThree.x && part.y === firstPart_snakeThree.y) ||
+                // kopf trifft fremde kopf
+                firstPart_snakeThree.x === firstPart_snakeTwo.x && firstPart_snakeThree.y === firstPart_snakeTwo.y ||
+                firstPart_snakeThree.x === firstPart_snakeOne.x && firstPart_snakeThree.y === firstPart_snakeOne.y ||
+                firstPart_snakeThree.x === firstPart_snakeFour.x && firstPart_snakeThree.y === firstPart_snakeFour.y ||
+                firstPart_snakeThree.x === firstPart_snakeFive.x && firstPart_snakeThree.y === firstPart_snakeFive.y;
+        }
+        if (inGame_snakeFour) {
+            //  schlange Vier
+            duplicatePart_snakeFour = otherParts_snakeFour.find(part => // kopf trifft auf eigenen körper
+                    part.x === firstPart_snakeFour.x && part.y === firstPart_snakeFour.y) ||
+                otherParts_snakeTwo.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeFour.x && part.y === firstPart_snakeFour.y) ||
+                otherParts_snakeThree.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeFour.x && part.y === firstPart_snakeFour.y) ||
+                otherParts_snakeOne.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeFour.x && part.y === firstPart_snakeFour.y) ||
+                otherParts_snakeFive.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeFour.x && part.y === firstPart_snakeFour.y) ||
+                // kopf trifft fremde kopf
+                firstPart_snakeFour.x === firstPart_snakeTwo.x && firstPart_snakeFour.y === firstPart_snakeTwo.y ||
+                firstPart_snakeFour.x === firstPart_snakeThree.x && firstPart_snakeFour.y === firstPart_snakeThree.y ||
+                firstPart_snakeFour.x === firstPart_snakeOne.x && firstPart_snakeFour.y === firstPart_snakeOne.y ||
+                firstPart_snakeFour.x === firstPart_snakeFive.x && firstPart_snakeFour.y === firstPart_snakeFive.y;
+        }
+        if (inGame_snakeFive) {
+            //  schlange Fünf
+            duplicatePart_snakeFive = otherParts_snakeFive.find(part => // kopf trifft auf eigenen körper
+                    part.x === firstPart_snakeFive.x && part.y === firstPart_snakeFive.y) ||
+                otherParts_snakeTwo.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeFive.x && part.y === firstPart_snakeFive.y) ||
+                otherParts_snakeThree.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeFive.x && part.y === firstPart_snakeFive.y) ||
+                otherParts_snakeFour.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeFive.x && part.y === firstPart_snakeFive.y) ||
+                otherParts_snakeFive.find(part => // kopf trifft fremden körper
+                    part.x === firstPart_snakeFive.x && part.y === firstPart_snakeFive.y) ||
+                // kopf trifft fremde kopf
+                firstPart_snakeFive.x === firstPart_snakeTwo.x && firstPart_snakeFive.y === firstPart_snakeTwo.y ||
+                firstPart_snakeFive.x === firstPart_snakeThree.x && firstPart_snakeFive.y === firstPart_snakeThree.y ||
+                firstPart_snakeFive.x === firstPart_snakeFour.x && firstPart_snakeFive.y === firstPart_snakeFour.y ||
+                firstPart_snakeFive.x === firstPart_snakeOne.x && firstPart_snakeFive.y === firstPart_snakeOne.y;
+        }
+        // 1. schlange
+        if (
+            duplicatePart_snakeOne
+        ) {  // schlange zurücksetzen / alle stücken entfernt
+            snakeOne = [
+                {
+                    x: 12,
+                    y: 12
+                }];
+            direction_snakeOne = '';
+
+        }
+        // 2. schlange
+        if (
+            duplicatePart_snakeTwo
+        ) {  // schlange zurücksetzen / alle stücken entfernt
+            snakeTwo = [
+                {
+                    x: 2,
+                    y: 2
+                }];
+            direction_snakeTwo = '';
+        }
+        // 3. schlange
+        if (
+            duplicatePart_snakeThree
+        ) {  // schlange zurücksetzen / alle stücken entfernt
+            snakeThree = [
+                {
+                    x: 22,
+                    y: 22
+                }];
+            direction_snakeThree = '';
+        }
+        // 4. schlange
+        if (
+            duplicatePart_snakeFour
+        ) {  // schlange zurücksetzen / alle stücken entfernt
+            snakeFour = [
+                {
+                    x: 22,
+                    y: 2
+                }];
+            direction_snakeFour = '';
+        }
+        // 5. schlange
+        if (
+            duplicatePart_snakeFive
+        ) {  // schlange zurücksetzen / alle stücken entfernt
+            snakeFive = [
+                {
+                    x: 2,
+                    y: 22
+                }];
+            direction_snakeFive = '';
+        }
+    }
+    // punkte vergabe
+    // Wachstum : nach dem fressen, Futter schicht für
+    // schicht durch reichen und hinten anhängen
+    // ---------------------------------------------------------------------------------------------------------
+    function shiftSnakeOne() {
+        for (let i = snakeOne.length - 1; i > 0; i--) {
+            const part = snakeOne[i];
+            const lastPart = snakeOne[i - 1];
+            part.x = lastPart.x;
+            part.y = lastPart.y;
+        }
+        let punkte = (snakeOne.length - 1) * 10;
+        document.getElementById('snake_one_score').value = punkte.toString();
+        if (punkte > document.getElementById('snake_two_score').value &&
+            punkte > document.getElementById('snake_three_score').value &&
+            punkte > document.getElementById('snake_four_score').value &&
+            punkte > document.getElementById('snake_five_score').value &&
+            punkte > document.getElementById('top_score').value
+        ) {
+            document.getElementById('top_score').value = punkte.toString();
+            document.getElementById('top_score').style.backgroundColor = snake_one_color;
+            document.getElementById('h3').style.color = snake_one_color;
+        }
+
+    }
+    function shiftSnakeTwo() {
+        for (let i = snakeTwo.length - 1; i > 0; i--) {
+            const part = snakeTwo[i];
+            const lastPart = snakeTwo[i - 1];
+            part.x = lastPart.x;
+            part.y = lastPart.y;
+        }
+        let punkte = (snakeTwo.length - 1) * 10;
+        document.getElementById('snake_two_score').value = punkte.toString();
+        if (punkte > document.getElementById('snake_one_score').value &&
+            punkte > document.getElementById('snake_three_score').value &&
+            punkte > document.getElementById('snake_four_score').value &&
+            punkte > document.getElementById('snake_five_score').value &&
+            punkte > document.getElementById('top_score').value) {
+            document.getElementById('top_score').value = punkte.toString();
+            document.getElementById('top_score').style.backgroundColor = snake_two_color;
+            document.getElementById('h3').style.color = snake_two_color;
+        }
+
+    }
+    function shiftSnakeThree() {
+        for (let i = snakeThree.length - 1; i > 0; i--) {
+            const part = snakeThree[i];
+            const lastPart = snakeThree[i - 1];
+            part.x = lastPart.x;
+            part.y = lastPart.y;
+        }
+        let punkte = (snakeThree.length - 1) * 10;
+        document.getElementById('snake_three_score').value = punkte.toString();
+        if (punkte > document.getElementById('snake_one_score').value &&
+            punkte > document.getElementById('snake_two_score').value &&
+            punkte > document.getElementById('snake_four_score').value &&
+            punkte > document.getElementById('snake_five_score').value &&
+            punkte > document.getElementById('top_score').value) {
+            document.getElementById('top_score').value = punkte.toString();
+            document.getElementById('top_score').style.backgroundColor = snake_three_color;
+            document.getElementById('h3').style.color = snake_three_color;
+        }
+
+    }
+    function shiftSnakeFour() {
+        for (let i = snakeFour.length - 1; i > 0; i--) {
+            const part = snakeFour[i];
+            const lastPart = snakeFour[i - 1];
+            part.x = lastPart.x;
+            part.y = lastPart.y;
+        }
+        let punkte = (snakeFour.length - 1) * 10;
+        document.getElementById('snake_four_score').value = punkte.toString();
+        if (punkte > document.getElementById('snake_one_score').value &&
+            punkte > document.getElementById('snake_three_score').value &&
+            punkte > document.getElementById('snake_two_score').value &&
+            punkte > document.getElementById('snake_five_score').value &&
+            punkte > document.getElementById('top_score').value) {
+            document.getElementById('top_score').value = punkte.toString();
+            document.getElementById('top_score').style.backgroundColor = snake_four_color;
+            document.getElementById('h3').style.color = snake_four_color;
+        }
+
+    }
+    function shiftSnakeFive() {
+        for (let i = snakeFive.length - 1; i > 0; i--) {
+            const part = snakeFive[i];
+            const lastPart = snakeFive[i - 1];
+            part.x = lastPart.x;
+            part.y = lastPart.y;
+        }
+        let punkte = (snakeFive.length - 1) * 10;
+        document.getElementById('snake_five_score').value = punkte.toString();
+        if (punkte > document.getElementById('snake_one_score').value &&
+            punkte > document.getElementById('snake_three_score').value &&
+            punkte > document.getElementById('snake_four_score').value &&
+            punkte > document.getElementById('snake_two_score').value &&
+            punkte > document.getElementById('top_score').value) {
+            document.getElementById('top_score').value = punkte.toString();
+            document.getElementById('top_score').style.backgroundColor = snake_five_color;
+            document.getElementById('h3').style.color = snake_five_color;
+        }
 
     }
 
+    // function crossWalls(){  ---------------------eine function für alle
+    //     if (snakeOne[0].x <= 0 )
+    //     { snakeOne[0].x += rows ;}
+    //     if(snakeOne[0].y <= 0 )
+    //     {snakeOne[0].y +=  cols ;}
+    //     if(snakeOne[0].y >= cols)
+    //     {snakeOne[0].y += - cols ;}
+    //     if (snakeOne[0].x >= rows )
+    //     {snakeOne[0].x += - rows ;}
+    // }
+
     // Steuerung
+    // ---------------------------------------------------------------------------------------------------------
     function keyDown(e) {
         if (inGame_snakeOne) {
             // schlange EINS steuerung + verhindern von rückwärts fahren.

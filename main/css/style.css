@@ -60,20 +60,17 @@ input{
     color: darkred;
 }
 #h1{
+
     color: black;
 }
 #h3{
     color: darkred;
 }
-#p1Name{
-    color: #FF00D5;
-}
-#p2Name{
-    color: #00EACF;
+h5{
+
 }
 table{
     font-size: 13px;
-
 }
 p,a,button{
     color: lightslategrey;
