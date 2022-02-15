@@ -32,12 +32,23 @@ input{
     z-index: 1;
 }
 #divScore{
-     position: absolute;
-     z-index: 2;
-     left: 600px;
-     top: 0px;
+    position: absolute;
+    z-index: 2;
+    left: 600px;
+    top: -30%;
     margin: 20px;
     padding: 10px;
+}
+#height-top-score{
+    position: relative;
+}
+#player-score{
+    position: relative;
+    top : 50px;
+}
+#sound-button{
+    position: relative;
+    top:340px;
 }
 #top_score{
     background-color: #6861FF ;
@@ -87,7 +98,6 @@ p,a,button{
 }
 
 .dropdown-content button {
-    border-style: wave;
     border-radius: 10px;
     border-color: darkred;
 
@@ -111,4 +121,8 @@ p,a,button{
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
+}
+#nav-button-div{
+    position: absolute;
+    top: 0;
 }
