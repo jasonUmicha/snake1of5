@@ -1,6 +1,3 @@
-<?php
-
-?>
 <!doctype html>
 <html lang="de">
 <head>
@@ -9,26 +6,21 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Nosifer&effect=neon|outline|emboss|shadow-multiple|fire">
-    <script>
-        let ei_sound = new Audio("audio/sound_test1.mp3");
-        let radio = new Audio("http://rs11.stream24.org:8270/listen.pls");
-        ei_sound.volume = 0.8;//lautstärke von 0.1-1
-        radio.volume = 0.2;
-    </script>
     <title>Snake 1 of 5</title>
 </head>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Nosifer&effect=neon|fire">
 
 <body>
 
 <main>
     <div id="nav-button-div">
-        <button type="button" onclick="start()">Start</button>
-        <button type="button" onclick="back()">Back</button>
+        <button id="start-button" type="button" onclick="start()">Start</button>
+        <button hidden id="back-button" type="button" onclick="back()">Back</button>
         <button onclick="openFullscreen();">Open Fullscreen</button>
-        <button onclick="closeFullscreen();">Close Fullscreen</button>
+        <button onclick="closeFullscreen();">Close Fullscreen</button><br>
+        <h3 hidden id="meldung" > </h3>
     </div>
     <table id="tabelle">
         <thead>
@@ -308,13 +300,13 @@
         </div>
     </div>
 </main>
-
 <script>
-
     // var deklaration
     // ---------------------------------------------------------------------------------------------------------
-
-
+    let ei_sound = new Audio("audio/sound_test1.mp3");
+    let radio = new Audio("http://rs11.stream24.org:8270/listen.pls");
+    ei_sound.volume = 0.8;//lautstärke von 0.1-1
+    radio.volume = 0.2;
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
     let rows = 25;
@@ -382,7 +374,6 @@
         '0 0 1.2em #f0f';
     // Events zuordnen
     // ---------------------------------------------------------------------------------------------------------
-
     document.getElementById('snake_one').addEventListener('input', namensGebung);
     document.getElementById('snake_two').addEventListener('input', namensGebung);
     document.getElementById('snake_three').addEventListener('input', namensGebung);
@@ -448,7 +439,6 @@
     // wenn eine taste gedrückt wird soll func.keyDown ausgeführt werden
     document.addEventListener('keydown', keyDown);
     draw();
-
     // Funktionen
     // ---------------------------------------------------------------------------------------------------------
     // game schleife (bewegung aber auch ablaufs programmierung)
@@ -671,7 +661,6 @@
             }
 
         }
-
         if (inGame_snakeOne) {
             // was passieren soll wenn schlange EINS auf futter trifft
             if (snakeOne[0].x === food.x &&
@@ -733,9 +722,7 @@
             }
         }
     }
-
     // malen => funktion : schlange/-en u. futter
-
     function draw() {
         // Hintergrund (wieder holen damit es nicht aussieht als wenn man male)
         let patternImage = new Image();
@@ -748,28 +735,28 @@
 
         if (inGame_snakeOne) {
             // Snake one
-            ctx.fillStyle = snake_one_color;
+            ctx.fillStyle = snake_one_color ;
             snakeOne.forEach(part => add(part.x, part.y, ctx.fillStyle));
         }
         if (inGame_snakeTwo) {
             // Snake two
-            ctx.fillStyle = snake_two_color;
+            ctx.fillStyle = snake_two_color ;
             snakeTwo.forEach(part => add(part.x, part.y, ctx.fillStyle));
         }
         if (inGame_snakeThree) {
             // Snake three
-            ctx.fillStyle = snake_three_color;
+            ctx.fillStyle = snake_three_color ;
             snakeThree.forEach(part => add(part.x, part.y, ctx.fillStyle));
         }
         if (inGame_snakeFour) {
             // Snake four
-            ctx.fillStyle = snake_four_color;
+            ctx.fillStyle = snake_four_color ;
             snakeFour.forEach(part => add(part.x, part.y, ctx.fillStyle));
         }
         if (inGame_snakeFive) {
             // Snake five
 
-            ctx.fillStyle = snake_five_color;
+            ctx.fillStyle = snake_five_color ;
             snakeFive.forEach(part => add(part.x, part.y, ctx.fillStyle));
         }
         // Futter(food) oder auch happen
@@ -778,7 +765,6 @@
         // ständiger wieder aufruf der func.draw(bewegter Ablauf)
         requestAnimationFrame(draw);
     }
-
     // vollbild
     // ---------------------------------------------------------------------------------------------------------
     function openFullscreen() {
@@ -786,7 +772,6 @@
             vollBild.requestFullscreen();
         }
     }
-
     function closeFullscreen() {
         if (document.exitFullscreen) {
             document.exitFullscreen();
@@ -811,7 +796,6 @@
             document.getElementById('p5Name').innerHTML = this.value
             inGame_snakeFive = true;
         }
-
     }
     // farbanpassung der schlangen und ihrer input variablen
     // ---------------------------------------------------------------------------------------------------------
@@ -854,7 +838,6 @@
             document.getElementById('p5Name').style.color = 'black';
             document.getElementById('p5Name').style.textShadow = neon;
         }
-
     }
     // spieler,namen,input.styles,positionen und jegliche bewegung zurücksetzen
     // ---------------------------------------------------------------------------------------------------------
@@ -924,11 +907,33 @@
         reset();
         document.getElementById('tabelle').hidden = false;
         document.getElementById('overDiv').hidden = true;
+        document.getElementById('back-button').hidden = true;
+        document.getElementById('start-button').hidden = false;
     }
     function start() {
-        document.getElementById('tabelle').hidden = true;
-        document.getElementById('overDiv').hidden = false
+        if(inGame_snakeOne===false&&
+            inGame_snakeTwo===false&&
+            inGame_snakeThree===false&&
+            inGame_snakeFour===false&&
+            inGame_snakeFive===false){
+            document.getElementById('meldung').innerHTML = 'einer schlange musst du einen namen geben ';
+            document.getElementById('meldung').style.color ='black';
+            document.getElementById('meldung').style.textShadow = neon ;
+            document.getElementById('meldung').hidden = false;
+        }else {
+            document.getElementById('meldung').innerHTML = '';
+            document.getElementById('meldung').hidden=true;
+            document.getElementById('tabelle').hidden = true;
+            document.getElementById('overDiv').hidden = false
+            document.getElementById('start-button').hidden = true;
+            document.getElementById('back-button').hidden = false;
+        }
+        // if (snake_one_color!== true){
+        //     document.getElementById('snake_one_score').style.backgroundColor=egg_color;
+        // }
+
     }
+
 
     function radioAn() {
         document.getElementById('radioAn').hidden = true;
@@ -999,7 +1004,6 @@
             x: randomX,//snake_part_one || snake_part_two ? Math.floor(Math.random()* cols)
             y: randomY//snake_part_one || snake_part_two ? Math.floor(Math.random()* rows)
         };
-
     }
     // endbedingungen
     // ---------------------------------------------------------------------------------------------------------
@@ -1198,7 +1202,6 @@
             document.getElementById('top_score').style.backgroundColor = snake_one_color;
             document.getElementById('h3').style.color = snake_one_color;
         }
-
     }
     function shiftSnakeTwo() {
         for (let i = snakeTwo.length - 1; i > 0; i--) {
@@ -1218,7 +1221,6 @@
             document.getElementById('top_score').style.backgroundColor = snake_two_color;
             document.getElementById('h3').style.color = snake_two_color;
         }
-
     }
     function shiftSnakeThree() {
         for (let i = snakeThree.length - 1; i > 0; i--) {
@@ -1238,7 +1240,6 @@
             document.getElementById('top_score').style.backgroundColor = snake_three_color;
             document.getElementById('h3').style.color = snake_three_color;
         }
-
     }
     function shiftSnakeFour() {
         for (let i = snakeFour.length - 1; i > 0; i--) {
@@ -1258,7 +1259,6 @@
             document.getElementById('top_score').style.backgroundColor = snake_four_color;
             document.getElementById('h3').style.color = snake_four_color;
         }
-
     }
     function shiftSnakeFive() {
         for (let i = snakeFive.length - 1; i > 0; i--) {
@@ -1278,9 +1278,7 @@
             document.getElementById('top_score').style.backgroundColor = snake_five_color;
             document.getElementById('h3').style.color = snake_five_color;
         }
-
     }
-
     // function crossWalls(){  ---------------------eine function für alle
     //     if (snakeOne[0].x <= 0 )
     //     { snakeOne[0].x += rows ;}
@@ -1356,10 +1354,6 @@
             }
         }
     }
-
-
 </script>
-
 </body>
-
 </html>
