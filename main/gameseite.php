@@ -13,6 +13,18 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Nosifer&effect=neon|outline|emboss|shadow-multiple|fire">
     <script>
+        let elem = document.documentElement;
+        function openFullscreen() {
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            }
+        }
+
+        function closeFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
         let ei_sound = new Audio("audio/sound_test1.mp3");
         let radio = new Audio("http://rs11.stream24.org:8270/listen.pls");
         ei_sound.volume = 0.8;//lautstärke von 0.1-1
@@ -22,6 +34,7 @@
 </head>
 
 <body>
+
 <main>
     <div id="nav-button-div">
         <button type="button" onclick="start()">Start</button>
@@ -99,6 +112,7 @@
                                 style="background-color: #F100CD">#12
                         </button>
                     </div>
+
                 </div>
             </td>
             <td>
@@ -279,6 +293,7 @@
     <div id="overDiv" hidden>
         <canvas id="canvas" width="600" height="600" moz-opaque></canvas>
         <div id="divScore">
+
             <div id="height-top-score">
                 <h1 id="h1" class="font-effect-fire"> 1 Vs 1 TopServer Score </h1>
                 <input id="height_score" type="text" value="100000000" readonly> <br>
@@ -301,13 +316,16 @@
                 <input id="radioAn" value="Musik An" onclick="radio.play() ,radioAn()" type="text" readonly>
                 <input id="radioAus" hidden value="Musik Aus" onclick="radio.pause() ,radioAus()" type="text" readonly>
             </div>
+
         </div>
     </div>
 </main>
 
 <script>
+
     // var deklaration
     // ---------------------------------------------------------------------------------------------------------
+
 
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
@@ -615,6 +633,7 @@
             // schlange ZWEI bewegungsabfrage
             if (direction_snakeTwo === 'LEFT' && direction_snakeTwo !== 'RIGHT') {
 
+
                 snakeTwo[0].x--;
             } else if (direction_snakeTwo === 'UP' && direction_snakeTwo !== 'DOWN') {
                 snakeTwo[0].y--;
@@ -662,6 +681,7 @@
             } else if (direction_snakeFive === 'DOWN' && direction_snakeFive !== 'UP') {
                 snakeFive[0].y++;
             }
+
         }
 
         if (inGame_snakeOne) {
@@ -727,6 +747,7 @@
     }
 
     // malen => funktion : schlange/-en u. futter
+
     function draw() {
         // Hintergrund (wieder holen damit es nicht aussieht als wenn man male)
         let patternImage = new Image();
@@ -759,6 +780,7 @@
         }
         if (inGame_snakeFive) {
             // Snake five
+
             ctx.fillStyle = snake_five_color;
             snakeFive.forEach(part => add(part.x, part.y, ctx.fillStyle));
         }
