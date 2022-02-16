@@ -13,18 +13,6 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Nosifer&effect=neon|outline|emboss|shadow-multiple|fire">
     <script>
-        let elem = document.documentElement;
-        function openFullscreen() {
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen();
-            }
-        }
-
-        function closeFullscreen() {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            }
-        }
         let ei_sound = new Audio("audio/sound_test1.mp3");
         let radio = new Audio("http://rs11.stream24.org:8270/listen.pls");
         ei_sound.volume = 0.8;//lautstärke von 0.1-1
