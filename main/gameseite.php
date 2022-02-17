@@ -1,3 +1,6 @@
+<?php
+
+?>
 <!doctype html>
 <html lang="de">
 <head>
@@ -6,8 +9,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+
     <link href="css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nosifer&effect=neon|fire" rel="stylesheet">
+
     <script>
         let ei_sound = new Audio("audio/sound_test1.mp3");
         let radio = new Audio("http://rs11.stream24.org:8270/listen.pls");
@@ -16,15 +21,15 @@
     </script>
     <title>Snake 1 of 5</title>
 </head>
+
 <body>
+
 <main>
     <div id="nav-button-div">
-        <button id="start-button" type="button" onclick="start()">Start</button>
-        <button hidden id="back-button" type="button" onclick="back()">Back</button>
-        <button onclick="openFullscreen()">Open Fullscreen</button>
-        <button onclick="closeFullscreen()">Close Fullscreen</button>
-        <br>
-        <h3 hidden id="meldung"></h3>
+        <button type="button" onclick="start()">Start</button>
+        <button type="button" onclick="back()">Back</button>
+        <button onclick="openFullscreen();">Open Fullscreen</button>
+        <button onclick="closeFullscreen();">Close Fullscreen</button>
     </div>
     <table id="tabelle">
         <thead>
@@ -302,7 +307,6 @@
                 <input type="range" min="10" max="100" value="25" onmouseup="feldGr()" id="spielfeldgroesse">
                 <button onclick="neuJetzt()">ich will mitspielen</button>
             </div>
-
         </div>
     </div>
 </main>
@@ -957,13 +961,12 @@
         reset();
         document.getElementById('tabelle').hidden = false;
         document.getElementById('overDiv').hidden = true;
-        document.getElementById('back-button').hidden = true;
-        document.getElementById('start-button').hidden = false;
     }
     function neuJetzt(){
         document.getElementById('tabelle').hidden = false;
         document.getElementById('overDiv').hidden = true;
     }
+
     function start(){
         if (inGame_snakeOne === false &&
             inGame_snakeTwo === false &&
@@ -998,6 +1001,7 @@
         //     document.getElementById('snake_five_score').style.backgroundColor = egg_color;
         // }
     }
+
 
 
     function radioAn() {
