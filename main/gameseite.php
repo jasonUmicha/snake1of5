@@ -9,19 +9,17 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Nosifer&effect=neon|outline|emboss|shadow-multiple|fire">
-    <script>
 
+    <link href="css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nosifer&effect=neon|fire" rel="stylesheet">
+
+    <script>
         let ei_sound = new Audio("audio/sound_test1.mp3");
         let radio = new Audio("http://rs11.stream24.org:8270/listen.pls");
         ei_sound.volume = 0.8;//lautstärke von 0.1-1
         radio.volume = 0.2;
     </script>
     <title>Snake 1 of 5</title>
-
-    <!---->
 </head>
 
 <body>
@@ -302,17 +300,13 @@
                 <input class="start_input" id="snake_four_score" value="" type="text" readonly>
                 <h5 class="start_input"  id="p5Name"></h5>
                 <input class="start_input" id="snake_five_score" type="text" value="" readonly> <br>
-                <input type="range" min="10" max="100" value="25" onmouseup="feldGr()" id="spielfeldgroesse">
-                <button onclick="neuJetzt()">ich will mitspielen</button>
+            </div>
+            <div id="sound-button">
                 <input id="radioAn" value="Musik An" onclick="radio.play() ,radioAn()" type="text" readonly>
                 <input id="radioAus" hidden value="Musik Aus" onclick="radio.pause() ,radioAus()" type="text" readonly>
+                <input type="range" min="10" max="100" value="25" onmouseup="feldGr()" id="spielfeldgroesse">
+                <button onclick="neuJetzt()">ich will mitspielen</button>
             </div>
-            <!-- <div id="sound-button">
-                 <input type="range" min="10" max="100" value="25" onmouseup="feldGr()" id="spielfeldgroesse">
-                 <input id="radioAn" value="Musik An" onclick="radio.play() ,radioAn()" type="text" readonly>
-                 <input id="radioAus" hidden value="Musik Aus" onclick="radio.pause() ,radioAus()" type="text" readonly>
-             </div>-->
-
         </div>
     </div>
 </main>
@@ -972,10 +966,43 @@
         document.getElementById('tabelle').hidden = false;
         document.getElementById('overDiv').hidden = true;
     }
-    function start() {
-        document.getElementById('tabelle').hidden = true;
-        document.getElementById('overDiv').hidden = false
+
+    function start(){
+        if (inGame_snakeOne === false &&
+            inGame_snakeTwo === false &&
+            inGame_snakeThree === false &&
+            inGame_snakeFour === false &&
+            inGame_snakeFive === false) {
+            document.getElementById('meldung').innerHTML = 'einer schlange musst du einen namen geben ';
+            document.getElementById('meldung').style.color = 'black';
+            document.getElementById('meldung').style.textShadow = neon;
+            document.getElementById('meldung').hidden = false;
+        } else {
+            document.getElementById('meldung').innerHTML = '';
+            document.getElementById('meldung').hidden = true;
+            document.getElementById('tabelle').hidden = true;
+            document.getElementById('overDiv').hidden = false
+            document.getElementById('start-button').hidden = true;
+            document.getElementById('back-button').hidden = false;
+        }
+        // if (snake_one_color !== true) {
+        //     document.getElementById('snake_one_score').style.backgroundColor = egg_color;
+        // }
+        // if (snake_two_color !== true) {
+        //     document.getElementById('snake_two_score').style.backgroundColor = egg_color;
+        // }
+        // if (snake_three_color !== true) {
+        //     document.getElementById('snake_three_score').style.backgroundColor = egg_color;
+        // }
+        // if (snake_four_color !== true) {
+        //     document.getElementById('snake_four_score').style.backgroundColor = egg_color;
+        // }
+        // if (snake_five_color !== true) {
+        //     document.getElementById('snake_five_score').style.backgroundColor = egg_color;
+        // }
     }
+
+
 
     function radioAn() {
         document.getElementById('radioAn').hidden = true;
