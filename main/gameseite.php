@@ -239,19 +239,19 @@
                 <div class="dropdown">
                     <button id="snake_five_color" class="dropbtn">Color</button>
                     <div class="dropdown-content">
-                        <button class="snake_five_color" id="color_DA00EC" type="submit"
+                        <button class="snake_five_color"  type="submit"
                                 style="background-color: #DA00EC">#1
                         </button>
-                        <button class="snake_five_color" id="color_AA09FF" type="submit"
+                        <button class="snake_five_color"  type="submit"
                                 style="background-color: #AA09FF">#2
                         </button>
-                        <button class="snake_five_color" id="color_6861FF" type="submit"
+                        <button class="snake_five_color"  type="submit"
                                 style="background-color: #6861FF">#3
                         </button>
-                        <button class="snake_five_color" id="color_009AFF" type="submit"
+                        <button class="snake_five_color"  type="submit"
                                 style="background-color: #009AFF">#4
                         </button>
-                        <button class="snake_five_color" id="color_00C9EB" type="submit"
+                        <button class="snake_five_color"  type="submit"
                                 style="background-color: #00C9EB">#5
                         </button>
                         <button class="snake_five_color"  type="submit"
@@ -773,15 +773,7 @@
             }
         }
     }
-    let bild=new Image();
-    bild.src='bilder/sky.jpg';
-    // malen => funktion : schlange/-en u. futter
-    function test(){
-        let pattern1 = ctx.createPattern(bild, 'repeat');
-        ctx.fillStyle = pattern1;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    }
     function draw() {
 
 
@@ -1411,6 +1403,8 @@
             }
         }
     }
+
+
 </script>
 
 </body>
