@@ -8,12 +8,6 @@
     <link href="/main/css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nosifer&effect=neon|fire"
           rel="stylesheet">
-    <script>
-        let ei_sound = new Audio("audio/sound_test1.mp3");
-        let radio = new Audio("http://rs11.stream24.org:8270/listen.pls");
-        ei_sound.volume = 0.8;//lautstärke von 0.1-1
-        radio.volume = 0.2;
-    </script>
     <title>Snake 1 of 5</title>
 </head>
 <body>
@@ -306,7 +300,10 @@
 <script>
     // var deklaration
     // ---------------------------------------------------------------------------------------------------------
-
+    let ei_sound = new Audio("audio/sound_test1.mp3");
+    let radio = new Audio("http://rs11.stream24.org:8270/listen.pls");
+    ei_sound.volume = 0.8;//lautstärke von 0.1-1
+    radio.volume = 0.2;
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
     let rows = 25;
@@ -1130,7 +1127,7 @@
                     part.x === firstPart_snakeFive.x && part.y === firstPart_snakeFive.y) ||
                 otherParts_snakeFour.find(part => // kopf trifft fremden körper
                     part.x === firstPart_snakeFive.x && part.y === firstPart_snakeFive.y) ||
-                otherParts_snakeFive.find(part => // kopf trifft fremden körper
+                otherParts_snakeOne.find(part => // kopf trifft fremden körper
                     part.x === firstPart_snakeFive.x && part.y === firstPart_snakeFive.y) ||
                 // kopf trifft fremde kopf
                 firstPart_snakeFive.x === firstPart_snakeTwo.x && firstPart_snakeFive.y === firstPart_snakeTwo.y ||
