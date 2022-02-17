@@ -46,7 +46,9 @@ input{
 }
 #sound-button{
     position: relative;
-    top:340px;
+    margin: 20px;
+    padding: 10px;
+    top:50px;
 }
 #top_score{
     background-color: #6861FF ;
@@ -64,9 +66,7 @@ input{
 #h3{
     color: darkred;
 }
-h5{
 
-}
 table{
     font-size: 13px;
 }
@@ -109,6 +109,8 @@ p,a,button{
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
+    margin: 20px;
+    padding: 10px;
 }
 #radioAus{
     background-color: #FF00D5;
@@ -117,8 +119,11 @@ p,a,button{
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
+    margin: 20px;
+    padding: 10px;
 }
 #nav-button-div{
     position: absolute;
     top: 0;
 }
+

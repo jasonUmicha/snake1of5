@@ -5,22 +5,26 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+    <link href="/main/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nosifer&effect=neon|fire"
+          rel="stylesheet">
+    <script>
+        let ei_sound = new Audio("audio/sound_test1.mp3");
+        let radio = new Audio("http://rs11.stream24.org:8270/listen.pls");
+        ei_sound.volume = 0.8;//lautstärke von 0.1-1
+        radio.volume = 0.2;
+    </script>
     <title>Snake 1 of 5</title>
 </head>
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Nosifer&effect=neon|fire">
-
 <body>
-
 <main>
     <div id="nav-button-div">
         <button id="start-button" type="button" onclick="start()">Start</button>
         <button hidden id="back-button" type="button" onclick="back()">Back</button>
-        <button onclick="openFullscreen();">Open Fullscreen</button>
-        <button onclick="closeFullscreen();">Close Fullscreen</button><br>
-        <h3 hidden id="meldung" > </h3>
+        <button onclick="openFullscreen()">Open Fullscreen</button>
+        <button onclick="closeFullscreen()">Close Fullscreen</button>
+        <br>
+        <h3 hidden id="meldung"></h3>
     </div>
     <table id="tabelle">
         <thead>
@@ -55,40 +59,40 @@
                 <div class="dropdown">
                     <button id="snake_one_color" class="dropbtn">Color</button>
                     <div class="dropdown-content">
-                        <button class="snake_one_color" id="color_DA00EC" type="submit"
+                        <button class="snake_one_color" type="submit"
                                 style="background-color: #DA00EC">#1
                         </button>
-                        <button class="snake_one_color" id="color_AA09FF" type="submit"
+                        <button class="snake_one_color" type="submit"
                                 style="background-color: #AA09FF">#2
                         </button>
-                        <button class="snake_one_color" id="color_6861FF" type="submit"
+                        <button class="snake_one_color" type="submit"
                                 style="background-color: #6861FF">#3
                         </button>
-                        <button class="snake_one_color" id="color_009AFF" type="submit"
+                        <button class="snake_one_color" type="submit"
                                 style="background-color: #009AFF">#4
                         </button>
-                        <button class="snake_one_color" id="color_00C9EB" type="submit"
+                        <button class="snake_one_color" type="submit"
                                 style="background-color: #00C9EB">#5
                         </button>
-                        <button class="snake_one_color" id="color_00EACF" type="submit"
+                        <button class="snake_one_color" type="submit"
                                 style="background-color: #00EACF">#6
                         </button>
-                        <button class="snake_one_color" id="color_00FE9A" type="submit"
+                        <button class="snake_one_color" type="submit"
                                 style="background-color: #00FE9A">#7
                         </button>
-                        <button class="snake_one_color" id="color_00FF53" type="submit"
+                        <button class="snake_one_color" type="submit"
                                 style="background-color: #00FF53">#8
                         </button>
-                        <button class="snake_one_color" id="color_BEE800" type="submit"
+                        <button class="snake_one_color" type="submit"
                                 style="background-color: #BEE800">#9
                         </button>
-                        <button class="snake_one_color" id="color_FF6155" type="submit"
+                        <button class="snake_one_color" type="submit"
                                 style="background-color: #FF6155">#10
                         </button>
-                        <button class="snake_one_color" id="color_FF009C" type="submit"
+                        <button class="snake_one_color" type="submit"
                                 style="background-color: #FF009C">#11
                         </button>
-                        <button class="snake_one_color" id="color_F100CD" type="submit"
+                        <button class="snake_one_color" type="submit"
                                 style="background-color: #F100CD">#12
                         </button>
                     </div>
@@ -99,40 +103,40 @@
                 <div class="dropdown">
                     <button id="snake_two_color" class="dropbtn">Color</button>
                     <div class="dropdown-content">
-                        <button class="snake_two_color" id="color_DA00EC" type="submit"
+                        <button class="snake_two_color" type="submit"
                                 style="background-color: #DA00EC">#1
                         </button>
-                        <button class="snake_two_color" id="color_AA09FF" type="submit"
+                        <button class="snake_two_color" type="submit"
                                 style="background-color: #AA09FF">#2
                         </button>
-                        <button class="snake_two_color" id="color_6861FF" type="submit"
+                        <button class="snake_two_color" type="submit"
                                 style="background-color: #6861FF">#3
                         </button>
-                        <button class="snake_two_color" id="color_009AFF" type="submit"
+                        <button class="snake_two_color" type="submit"
                                 style="background-color: #009AFF">#4
                         </button>
-                        <button class="snake_two_color" id="color_00C9EB" type="submit"
+                        <button class="snake_two_color" type="submit"
                                 style="background-color: #00C9EB">#5
                         </button>
-                        <button class="snake_two_color" id="color_00EACF" type="submit"
+                        <button class="snake_two_color" type="submit"
                                 style="background-color: #00EACF">#6
                         </button>
-                        <button class="snake_two_color" id="color_00FE9A" type="submit"
+                        <button class="snake_two_color" type="submit"
                                 style="background-color: #00FE9A">#7
                         </button>
-                        <button class="snake_two_color" id="color_00FF53" type="submit"
+                        <button class="snake_two_color" type="submit"
                                 style="background-color: #00FF53">#8
                         </button>
-                        <button class="snake_two_color" id="color_BEE800" type="submit"
+                        <button class="snake_two_color" type="submit"
                                 style="background-color: #BEE800">#9
                         </button>
-                        <button class="snake_two_color" id="color_FF6155" type="submit"
+                        <button class="snake_two_color" type="submit"
                                 style="background-color: #FF6155">#10
                         </button>
-                        <button class="snake_two_color" id="color_FF009C" type="submit"
+                        <button class="snake_two_color" type="submit"
                                 style="background-color: #FF009C">#11
                         </button>
-                        <button class="snake_two_color" id="color_F100CD" type="submit"
+                        <button class="snake_two_color" type="submit"
                                 style="background-color: #F100CD">#12
                         </button>
                     </div>
@@ -142,40 +146,40 @@
                 <div class="dropdown">
                     <button id="snake_three_color" class="dropbtn">Color</button>
                     <div class="dropdown-content">
-                        <button class="snake_three_color" id="color_DA00EC" type="submit"
+                        <button class="snake_three_color" type="submit"
                                 style="background-color: #DA00EC">#1
                         </button>
-                        <button class="snake_three_color" id="color_AA09FF" type="submit"
+                        <button class="snake_three_color" type="submit"
                                 style="background-color: #AA09FF">#2
                         </button>
-                        <button class="snake_three_color" id="color_6861FF" type="submit"
+                        <button class="snake_three_color" type="submit"
                                 style="background-color: #6861FF">#3
                         </button>
-                        <button class="snake_three_color" id="color_009AFF" type="submit"
+                        <button class="snake_three_color" type="submit"
                                 style="background-color: #009AFF">#4
                         </button>
-                        <button class="snake_three_color" id="color_00C9EB" type="submit"
+                        <button class="snake_three_color" type="submit"
                                 style="background-color: #00C9EB">#5
                         </button>
-                        <button class="snake_three_color" id="color_00EACF" type="submit"
+                        <button class="snake_three_color" type="submit"
                                 style="background-color: #00EACF">#6
                         </button>
-                        <button class="snake_three_color" id="color_00FE9A" type="submit"
+                        <button class="snake_three_color" type="submit"
                                 style="background-color: #00FE9A">#7
                         </button>
-                        <button class="snake_three_color" id="color_00FF53" type="submit"
+                        <button class="snake_three_color" type="submit"
                                 style="background-color: #00FF53">#8
                         </button>
-                        <button class="snake_three_color" id="color_BEE800" type="submit"
+                        <button class="snake_three_color" type="submit"
                                 style="background-color: #BEE800">#9
                         </button>
-                        <button class="snake_three_color" id="color_FF6155" type="submit"
+                        <button class="snake_three_color" type="submit"
                                 style="background-color: #FF6155">#10
                         </button>
-                        <button class="snake_three_color" id="color_FF009C" type="submit"
+                        <button class="snake_three_color" type="submit"
                                 style="background-color: #FF009C">#11
                         </button>
-                        <button class="snake_three_color" id="color_F100CD" type="submit"
+                        <button class="snake_three_color" type="submit"
                                 style="background-color: #F100CD">#12
                         </button>
                     </div>
@@ -185,40 +189,40 @@
                 <div class="dropdown">
                     <button id="snake_four_color" class="dropbtn">Color</button>
                     <div class="dropdown-content">
-                        <button class="snake_four_color" id="color_DA00EC" type="submit"
+                        <button class="snake_four_color" type="submit"
                                 style="background-color: #DA00EC">#1
                         </button>
-                        <button class="snake_four_color" id="color_AA09FF" type="submit"
+                        <button class="snake_four_color" type="submit"
                                 style="background-color: #AA09FF">#2
                         </button>
-                        <button class="snake_four_color" id="color_6861FF" type="submit"
+                        <button class="snake_four_color" type="submit"
                                 style="background-color: #6861FF">#3
                         </button>
-                        <button class="snake_four_color" id="color_009AFF" type="submit"
+                        <button class="snake_four_color" type="submit"
                                 style="background-color: #009AFF">#4
                         </button>
-                        <button class="snake_four_color" id="color_00C9EB" type="submit"
+                        <button class="snake_four_color" type="submit"
                                 style="background-color: #00C9EB">#5
                         </button>
-                        <button class="snake_four_color" id="color_00EACF" type="submit"
+                        <button class="snake_four_color" type="submit"
                                 style="background-color: #00EACF">#6
                         </button>
-                        <button class="snake_four_color" id="color_00FE9A" type="submit"
+                        <button class="snake_four_color" type="submit"
                                 style="background-color: #00FE9A">#7
                         </button>
-                        <button class="snake_four_color" id="color_00FF53" type="submit"
+                        <button class="snake_four_color" type="submit"
                                 style="background-color: #00FF53">#8
                         </button>
-                        <button class="snake_four_color" id="color_BEE800" type="submit"
+                        <button class="snake_four_color" type="submit"
                                 style="background-color: #BEE800">#9
                         </button>
-                        <button class="snake_four_color" id="color_FF6155" type="submit"
+                        <button class="snake_four_color" type="submit"
                                 style="background-color: #FF6155">#10
                         </button>
-                        <button class="snake_four_color" id="color_FF009C" type="submit"
+                        <button class="snake_four_color" type="submit"
                                 style="background-color: #FF009C">#11
                         </button>
-                        <button class="snake_four_color" id="color_F100CD" type="submit"
+                        <button class="snake_four_color" type="submit"
                                 style="background-color: #F100CD">#12
                         </button>
                     </div>
@@ -228,40 +232,40 @@
                 <div class="dropdown">
                     <button id="snake_five_color" class="dropbtn">Color</button>
                     <div class="dropdown-content">
-                        <button class="snake_five_color" id="color_DA00EC" type="submit"
+                        <button class="snake_five_color" type="submit"
                                 style="background-color: #DA00EC">#1
                         </button>
-                        <button class="snake_five_color" id="color_AA09FF" type="submit"
+                        <button class="snake_five_color" type="submit"
                                 style="background-color: #AA09FF">#2
                         </button>
-                        <button class="snake_five_color" id="color_6861FF" type="submit"
+                        <button class="snake_five_color" type="submit"
                                 style="background-color: #6861FF">#3
                         </button>
-                        <button class="snake_five_color" id="color_009AFF" type="submit"
+                        <button class="snake_five_color" type="submit"
                                 style="background-color: #009AFF">#4
                         </button>
-                        <button class="snake_five_color" id="color_00C9EB" type="submit"
+                        <button class="snake_five_color" type="submit"
                                 style="background-color: #00C9EB">#5
                         </button>
-                        <button class="snake_five_color" id="color_00EACF" type="submit"
+                        <button class="snake_five_color" type="submit"
                                 style="background-color: #00EACF">#6
                         </button>
-                        <button class="snake_five_color" id="color_00FE9A" type="submit"
+                        <button class="snake_five_color" type="submit"
                                 style="background-color: #00FE9A">#7
                         </button>
-                        <button class="snake_five_color" id="color_00FF53" type="submit"
+                        <button class="snake_five_color" type="submit"
                                 style="background-color: #00FF53">#8
                         </button>
-                        <button class="snake_five_color" id="color_BEE800" type="submit"
+                        <button class="snake_five_color" type="submit"
                                 style="background-color: #BEE800">#9
                         </button>
-                        <button class="snake_five_color" id="color_FF6155" type="submit"
+                        <button class="snake_five_color" type="submit"
                                 style="background-color: #FF6155">#10
                         </button>
-                        <button class="snake_five_color" id="color_FF009C" type="submit"
+                        <button class="snake_five_color" type="submit"
                                 style="background-color: #FF009C">#11
                         </button>
-                        <button class="snake_five_color" id="color_F100CD" type="submit"
+                        <button class="snake_five_color" type="submit"
                                 style="background-color: #F100CD">#12
                         </button>
                     </div>
@@ -283,30 +287,26 @@
             <div id="player-score">
                 <h5 class="start_input" id="p1Name"></h5>
                 <input class="start_input" id="snake_one_score" type="text" value="" readonly> <br>
-                <h5 class="start_input"  id="p2Name"></h5>
+                <h5 class="start_input" id="p2Name"></h5>
                 <input class="start_input" id="snake_two_score" value="" type="text" readonly>
-                <h5 class="start_input"  id="p3Name"></h5>
+                <h5 class="start_input" id="p3Name"></h5>
                 <input class="start_input" id="snake_three_score" type="text" value="" readonly> <br>
-                <h5 class="start_input"  id="p4Name"></h5>
+                <h5 class="start_input" id="p4Name"></h5>
                 <input class="start_input" id="snake_four_score" value="" type="text" readonly>
-                <h5 class="start_input"  id="p5Name"></h5>
+                <h5 class="start_input" id="p5Name"></h5>
                 <input class="start_input" id="snake_five_score" type="text" value="" readonly> <br>
             </div>
             <div id="sound-button">
                 <input id="radioAn" value="Musik An" onclick="radio.play() ,radioAn()" type="text" readonly>
                 <input id="radioAus" hidden value="Musik Aus" onclick="radio.pause() ,radioAus()" type="text" readonly>
             </div>
-
         </div>
     </div>
 </main>
 <script>
     // var deklaration
     // ---------------------------------------------------------------------------------------------------------
-    let ei_sound = new Audio("audio/sound_test1.mp3");
-    let radio = new Audio("http://rs11.stream24.org:8270/listen.pls");
-    ei_sound.volume = 0.8;//lautstärke von 0.1-1
-    radio.volume = 0.2;
+
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
     let rows = 25;
@@ -722,6 +722,7 @@
             }
         }
     }
+
     // malen => funktion : schlange/-en u. futter
     function draw() {
         // Hintergrund (wieder holen damit es nicht aussieht als wenn man male)
@@ -735,28 +736,28 @@
 
         if (inGame_snakeOne) {
             // Snake one
-            ctx.fillStyle = snake_one_color ;
+            ctx.fillStyle = snake_one_color;
             snakeOne.forEach(part => add(part.x, part.y, ctx.fillStyle));
         }
         if (inGame_snakeTwo) {
             // Snake two
-            ctx.fillStyle = snake_two_color ;
+            ctx.fillStyle = snake_two_color;
             snakeTwo.forEach(part => add(part.x, part.y, ctx.fillStyle));
         }
         if (inGame_snakeThree) {
             // Snake three
-            ctx.fillStyle = snake_three_color ;
+            ctx.fillStyle = snake_three_color;
             snakeThree.forEach(part => add(part.x, part.y, ctx.fillStyle));
         }
         if (inGame_snakeFour) {
             // Snake four
-            ctx.fillStyle = snake_four_color ;
+            ctx.fillStyle = snake_four_color;
             snakeFour.forEach(part => add(part.x, part.y, ctx.fillStyle));
         }
         if (inGame_snakeFive) {
             // Snake five
 
-            ctx.fillStyle = snake_five_color ;
+            ctx.fillStyle = snake_five_color;
             snakeFive.forEach(part => add(part.x, part.y, ctx.fillStyle));
         }
         // Futter(food) oder auch happen
@@ -765,6 +766,7 @@
         // ständiger wieder aufruf der func.draw(bewegter Ablauf)
         requestAnimationFrame(draw);
     }
+
     // vollbild
     // ---------------------------------------------------------------------------------------------------------
     function openFullscreen() {
@@ -772,11 +774,13 @@
             vollBild.requestFullscreen();
         }
     }
+
     function closeFullscreen() {
         if (document.exitFullscreen) {
             document.exitFullscreen();
         }
     }
+
     // namen / in game = true
     // ---------------------------------------------------------------------------------------------------------
     function namensGebung() {
@@ -797,6 +801,7 @@
             inGame_snakeFive = true;
         }
     }
+
     // farbanpassung der schlangen und ihrer input variablen
     // ---------------------------------------------------------------------------------------------------------
     function farbwahl() {
@@ -839,6 +844,7 @@
             document.getElementById('p5Name').style.textShadow = neon;
         }
     }
+
     // spieler,namen,input.styles,positionen und jegliche bewegung zurücksetzen
     // ---------------------------------------------------------------------------------------------------------
     function reset() {
@@ -884,23 +890,21 @@
         inGame_snakeFive = false;
         clearInterval();
         cancelAnimationFrame(draw);
-        for (let i = 0; i < document.getElementsByClassName('snake_name').length; i++)
-        {
+        for (let i = 0; i < document.getElementsByClassName('snake_name').length; i++) {
             document.getElementsByClassName('snake_name')[i].value = null;
             document.getElementsByClassName('snake_name')[i].style.backgroundColor = 'black';
             document.getElementsByClassName('snake_name')[i].style.color = 'darkred';
         }
-        for (let i = 0; i < document.getElementsByClassName('start_input').length; i++)
-        {
+        for (let i = 0; i < document.getElementsByClassName('start_input').length; i++) {
             document.getElementsByClassName('start_input')[i].value = null;
             document.getElementsByClassName('start_input')[i].innerHTML = null;
             document.getElementsByClassName('start_input')[i].style.backgroundColor = 'black';
         }
-        for (let i = 0; i < document.getElementsByClassName('dropbtn').length; i++)
-        {
+        for (let i = 0; i < document.getElementsByClassName('dropbtn').length; i++) {
             document.getElementsByClassName('dropbtn')[i].style.backgroundColor = 'black';
         }
     }
+
     // nav & sound button
     // ---------------------------------------------------------------------------------------------------------
     function back() {
@@ -910,36 +914,45 @@
         document.getElementById('back-button').hidden = true;
         document.getElementById('start-button').hidden = false;
     }
+
     function start() {
-        if(inGame_snakeOne===false&&
-            inGame_snakeTwo===false&&
-            inGame_snakeThree===false&&
-            inGame_snakeFour===false&&
-            inGame_snakeFive===false){
+        if (inGame_snakeOne === false &&
+            inGame_snakeTwo === false &&
+            inGame_snakeThree === false &&
+            inGame_snakeFour === false &&
+            inGame_snakeFive === false) {
             document.getElementById('meldung').innerHTML = 'einer schlange musst du einen namen geben ';
-            document.getElementById('meldung').style.color ='black';
-            document.getElementById('meldung').style.textShadow = neon ;
+            document.getElementById('meldung').style.color = 'black';
+            document.getElementById('meldung').style.textShadow = neon;
             document.getElementById('meldung').hidden = false;
-        }else {
+        } else {
             document.getElementById('meldung').innerHTML = '';
-            document.getElementById('meldung').hidden=true;
+            document.getElementById('meldung').hidden = true;
             document.getElementById('tabelle').hidden = true;
             document.getElementById('overDiv').hidden = false
             document.getElementById('start-button').hidden = true;
             document.getElementById('back-button').hidden = false;
         }
-        // if (snake_one_color!== true){
-        //     document.getElementById('snake_one_score').style.backgroundColor=egg_color;
+        // if (snake_one_color !== true) {
+        //     document.getElementById('snake_one_score').style.backgroundColor = egg_color;
         // }
-
+        // if (snake_two_color !== true) {
+        //     document.getElementById('snake_two_score').style.backgroundColor = egg_color;
+        // }
+        // if (snake_three_color !== true) {
+        //     document.getElementById('snake_three_score').style.backgroundColor = egg_color;
+        // }
+        // if (snake_four_color !== true) {
+        //     document.getElementById('snake_four_score').style.backgroundColor = egg_color;
+        // }
+        // if (snake_five_color !== true) {
+        //     document.getElementById('snake_five_score').style.backgroundColor = egg_color;
+        // }
     }
-
-
     function radioAn() {
         document.getElementById('radioAn').hidden = true;
         document.getElementById('radioAus').hidden = false;
     }
-
     function radioAus() {
         document.getElementById('radioAn').hidden = false;
         document.getElementById('radioAus').hidden = true;
@@ -951,6 +964,7 @@
         ctx.shadowColor = color;
         ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
     }
+
     // ei positionieren / abwandlung der add.function (extras fürs ei eingefügt)
     // ---------------------------------------------------------------------------------------------------------
     function addFood(x, y) {
@@ -960,6 +974,7 @@
         image.src = 'bilder/egg.png';
         ctx.drawImage(image, x * cellWidth, y * cellHeight, cellWidth, cellHeight);
     }
+
     // Futterstück irgendwo (random) erscheinen lassen.
     // (x,y) zufällig zu ordnen
     // ---------------------------------------------------------------------------------------------------------
@@ -1005,6 +1020,7 @@
             y: randomY//snake_part_one || snake_part_two ? Math.floor(Math.random()* rows)
         };
     }
+
     // endbedingungen
     // ---------------------------------------------------------------------------------------------------------
     // an sich ein endlos game bis das feld voll ist
@@ -1179,6 +1195,7 @@
             direction_snakeFive = '';
         }
     }
+
     // punkte vergabe
     // Wachstum : nach dem fressen, Futter schicht für
     // schicht durch reichen und hinten anhängen
@@ -1203,6 +1220,7 @@
             document.getElementById('h3').style.color = snake_one_color;
         }
     }
+
     function shiftSnakeTwo() {
         for (let i = snakeTwo.length - 1; i > 0; i--) {
             const part = snakeTwo[i];
@@ -1222,6 +1240,7 @@
             document.getElementById('h3').style.color = snake_two_color;
         }
     }
+
     function shiftSnakeThree() {
         for (let i = snakeThree.length - 1; i > 0; i--) {
             const part = snakeThree[i];
@@ -1241,6 +1260,7 @@
             document.getElementById('h3').style.color = snake_three_color;
         }
     }
+
     function shiftSnakeFour() {
         for (let i = snakeFour.length - 1; i > 0; i--) {
             const part = snakeFour[i];
@@ -1260,6 +1280,7 @@
             document.getElementById('h3').style.color = snake_four_color;
         }
     }
+
     function shiftSnakeFive() {
         for (let i = snakeFive.length - 1; i > 0; i--) {
             const part = snakeFive[i];
@@ -1279,6 +1300,7 @@
             document.getElementById('h3').style.color = snake_five_color;
         }
     }
+
     // function crossWalls(){  ---------------------eine function für alle
     //     if (snakeOne[0].x <= 0 )
     //     { snakeOne[0].x += rows ;}
