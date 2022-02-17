@@ -33,7 +33,7 @@ input{
     position: absolute;
     z-index: 2;
     left: 600px;
-    top: -30%;
+    top: -15%;
     margin: 20px;
     padding: 10px;
 }
@@ -126,4 +126,4 @@ p,a,button{
     position: absolute;
     top: 0;
 }
-/* ------------*/
+

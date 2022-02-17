@@ -6,20 +6,15 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Nosifer&effect=neon|outline|emboss|shadow-multiple|fire">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nosifer&effect=neon|fire" rel="stylesheet">
     <script>
-
         let ei_sound = new Audio("audio/sound_test1.mp3");
         let radio = new Audio("http://rs11.stream24.org:8270/listen.pls");
         ei_sound.volume = 0.8;//lautstärke von 0.1-1
         radio.volume = 0.2;
     </script>
     <title>Snake 1 of 5</title>
-
-    <!---->
 </head>
 <body>
 <main>
@@ -64,7 +59,6 @@
                 <div class="dropdown">
                     <button id="snake_one_color" class="dropbtn">Color</button>
                     <div class="dropdown-content">
-
                         <button class="snake_one_color"  type="submit"
                                 style="background-color: #DA00EC">#1
                         </button>
@@ -75,7 +69,6 @@
                                 style="background-color: #6861FF">#3
                         </button>
                         <button class="snake_one_color"  type="submit"
-
                                 style="background-color: #009AFF">#4
                         </button>
                         <button class="snake_one_color" type="submit"
@@ -84,7 +77,6 @@
                         <button class="snake_one_color" type="submit"
                                 style="background-color: #00EACF">#6
                         </button>
-
                         <button class="snake_one_color"  type="submit"
                                 style="background-color: #00FE9A">#7
                         </button>
@@ -101,7 +93,6 @@
                                 style="background-color: #FF009C">#11
                         </button>
                         <button class="snake_one_color"  type="submit"
-
                                 style="background-color: #F100CD">#12
                         </button>
                     </div>
@@ -115,7 +106,6 @@
                         <button class="snake_two_color" type="submit"
                                 style="background-color: #DA00EC">#1
                         </button>
-
                         <button class="snake_two_color"  type="submit"
                                 style="background-color: #AA09FF">#2
                         </button>
@@ -147,7 +137,6 @@
                                 style="background-color: #FF009C">#11
                         </button>
                         <button class="snake_two_color"  type="submit"
-
                                 style="background-color: #F100CD">#12
                         </button>
                     </div>
@@ -157,7 +146,6 @@
                 <div class="dropdown">
                     <button id="snake_three_color" class="dropbtn">Color</button>
                     <div class="dropdown-content">
-
                         <button class="snake_three_color"  type="submit"
                                 style="background-color: #DA00EC">#1
                         </button>
@@ -192,7 +180,6 @@
                                 style="background-color: #FF009C">#11
                         </button>
                         <button class="snake_three_color"  type="submit"
-
                                 style="background-color: #F100CD">#12
                         </button>
                     </div>
@@ -202,7 +189,6 @@
                 <div class="dropdown">
                     <button id="snake_four_color" class="dropbtn">Color</button>
                     <div class="dropdown-content">
-
                         <button class="snake_four_color"  type="submit"
                                 style="background-color: #DA00EC">#1
                         </button>
@@ -228,7 +214,6 @@
                                 style="background-color: #00FF53">#8
                         </button>
                         <button class="snake_four_color"  type="submit"
-
                                 style="background-color: #BEE800">#9
                         </button>
                         <button class="snake_four_color" type="submit"
@@ -237,9 +222,7 @@
                         <button class="snake_four_color" type="submit"
                                 style="background-color: #FF009C">#11
                         </button>
-
                         <button class="snake_four_color"  type="submit"
-
                                 style="background-color: #F100CD">#12
                         </button>
                     </div>
@@ -249,7 +232,6 @@
                 <div class="dropdown">
                     <button id="snake_five_color" class="dropbtn">Color</button>
                     <div class="dropdown-content">
-
                         <button class="snake_five_color"  type="submit"
                                 style="background-color: #DA00EC">#1
                         </button>
@@ -284,7 +266,6 @@
                                 style="background-color: #FF009C">#11
                         </button>
                         <button class="snake_five_color"  type="submit"
-
                                 style="background-color: #F100CD">#12
                         </button>
                     </div>
@@ -306,32 +287,27 @@
             <div id="player-score">
                 <h5 class="start_input" id="p1Name"></h5>
                 <input class="start_input" id="snake_one_score" type="text" value="" readonly> <br>
-                <h5 class="start_input" id="p2Name"></h5>
+                <h5 class="start_input"  id="p2Name"></h5>
                 <input class="start_input" id="snake_two_score" value="" type="text" readonly>
-                <h5 class="start_input" id="p3Name"></h5>
+                <h5 class="start_input"  id="p3Name"></h5>
                 <input class="start_input" id="snake_three_score" type="text" value="" readonly> <br>
-                <h5 class="start_input" id="p4Name"></h5>
+                <h5 class="start_input"  id="p4Name"></h5>
                 <input class="start_input" id="snake_four_score" value="" type="text" readonly>
-                <h5 class="start_input" id="p5Name"></h5>
+                <h5 class="start_input"  id="p5Name"></h5>
                 <input class="start_input" id="snake_five_score" type="text" value="" readonly> <br>
-                <input type="range" min="10" max="100" value="25" onmouseup="feldGr()" id="spielfeldgroesse">
-                <button onclick="neuJetzt()">ich will mitspielen</button>
+            </div>
+            <div id="sound-button">
                 <input id="radioAn" value="Musik An" onclick="radio.play() ,radioAn()" type="text" readonly>
                 <input id="radioAus" hidden value="Musik Aus" onclick="radio.pause() ,radioAus()" type="text" readonly>
+                <input type="range" min="10" max="100" value="25" onmouseup="feldGr()" id="spielfeldgroesse">
+                <button onclick="neuJetzt()">ich will mitspielen</button>
             </div>
-
-            <!-- <div id="sound-button">
-                 <input type="range" min="10" max="100" value="25" onmouseup="feldGr()" id="spielfeldgroesse">
-                 <input id="radioAn" value="Musik An" onclick="radio.play() ,radioAn()" type="text" readonly>
-                 <input id="radioAus" hidden value="Musik Aus" onclick="radio.pause() ,radioAus()" type="text" readonly>
-             </div>-->
-
 
         </div>
     </div>
 </main>
-<script>
 
+<script>
     let slider =document.getElementById('spielfeldgroesse');
     let rowsInput;
     let colsInput;
@@ -362,13 +338,16 @@
 
         placeFood();
     }
-
     // var deklaration
-    // --------------------------------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------------------------
+
+
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
     let rows =25;
     let cols =25;
+
+
     let cellWidth = canvas.width / cols;
     let cellHeight = canvas.height / rows;
     // steuer richtung festlegen
@@ -432,6 +411,7 @@
         '0 0 1.2em #f0f';
     // Events zuordnen
     // ---------------------------------------------------------------------------------------------------------
+
     document.getElementById('snake_one').addEventListener('input', namensGebung);
     document.getElementById('snake_two').addEventListener('input', namensGebung);
     document.getElementById('snake_three').addEventListener('input', namensGebung);
@@ -497,6 +477,7 @@
     // wenn eine taste gedrückt wird soll func.keyDown ausgeführt werden
     document.addEventListener('keydown', keyDown);
     draw();
+
     // Funktionen
     // ---------------------------------------------------------------------------------------------------------
     // game schleife (bewegung aber auch ablaufs programmierung)
@@ -720,6 +701,7 @@
             }
 
         }
+
         if (inGame_snakeOne) {
             // was passieren soll wenn schlange EINS auf futter trifft
             if (snakeOne[0].x === food.x &&
@@ -782,9 +764,6 @@
         }
     }
 
-
-    // malen => funktion : schlange/-en u. futter
-
     function draw() {
 
 
@@ -845,7 +824,6 @@
             document.exitFullscreen();
         }
     }
-
     // namen / in game = true
     // ---------------------------------------------------------------------------------------------------------
     function namensGebung() {
@@ -865,8 +843,8 @@
             document.getElementById('p5Name').innerHTML = this.value
             inGame_snakeFive = true;
         }
-    }
 
+    }
     // farbanpassung der schlangen und ihrer input variablen
     // ---------------------------------------------------------------------------------------------------------
     function farbwahl() {
@@ -908,8 +886,8 @@
             document.getElementById('p5Name').style.color = 'black';
             document.getElementById('p5Name').style.textShadow = neon;
         }
-    }
 
+    }
     // spieler,namen,input.styles,positionen und jegliche bewegung zurücksetzen
     // ---------------------------------------------------------------------------------------------------------
     function reset() {
@@ -962,16 +940,17 @@
             document.getElementsByClassName('snake_name')[i].style.backgroundColor = 'black';
             document.getElementsByClassName('snake_name')[i].style.color = 'darkred';
         }
-        for (let i = 0; i < document.getElementsByClassName('start_input').length; i++) {
+        for (let i = 0; i < document.getElementsByClassName('start_input').length; i++)
+        {
             document.getElementsByClassName('start_input')[i].value = null;
             document.getElementsByClassName('start_input')[i].innerHTML = null;
             document.getElementsByClassName('start_input')[i].style.backgroundColor = 'black';
         }
-        for (let i = 0; i < document.getElementsByClassName('dropbtn').length; i++) {
+        for (let i = 0; i < document.getElementsByClassName('dropbtn').length; i++)
+        {
             document.getElementsByClassName('dropbtn')[i].style.backgroundColor = 'black';
         }
     }
-
     // nav & sound button
     // ---------------------------------------------------------------------------------------------------------
     function back() {
@@ -981,13 +960,11 @@
         document.getElementById('back-button').hidden = true;
         document.getElementById('start-button').hidden = false;
     }
-
     function neuJetzt(){
         document.getElementById('tabelle').hidden = false;
         document.getElementById('overDiv').hidden = true;
     }
-
-    function start() {
+    function start(){
         if (inGame_snakeOne === false &&
             inGame_snakeTwo === false &&
             inGame_snakeThree === false &&
@@ -1021,10 +998,13 @@
         //     document.getElementById('snake_five_score').style.backgroundColor = egg_color;
         // }
     }
+
+
     function radioAn() {
         document.getElementById('radioAn').hidden = true;
         document.getElementById('radioAus').hidden = false;
     }
+
     function radioAus() {
         document.getElementById('radioAn').hidden = false;
         document.getElementById('radioAus').hidden = true;
@@ -1036,7 +1016,6 @@
         ctx.shadowColor = color;
         ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
     }
-
     // ei positionieren / abwandlung der add.function (extras fürs ei eingefügt)
     // ---------------------------------------------------------------------------------------------------------
     function addFood(x, y) {
@@ -1046,7 +1025,6 @@
         image.src = 'bilder/egg.png';
         ctx.drawImage(image, x * cellWidth, y * cellHeight, cellWidth, cellHeight);
     }
-
     // Futterstück irgendwo (random) erscheinen lassen.
     // (x,y) zufällig zu ordnen
     // ---------------------------------------------------------------------------------------------------------
@@ -1091,8 +1069,8 @@
             x: randomX,//snake_part_one || snake_part_two ? Math.floor(Math.random()* cols)
             y: randomY//snake_part_one || snake_part_two ? Math.floor(Math.random()* rows)
         };
-    }
 
+    }
     // endbedingungen
     // ---------------------------------------------------------------------------------------------------------
     // an sich ein endlos game bis das feld voll ist
@@ -1267,7 +1245,6 @@
             direction_snakeFive = '';
         }
     }
-
     // punkte vergabe
     // Wachstum : nach dem fressen, Futter schicht für
     // schicht durch reichen und hinten anhängen
@@ -1291,8 +1268,8 @@
             document.getElementById('top_score').style.backgroundColor = snake_one_color;
             document.getElementById('h3').style.color = snake_one_color;
         }
-    }
 
+    }
     function shiftSnakeTwo() {
         for (let i = snakeTwo.length - 1; i > 0; i--) {
             const part = snakeTwo[i];
@@ -1311,8 +1288,8 @@
             document.getElementById('top_score').style.backgroundColor = snake_two_color;
             document.getElementById('h3').style.color = snake_two_color;
         }
-    }
 
+    }
     function shiftSnakeThree() {
         for (let i = snakeThree.length - 1; i > 0; i--) {
             const part = snakeThree[i];
@@ -1331,8 +1308,8 @@
             document.getElementById('top_score').style.backgroundColor = snake_three_color;
             document.getElementById('h3').style.color = snake_three_color;
         }
-    }
 
+    }
     function shiftSnakeFour() {
         for (let i = snakeFour.length - 1; i > 0; i--) {
             const part = snakeFour[i];
@@ -1351,8 +1328,8 @@
             document.getElementById('top_score').style.backgroundColor = snake_four_color;
             document.getElementById('h3').style.color = snake_four_color;
         }
-    }
 
+    }
     function shiftSnakeFive() {
         for (let i = snakeFive.length - 1; i > 0; i--) {
             const part = snakeFive[i];
@@ -1371,6 +1348,7 @@
             document.getElementById('top_score').style.backgroundColor = snake_five_color;
             document.getElementById('h3').style.color = snake_five_color;
         }
+
     }
 
     // function crossWalls(){  ---------------------eine function für alle
@@ -1448,6 +1426,10 @@
             }
         }
     }
+
+
 </script>
+
 </body>
+
 </html>

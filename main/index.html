@@ -9,9 +9,8 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Nosifer&effect=neon|outline|emboss|shadow-multiple|fire">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nosifer&effect=neon|fire" rel="stylesheet">
   <script>
 
     let ei_sound = new Audio("audio/sound_test1.mp3");
@@ -28,10 +27,12 @@
 
 <main>
   <div id="nav-button-div">
-    <button type="button" onclick="start()">Start</button>
-    <button type="button" onclick="back()">Back</button>
-    <button onclick="openFullscreen();">Open Fullscreen</button>
-    <button onclick="closeFullscreen();">Close Fullscreen</button>
+    <button id="start-button" type="button" onclick="start()">Start</button>
+    <button hidden id="back-button" type="button" onclick="back()">Back</button>
+    <button onclick="openFullscreen()">Open Fullscreen</button>
+    <button onclick="closeFullscreen()">Close Fullscreen</button>
+    <br>
+    <h3 hidden id="meldung"></h3>
   </div>
   <table id="tabelle">
     <thead>
@@ -239,40 +240,40 @@
         <div class="dropdown">
           <button id="snake_five_color" class="dropbtn">Color</button>
           <div class="dropdown-content">
-            <button class="snake_five_color" id="color_DA00EC" type="submit"
+            <button class="snake_five_color"  type="submit"
                     style="background-color: #DA00EC">#1
             </button>
-            <button class="snake_five_color" id="color_AA09FF" type="submit"
+            <button class="snake_five_color"  type="submit"
                     style="background-color: #AA09FF">#2
             </button>
-            <button class="snake_five_color" id="color_6861FF" type="submit"
+            <button class="snake_five_color"  type="submit"
                     style="background-color: #6861FF">#3
             </button>
-            <button class="snake_five_color" id="color_009AFF" type="submit"
+            <button class="snake_five_color"  type="submit"
                     style="background-color: #009AFF">#4
             </button>
-            <button class="snake_five_color" id="color_00C9EB" type="submit"
+            <button class="snake_five_color"  type="submit"
                     style="background-color: #00C9EB">#5
             </button>
-            <button class="snake_five_color" id="color_00EACF" type="submit"
+            <button class="snake_five_color"  type="submit"
                     style="background-color: #00EACF">#6
             </button>
-            <button class="snake_five_color" id="color_00FE9A" type="submit"
+            <button class="snake_five_color"  type="submit"
                     style="background-color: #00FE9A">#7
             </button>
-            <button class="snake_five_color" id="color_00FF53" type="submit"
+            <button class="snake_five_color"  type="submit"
                     style="background-color: #00FF53">#8
             </button>
-            <button class="snake_five_color" id="color_BEE800" type="submit"
+            <button class="snake_five_color"  type="submit"
                     style="background-color: #BEE800">#9
             </button>
-            <button class="snake_five_color" id="color_FF6155" type="submit"
+            <button class="snake_five_color"  type="submit"
                     style="background-color: #FF6155">#10
             </button>
-            <button class="snake_five_color" id="color_FF009C" type="submit"
+            <button class="snake_five_color"  type="submit"
                     style="background-color: #FF009C">#11
             </button>
-            <button class="snake_five_color" id="color_F100CD" type="submit"
+            <button class="snake_five_color"  type="submit"
                     style="background-color: #F100CD">#12
             </button>
           </div>
@@ -302,16 +303,13 @@
         <input class="start_input" id="snake_four_score" value="" type="text" readonly>
         <h5 class="start_input"  id="p5Name"></h5>
         <input class="start_input" id="snake_five_score" type="text" value="" readonly> <br>
-        <input type="range" min="10" max="100" value="25" onmouseup="feldGr()" id="spielfeldgroesse">
-        <button onclick="neuJetzt()">ich will mitspielen</button>
+      </div>
+      <div id="sound-button">
         <input id="radioAn" value="Musik An" onclick="radio.play() ,radioAn()" type="text" readonly>
         <input id="radioAus" hidden value="Musik Aus" onclick="radio.pause() ,radioAus()" type="text" readonly>
+        <input type="range" min="10" max="100" value="25" onmouseup="feldGr()" id="spielfeldgroesse">
+        <button onclick="neuJetzt()">ich will mitspielen</button>
       </div>
-      <!-- <div id="sound-button">
-           <input type="range" min="10" max="100" value="25" onmouseup="feldGr()" id="spielfeldgroesse">
-           <input id="radioAn" value="Musik An" onclick="radio.play() ,radioAn()" type="text" readonly>
-           <input id="radioAus" hidden value="Musik Aus" onclick="radio.pause() ,radioAus()" type="text" readonly>
-       </div>-->
 
     </div>
   </div>
@@ -773,15 +771,7 @@
       }
     }
   }
-  let bild=new Image();
-  bild.src='bilder/sky.jpg';
-  // malen => funktion : schlange/-en u. futter
-  function test(){
-    let pattern1 = ctx.createPattern(bild, 'repeat');
-    ctx.fillStyle = pattern1;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  }
   function draw() {
 
 
@@ -975,15 +965,50 @@
     reset();
     document.getElementById('tabelle').hidden = false;
     document.getElementById('overDiv').hidden = true;
+    document.getElementById('back-button').hidden = true;
+    document.getElementById('start-button').hidden = false;
   }
   function neuJetzt(){
     document.getElementById('tabelle').hidden = false;
     document.getElementById('overDiv').hidden = true;
+    document.getElementById('back-button').hidden = true;
+    document.getElementById('start-button').hidden = false;
   }
-  function start() {
-    document.getElementById('tabelle').hidden = true;
-    document.getElementById('overDiv').hidden = false
+  function start(){
+    if (inGame_snakeOne === false &&
+            inGame_snakeTwo === false &&
+            inGame_snakeThree === false &&
+            inGame_snakeFour === false &&
+            inGame_snakeFive === false) {
+      document.getElementById('meldung').innerHTML = 'einer schlange musst du einen namen geben ';
+      document.getElementById('meldung').style.color = 'black';
+      document.getElementById('meldung').style.textShadow = neon;
+      document.getElementById('meldung').hidden = false;
+    } else {
+      document.getElementById('meldung').innerHTML = '';
+      document.getElementById('meldung').hidden = true;
+      document.getElementById('tabelle').hidden = true;
+      document.getElementById('overDiv').hidden = false
+      document.getElementById('start-button').hidden = true;
+      document.getElementById('back-button').hidden = false;
+    }
+    // if (snake_one_color !== true) {
+    //     document.getElementById('snake_one_score').style.backgroundColor = egg_color;
+    // }
+    // if (snake_two_color !== true) {
+    //     document.getElementById('snake_two_score').style.backgroundColor = egg_color;
+    // }
+    // if (snake_three_color !== true) {
+    //     document.getElementById('snake_three_score').style.backgroundColor = egg_color;
+    // }
+    // if (snake_four_color !== true) {
+    //     document.getElementById('snake_four_score').style.backgroundColor = egg_color;
+    // }
+    // if (snake_five_color !== true) {
+    //     document.getElementById('snake_five_score').style.backgroundColor = egg_color;
+    // }
   }
+
 
   function radioAn() {
     document.getElementById('radioAn').hidden = true;
